@@ -15,6 +15,5 @@ public class Main {
 		cookie.put("vjkl5", "648f9dffb367410105180e13de7acce909d16740");
 		cookie.put("vl5x", "1a295ff6179c9c81bbffe424");
 		
-		
 	}
 }

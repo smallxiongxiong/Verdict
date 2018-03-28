@@ -4,18 +4,26 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JudgementSimple {
 
 	private String judicialGist; // 裁判要旨段原文
-	private String caseType; // 案件类型
+	private String caseType; // 类型案件
 	private String adjudicatTime; // 裁判日期
 	private String caseName; // 案件名称
 	private String caseID; // 文书ID
 	private String judgmentProcess; // 审判程序
 	private String caseNum; // 案号
-	private String adjudicatCourt; // 法院名称
+	private String adjudicatCourt; // 审理法院，法院名称
+	private String mark; // 标记
+	private String endMethod; // 结案方式
+	private String administrativeScope; // 行政管理范围
+	private String administrativeType; // 行政行为种类
+	private String[] appellor; // 当事人
+	private Statute legalBase; // 法条依赖
+	private String originType;		//与原文Type对应
 
 	private long timestamp; // 用来映射裁判日期
 
@@ -34,6 +42,10 @@ public class JudgementSimple {
 			put("审判程序", "judgmentProcess");
 			put("案号", "caseNum");
 			put("法院名称", "adjudicatCourt");
+			put("审理法院", "adjudicatCourt");
+			put("Type", "originType");
+			put("Mark", "mark");
+			put("结案方式", "endMethod");
 		}
 	};
 
@@ -110,6 +122,7 @@ public class JudgementSimple {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
+			System.out.println("=================");
 			date = sdf.parse(this.adjudicatTime);
 			this.timestamp = date.getTime();
 		} catch (ParseException e) {

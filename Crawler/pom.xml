@@ -24,6 +24,22 @@
 			<version>2.8.2</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/cn.wanghaomiao/JsoupXpath -->
+		<dependency>
+			<groupId>cn.wanghaomiao</groupId>
+			<artifactId>JsoupXpath</artifactId>
+			<version>0.3.2</version>
+		</dependency>
+
+
+
 
 		<!-- 测试依赖框架 -->
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
