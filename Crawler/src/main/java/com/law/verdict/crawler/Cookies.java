@@ -31,7 +31,7 @@ public class Cookies {
 				res.put("vjkl5", ck.getValue().trim());
 			}
 		}
-		WindowsUtils.killByName("chrome.exe");
+		//WindowsUtils.killByName("chrome.exe");
 		return res;
 	}
 

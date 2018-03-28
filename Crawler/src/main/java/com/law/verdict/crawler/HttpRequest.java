@@ -10,37 +10,22 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpRequest {  
-    /** 
-     * ÏòÖ¸¶¨URL·¢ËÍGET·½·¨µÄÇëÇó 
-     *  
-     * @param url 
-     *            ·¢ËÍÇëÇóµÄURL 
-     * @param param 
-     *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£ 
-     * @return URL Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û 
-     */  
     public static String sendGet(String url, String param) {  
         String result = "";  
         BufferedReader in = null;  
         try {  
             String urlNameString = url + "?" + param;  
             URL realUrl = new URL(urlNameString);  
-            // ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó  
             URLConnection connection = realUrl.openConnection();  
-            // ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ  
             connection.setRequestProperty("accept", "*/*");  
             connection.setRequestProperty("connection", "Keep-Alive");  
             connection.setRequestProperty("user-agent",  
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");  
-            // ½¨Á¢Êµ¼ÊµÄÁ¬½Ó  
             connection.connect();  
-            // »ñÈ¡ËùÓĞÏìÓ¦Í·×Ö¶Î  
             Map<String, List<String>> map = connection.getHeaderFields();  
-            // ±éÀúËùÓĞµÄÏìÓ¦Í·×Ö¶Î  
             for (String key : map.keySet()) {  
                 System.out.println(key + "--->" + map.get(key));  
             }  
-            // ¶¨Òå BufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦  
             in = new BufferedReader(new InputStreamReader(  
                     connection.getInputStream()));  
             String line;  
@@ -48,10 +33,9 @@ public class HttpRequest {
                 result += line;  
             }  
         } catch (Exception e) {  
-            System.out.println("·¢ËÍGETÇëÇó³öÏÖÒì³££¡" + e);  
+            System.out.println("ï¿½ï¿½ï¿½ï¿½GETï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½" + e);  
             e.printStackTrace();  
         }  
-        // Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊäÈëÁ÷  
         finally {  
             try {  
                 if (in != null) {  
@@ -63,50 +47,34 @@ public class HttpRequest {
         }  
         return result;  
     }  
-    /**  
-     * ÏòÖ¸¶¨ URL ·¢ËÍPOST·½·¨µÄÇëÇó  
-     *   
-     * @param url  
-     *            ·¢ËÍÇëÇóµÄ URL  
-     * @param param  
-     *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£  
-     * @return Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û  
-     */  
     public static String sendPost(String url, String param, Map specialValue) {  
-        PrintWriter out = null;  
+        System.out.println(param+"==="+specialValue.get("vjkl5"));
+    	PrintWriter out = null;  
         BufferedReader in = null;  
         String result = "";  
         try {  
             URL realUrl = new URL(url);  
-            // ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó  
             URLConnection conn = realUrl.openConnection();  
-            // ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ  
-            conn.setRequestProperty("accept", "*/*");  
+            conn.setRequestProperty("accept", "*/*"); 
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             conn.setRequestProperty("connection", "Keep-Alive");  
             conn.setRequestProperty("cookie", "vjkl5="+specialValue.get("vjkl5"));
             conn.setRequestProperty("user-agent",  "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36");  
-            // ·¢ËÍPOSTÇëÇó±ØĞëÉèÖÃÈçÏÂÁ½ĞĞ  
             conn.setDoOutput(true);  
             conn.setDoInput(true);  
-            // »ñÈ¡URLConnection¶ÔÏó¶ÔÓ¦µÄÊä³öÁ÷  
             out = new PrintWriter(conn.getOutputStream());  
-            // ·¢ËÍÇëÇó²ÎÊı  
-            System.out.print(param+"&vl5x="+specialValue.get("vl5x"));
-            out.print(param+"&vl5x="+specialValue.get("vl5x"));  
-            // flushÊä³öÁ÷µÄ»º³å  
+            out.print(param);
             out.flush();  
-            // ¶¨ÒåBufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦  
             in = new BufferedReader(  
-                    new InputStreamReader(conn.getInputStream()));  
+                    new InputStreamReader(conn.getInputStream(),"utf-8"));  
             String line;  
             while ((line = in.readLine()) != null) {  
                 result += line;  
             }  
         } catch (Exception e) {  
-            System.out.println("·¢ËÍ POST ÇëÇó³öÏÖÒì³££¡"+e);  
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ POST ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½"+e);  
             e.printStackTrace();  
         }  
-        //Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊä³öÁ÷¡¢ÊäÈëÁ÷  
         finally{  
             try{  
                 if(out!=null){  
