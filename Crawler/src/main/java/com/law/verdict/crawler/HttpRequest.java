@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpRequest {  
-    public static String sendGet(String url, String param) {  
+    public static String sendGet(String url, String param,String cookie) {  
         String result = "";  
         BufferedReader in = null;  
         try {  
             String urlNameString = url + "?" + param;  
             URL realUrl = new URL(urlNameString);  
-            URLConnection connection = realUrl.openConnection();  
+            URLConnection connection = realUrl.openConnection();
+            connection.setRequestProperty("cookie", "vjkl5="+cookie);
             connection.setRequestProperty("accept", "*/*");  
             connection.setRequestProperty("connection", "Keep-Alive");  
             connection.setRequestProperty("user-agent",  
@@ -33,7 +34,6 @@ public class HttpRequest {
                 result += line;  
             }  
         } catch (Exception e) {  
-            System.out.println("����GET��������쳣��" + e);  
             e.printStackTrace();  
         }  
         finally {  
@@ -47,8 +47,7 @@ public class HttpRequest {
         }  
         return result;  
     }  
-    public static String sendPost(String url, String param, Map specialValue) {  
-        System.out.println(param+"==="+specialValue.get("vjkl5"));
+    public static String sendPost(String url, String param, String cookie) {  
     	PrintWriter out = null;  
         BufferedReader in = null;  
         String result = "";  
@@ -58,7 +57,7 @@ public class HttpRequest {
             conn.setRequestProperty("accept", "*/*"); 
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             conn.setRequestProperty("connection", "Keep-Alive");  
-            conn.setRequestProperty("cookie", "vjkl5="+specialValue.get("vjkl5"));
+            conn.setRequestProperty("cookie", "vjkl5="+cookie);
             conn.setRequestProperty("user-agent",  "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36");  
             conn.setDoOutput(true);  
             conn.setDoInput(true);  
@@ -72,7 +71,6 @@ public class HttpRequest {
                 result += line;  
             }  
         } catch (Exception e) {  
-            System.out.println("���� POST ��������쳣��"+e);  
             e.printStackTrace();  
         }  
         finally{  
