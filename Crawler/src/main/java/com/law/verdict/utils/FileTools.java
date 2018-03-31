@@ -23,9 +23,9 @@ import java.util.logging.Logger;
  *
  * @author s.watson
  */
-public class FileUtils {
+public class FileTools {
 
-	public FileUtils() {
+	public FileTools() {
 
 	}
 
@@ -504,7 +504,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			sb.append(FileUtils.tail(file, false, 0, charset));
+			sb.append(FileTools.tail(file, false, 0, charset));
 		} catch (Exception ex) {
 
 		}
@@ -522,7 +522,7 @@ public class FileUtils {
 		StringBuilder sb = new StringBuilder();
 		try {
 			File file = new File(fullPath);
-			sb.append(FileUtils.tail(file, false, 0, charset));
+			sb.append(FileTools.tail(file, false, 0, charset));
 		} catch (Exception ex) {
 
 		}
@@ -539,7 +539,7 @@ public class FileUtils {
 	public static StringBuilder read(File file, String charset) {
 		StringBuilder sb = new StringBuilder();
 		try {
-			sb.append(FileUtils.tail(file, false, 0, charset));
+			sb.append(FileTools.tail(file, false, 0, charset));
 		} catch (Exception ex) {
 
 		}
@@ -560,7 +560,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			sb.append(FileUtils.tail(file, true, line, charset));
+			sb.append(FileTools.tail(file, true, line, charset));
 		} catch (Exception ex) {
 
 		}
@@ -579,7 +579,7 @@ public class FileUtils {
 		StringBuilder sb = new StringBuilder();
 		try {
 			File file = new File(fullPath);
-			sb.append(FileUtils.tail(file, true, line, charset));
+			sb.append(FileTools.tail(file, true, line, charset));
 		} catch (Exception ex) {
 
 		}
@@ -597,7 +597,7 @@ public class FileUtils {
 	public static StringBuilder find(File file, int line, String charset) {
 		StringBuilder sb = new StringBuilder();
 		try {
-			sb.append(FileUtils.tail(file, true, line, charset));
+			sb.append(FileTools.tail(file, true, line, charset));
 		} catch (Exception ex) {
 
 		}
@@ -619,7 +619,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			sb.append(FileUtils.tail(file, find, line, charset));
+			sb.append(FileTools.tail(file, find, line, charset));
 		} catch (Exception ex) {
 
 		}
@@ -639,7 +639,7 @@ public class FileUtils {
 		StringBuilder sb = new StringBuilder();
 		try {
 			File file = new File(fullPath);
-			sb.append(FileUtils.tail(file, find, line, charset));
+			sb.append(FileTools.tail(file, find, line, charset));
 		} catch (Exception ex) {
 
 		}
@@ -700,7 +700,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			list.addAll(FileUtils.sed(file, charset));
+			list.addAll(FileTools.sed(file, charset));
 		} catch (Exception ex) {
 
 		}
@@ -718,7 +718,7 @@ public class FileUtils {
 		List<String> list = new ArrayList();
 		try {
 			File file = new File(fullPath);
-			list.addAll(FileUtils.sed(file, charset));
+			list.addAll(FileTools.sed(file, charset));
 		} catch (Exception ex) {
 
 		}
@@ -774,7 +774,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			output = FileUtils.cat(file);
+			output = FileTools.cat(file);
 		} catch (Exception ex) {
 
 		}
@@ -791,7 +791,7 @@ public class FileUtils {
 		byte[] output = {};
 		try {
 			File file = new File(fullPath);
-			output = FileUtils.cat(file);
+			output = FileTools.cat(file);
 		} catch (Exception ex) {
 
 		}
@@ -875,7 +875,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			FileUtils.dd(file, content, isAppend);
+			FileTools.dd(file, content, isAppend);
 		} catch (Exception ex) {
 
 		}
@@ -891,7 +891,7 @@ public class FileUtils {
 	public static void dd(String fullPath, byte[] content, boolean isAppend) {
 		try {
 			File file = new File(fullPath);
-			FileUtils.dd(file, content, isAppend);
+			FileTools.dd(file, content, isAppend);
 		} catch (Exception ex) {
 
 		}
@@ -936,7 +936,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			FileUtils.write(file, content, true);
+			FileTools.write(file, content, true);
 		} catch (Exception ex) {
 
 		}
@@ -951,7 +951,7 @@ public class FileUtils {
 	public static void write(String fullPath, String content) {
 		try {
 			File file = new File(fullPath);
-			FileUtils.write(file, content, true);
+			FileTools.write(file, content, true);
 		} catch (Exception ex) {
 
 		}
@@ -965,7 +965,7 @@ public class FileUtils {
 	 */
 	public static void write(File file, String content) {
 		try {
-			FileUtils.write(file, content, true);
+			FileTools.write(file, content, true);
 		} catch (Exception ex) {
 
 		}
@@ -983,7 +983,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			FileUtils.write(file, content, isAppend);
+			FileTools.write(file, content, isAppend);
 		} catch (Exception ex) {
 
 		}
@@ -999,7 +999,7 @@ public class FileUtils {
 	public static void write(String fullPath, String content, boolean isAppend) {
 		try {
 			File file = new File(fullPath);
-			FileUtils.write(file, content, isAppend);
+			FileTools.write(file, content, isAppend);
 		} catch (Exception ex) {
 
 		}
@@ -1045,7 +1045,7 @@ public class FileUtils {
 		try {
 			String fullPath = combainPath(filePath, fileName);
 			File file = new File(fullPath);
-			FileUtils.tail(file, content, index);
+			FileTools.tail(file, content, index);
 		} catch (Exception ex) {
 
 		}
@@ -1061,7 +1061,7 @@ public class FileUtils {
 	public static void tail(String fullPath, String content, long index) {
 		try {
 			File file = new File(fullPath);
-			FileUtils.tail(file, content, index);
+			FileTools.tail(file, content, index);
 		} catch (Exception ex) {
 
 		}
