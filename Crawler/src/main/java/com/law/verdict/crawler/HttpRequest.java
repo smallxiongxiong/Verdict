@@ -69,7 +69,7 @@ public class HttpRequest {
             String line;  
             while ((line = in.readLine()) != null) {  
                 result += line;  
-            }  
+            }
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
