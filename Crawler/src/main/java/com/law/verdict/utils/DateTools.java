@@ -9,6 +9,7 @@ import java.util.List;
 
 public class DateTools {
 	/**
+	 * 用获取指定日期后scope天数的日期列表
 	 * @param dateStr  yyyy-MM-dd格式的字符时间 eg:2018-04-01
 	 * @param scope    
 	 * @return
