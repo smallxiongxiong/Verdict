@@ -33,7 +33,12 @@ public class Parse {
 	 * @return
 	 */
 	public static List<JudgementSimple> parseListContent(String content) {
+		
 		List<JudgementSimple> result = new LinkedList<JudgementSimple>();
+		if(null != content || content.trim().length() <= 0) {
+			return result;
+		}
+		content = content.substring(1, content.length() - 1);
 		content = content.replace("\\", "");
 		JsonElement elements = new JsonParser().parse(content);
 		JsonArray data = elements.getAsJsonArray();
