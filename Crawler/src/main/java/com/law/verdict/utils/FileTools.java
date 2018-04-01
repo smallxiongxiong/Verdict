@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1016,6 +1017,10 @@ public class FileTools {
 		FileWriter fileWriter = null;
 		try {
 			if (!file.exists()) {
+				File parent = file.getParentFile();
+				if(!parent.exists()){
+					parent.mkdirs();
+				}
 				file.createNewFile();
 			}
 			fileWriter = new FileWriter(file.getPath(), isAppend);
@@ -1436,4 +1441,24 @@ public class FileTools {
 		}
 		return size;
 	}
+	/**
+     * 以列表的方式获取文件的所有行
+     *
+     * @param file 需要出来的文件
+     * @return 包含所有行的list
+     */
+    public final static List<String> readTolines(File file) {
+        List<String> list = new ArrayList<>();
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader(file))
+        ) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
