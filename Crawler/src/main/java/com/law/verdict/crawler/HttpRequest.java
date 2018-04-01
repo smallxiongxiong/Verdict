@@ -68,7 +68,7 @@ public class HttpRequest {
             System.out.println(conn.getResponseCode());
             if(conn.getResponseCode() != 200) {
             	System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝" +conn.getResponseCode()  + System.currentTimeMillis());
-            	return String.valueOf(conn.getResponseCode()  + System.currentTimeMillis());
+            	return String.valueOf("RF"+conn.getResponseCode()  + System.currentTimeMillis());
             }
             in = new BufferedReader(  
                     new InputStreamReader(conn.getInputStream(),"utf-8"));  
