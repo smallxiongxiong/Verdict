@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -53,7 +54,7 @@ public class HttpRequest {
         String result = "";  
         try {  
             URL realUrl = new URL(url);  
-            URLConnection conn = realUrl.openConnection();  
+            HttpURLConnection  conn = (HttpURLConnection) realUrl.openConnection();  
             conn.setRequestProperty("accept", "*/*"); 
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             conn.setRequestProperty("connection", "Keep-Alive");  
@@ -63,7 +64,12 @@ public class HttpRequest {
             conn.setDoInput(true);  
             out = new PrintWriter(conn.getOutputStream());  
             out.print(param);
-            out.flush();  
+            out.flush();
+            System.out.println(conn.getResponseCode());
+            if(conn.getResponseCode() != 200) {
+            	System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝" +conn.getResponseCode()  + System.currentTimeMillis());
+            	return String.valueOf(conn.getResponseCode()  + System.currentTimeMillis());
+            }
             in = new BufferedReader(  
                     new InputStreamReader(conn.getInputStream(),"utf-8"));  
             String line;  
