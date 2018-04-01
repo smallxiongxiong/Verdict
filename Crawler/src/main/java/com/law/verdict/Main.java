@@ -3,8 +3,6 @@ package com.law.verdict;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.law.verdict.crawler.Cookies;
-
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello Word");
