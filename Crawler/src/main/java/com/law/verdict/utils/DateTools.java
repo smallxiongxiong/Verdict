@@ -9,28 +9,35 @@ import java.util.List;
 
 public class DateTools {
 	/**
-	 * 用获取指定日期后scope天数的日期列表
-	 * @param dateStr  yyyy-MM-dd格式的字符时间 eg:2018-04-01
-	 * @param scope    
+	 * 
+	 * @param dateStr
+	 * @param scope
+	 * @param times
 	 * @return
 	 */
-	public static List<String> getScopeDay(String dateStr, int scope) {
+	public static List<String> getScopeDay(String dateStr, int scope, int times) {
 		ArrayList<String> result = new ArrayList<>();
-		result.add(dateStr);
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
 		try {
 			Date date = sdf.parse(dateStr);
 			cal.setTime(date);
-			int i = 0;
 			scope--;
-			while (i < scope) {
-				int day = cal.get(Calendar.DATE);
-				cal.set(Calendar.DATE, day + 1);
-				Date tmp = cal.getTime();
-				result.add(sdf.format(tmp));
-				i++;
+			int index = 0;
+			String tmpStr = dateStr + ",";
+			int count = 0;
+			while(index++ < times) {
+				if(tmpStr.length() <= 0) {
+					Date tmp= cal.getTime();
+					tmpStr = sdf.format(tmp) + ",";		
+				}else {					
+					count +=scope;
+					cal.set(Calendar.DATE, count);
+					tmpStr+= sdf.format(cal.getTime());
+					cal.set(Calendar.DATE, ++count);
+					result.add(tmpStr);
+					tmpStr = "";
+				}
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
