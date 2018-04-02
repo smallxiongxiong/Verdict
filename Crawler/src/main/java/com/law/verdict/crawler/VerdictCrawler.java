@@ -12,10 +12,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class VerdictCrawler {
-	private WebDriver driver;
+	public WebDriver driver;
 	public VerdictCrawler() {
 		super();
-		this.driver = DriverFactory.create();;
+		this.driver = DriverFactory.create();
 	}
 	public Map<String, String> getSpecialParams(String url) {
 		Map<String, String> res = new HashMap<String, String>();

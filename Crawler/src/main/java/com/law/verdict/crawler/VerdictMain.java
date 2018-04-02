@@ -23,13 +23,11 @@ public class VerdictMain {
 		String url = "http://wenshu.court.gov.cn/List/List?sorttype=1&conditions=searchWord+1+AJLX++%E6%A1%88%E4%BB%B6%E7%B1%BB%E5%9E%8B:%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6";
 		Map<String, String> specialParams = crawler.getSpecialParams(url);
 		Map<String, String> params = new HashMap<String, String>();
-
 		List<String> causeOfActionKey = FileTools.readTolines(new File("src/main/resources/casedict.txt"));
-		List<String> treeKeyWord = FileTools.readTolines(new File("src/main/resources/treeKeyWord.txt"));
-		// List<String> dataStrs = DateTools.getScopeDay("2016-01-01", 180,4);
-
-		// List<String> dataStrs = DateTools.getScopeDay("2016-01-01", 30, 9);
-
+		List<String> isCrawlerWords = FileTools.readTolines(new File("src/main/resources/isCrawlerWords.txt"));
+		causeOfActionKey.removeAll(isCrawlerWords);
+		
+		String caseType="民事案件";
 		String data1 = "2016-01-01";
 		Calendar cal = Calendar.getInstance();
 		int scope = 30;
@@ -51,9 +49,15 @@ public class VerdictMain {
 				cal.setTime(date);
 				cal.set(Calendar.DATE, scope * times);
 				String data2 = sdf.format(cal.getTime());
-				params.put("Param", "案由:" + cause + ",裁判日期:" + data1 + " TO " + data2);//// 关键词:继承,案由:遗嘱继承纠纷,裁判日期:2018-04-02
+				params.put("Param", "案件类型:"+caseType+",案由:" + cause + ",裁判日期:" + data1 + " TO " + data2);//// 关键词:继承,案由:遗嘱继承纠纷,裁判日期:2018-04-02
 				String fileName = params.get("Param").replace(":", "_").replace("-", "").replace(" ", "").replace(",",
 						"_") + "_" + Index;
+				File listFileName = new File("D:" + File.separator + "verdict"+File.separator+fileName);
+				if(listFileName.exists()){
+					System.out.println(listFileName+": has exist!!");
+					Index++;
+					continue;
+				}
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -63,7 +67,9 @@ public class VerdictMain {
 				list = crawler.getContentList("http://wenshu.court.gov.cn/List/ListContent", params,
 						specialParams.get("vjkl5"));
 				System.out.println("list content:" + list);
-				if (list.startsWith("RF")) {
+				if (list.startsWith("RF")||list.contains("remind key")) {
+					WindowsUtils.killByName("chrome.exe");
+					crawler.driver = DriverFactory.create();
 					specialParams = crawler.getSpecialParams(url);
 					params.put("vl5x", specialParams.get("vl5x"));
 					continue;
@@ -77,10 +83,15 @@ public class VerdictMain {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
+						File detailName = new File("D:" + File.separator + "verdict" + File.separator + caseType+File.separator +js.getCaseID());
+						if(detailName.exists()){
+							System.out.println(detailName+"has exist!!");
+							continue;
+						}
 						String detail = crawler.getContentDetail(
 								"http://wenshu.court.gov.cn/CreateContentJS/CreateContentJS.aspx", js.getCaseID(),
 								specialParams.get("vjkl5"));
-						FileTools.write("D:" + File.separator + "verdict" + File.separator + "details", js.getCaseID(),
+						FileTools.write("D:" + File.separator + "verdict" + File.separator + caseType, js.getCaseID(),
 								detail, false);
 					}
 					if (StringTools.isResponseOK(list)) {
@@ -94,7 +105,12 @@ public class VerdictMain {
 				if (sdf.parse(data2).after(new Date())) {
 					break;
 				}
+				if(Index>100){
+					break;
+				}
 			} while (!list.startsWith("RF"));
+			
+			FileTools.writeAndChangeRow(new File("src/main/resources/isCrawlerWords.txt"), cause, true);
 
 		}
 
