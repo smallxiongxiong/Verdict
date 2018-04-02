@@ -24,7 +24,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.law.verdict.parse.Parse;
+import com.law.verdict.parse.model.Judgement;
 import com.law.verdict.parse.model.JudgementSimple;
+import com.law.verdict.utils.DateTools;
 
 import util.FileReader;
 
@@ -32,17 +34,16 @@ public class ContentParseTest {
 	final static String LIST_CONTENT_PATH = "src/test/resources/data/ListContent.txt";
 	final static String RELATED_FILE_PATH = "src/test/resources/data/relatedFiles.txt";
 	final static String SUMMARY_PATH = "src/test/resources/data/summary.txt";
-	final static String CONTENT_PATH = "src/test/resources/data/content.txt";
+	final static String CONTENT_PATH = "src/test/resources/data/content3.txt";
 	final static String HTML_PATH = "src/test/resources/data/html.txt";
-	
+
 	List<String> listContents = null;
 	List<String> relatedFiles = null;
 	List<String> summary = null;
 	List<String> content = null;
 	List<String> html = null;
 	List<String> dict = null;
-	List<String> keyWords =null;
-	
+	List<String> keyWords = null;
 
 	@Before
 	public void before() {
@@ -55,99 +56,92 @@ public class ContentParseTest {
 		keyWords = FileReader.readByLine("src/test/resources/data/treeContent.txt");
 	}
 
-	//@Test
+	// @Test
 	public void test() {
 		for (String item : listContents) {
 			List<JudgementSimple> result = Parse.parseListContent(item);
 			assertEquals(5, result.size());
 		}
 	}
-	//@Test
+
+	// @Test
 	public void testRelatedFiles() {
-		for(String item: relatedFiles) {
+		for (String item : relatedFiles) {
 			Parse.parseRelatedFiles(item);
 		}
 	}
-	
-	//@Test
+
+	// @Test
 	public void testSummary() {
-		for(String item: summary) {
+		for (String item : summary) {
 			Parse.parseSummary(item, "");
 		}
 	}
-	//@Test
+
+	@Test
 	public void testContent() {
-		for(String item: content) {
-			Parse.parseContent(item);
+		for (String item : content) {
+			Judgement result = Parse.parseContent(item);
+			System.out.println(result.toString());
 		}
 	}
+
 	//@Test
 	public void testHtml() {
-		for(String item: html) {
-			Parse.parseHtmlContent(item);
+		for (String item : html) {
+			Judgement result = Parse.parseHtmlContent(item);
+			System.out.println(result);
 		}
 	}
-	
+
 	public void testPatter() {
 		String content = "委托代理人：李晓红，北京市正见永申律师事务所律师。";
 		Pattern p = Pattern.compile("(.[^：]*)：([^，]*)，([^。]*)。");
 		Matcher m = p.matcher(content);
-		if(m.find()) {
-			
+		if (m.find()) {
+
 			System.out.println(m.group(1));
 			System.out.println(m.group(2));
-			System.out.println(m.group(3));			
+			System.out.println(m.group(3));
 		}
 	}
-	@Test
+
+	//@Test
 	public void testCalendr() {
 		String content = "2018-03-01";
-		ArrayList<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<>();
 		result.add(content);
-		int scope = 15;
-		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		try {
-			Date date = sdf.parse(content);
-			cal.setTime(date);
-			int i = 0;
-			while(i < scope) {
-				int day = cal.get(Calendar.DATE);  
-		        cal.set(Calendar.DATE, day + 1); 
-		        Date tmp = cal.getTime();
-		        result.add(sdf.format(tmp));
-		        i++;
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		for(String item: result) {
-			System.out.println(item);
-		}
-		
-	}
-	
-	//@Test
-	public void testKeyWords() {
-		String content = keyWords.get(0);
-		JsonReader jsonReader = new JsonReader(new StringReader(content));// 其中jsonContext为String类型的Json数据
-		jsonReader.setLenient(true);
+		int scope = 5;
+		int times = 10;
+		 result = DateTools.getScopeDay(content, scope, times);
+		 for(String item: result) {
+			 System.out.println(item);
+		 }
 
-		JsonElement elements = new JsonParser().parse(jsonReader);
-		JsonArray array = elements.getAsJsonArray();
-		Iterator<JsonElement> it = array.iterator();
-		while(it.hasNext()) {
-			JsonArray tmp = it.next().getAsJsonObject().get("Child").getAsJsonArray();
-			Iterator<JsonElement> tmpIt = tmp.iterator();
-			while(tmpIt.hasNext()) {
-				String text = tmpIt.next().getAsJsonObject().get("Key").getAsString();
-				System.out.println(text);
+	}
+
+	// @Test
+	public void testKeyWords() {
+		for (String content : keyWords) {
+			content = content.replace("\\\"", "\"");
+			JsonReader jsonReader = new JsonReader(new StringReader(content));// 其中jsonContext为String类型的Json数据
+			jsonReader.setLenient(true);
+
+			JsonElement elements = new JsonParser().parse(jsonReader);
+			JsonArray array = elements.getAsJsonArray();
+			Iterator<JsonElement> it = array.iterator();
+			while (it.hasNext()) {
+				JsonArray tmp = it.next().getAsJsonObject().get("Child").getAsJsonArray();
+				Iterator<JsonElement> tmpIt = tmp.iterator();
+				while (tmpIt.hasNext()) {
+					String text = tmpIt.next().getAsJsonObject().get("Key").getAsString();
+					System.out.println(text);
+				}
 			}
 		}
 	}
-	
-	//@Test
+
+	// @Test
 	public void testType() {
 		String content = dict.get(0);
 		JsonReader jsonReader = new JsonReader(new StringReader(content));// 其中jsonContext为String类型的Json数据
@@ -157,20 +151,13 @@ public class ContentParseTest {
 		JsonObject obj = elements.getAsJsonObject();
 		JsonArray array = obj.getAsJsonArray("treeNodes");
 		Iterator<JsonElement> it = array.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			JsonObject tmp = it.next().getAsJsonObject();
 			String id = tmp.get("id").getAsString();
-			if(9 == id.length()) {
+			if (9 == id.length()) {
 				System.out.println(tmp.get("name").getAsString());
 			}
 		}
-		
-	}
-	
-	public static class Type {
-		String id;
-		String parentId;
-		String name;
-		String key;
+
 	}
 }

@@ -1,14 +1,14 @@
 package com.law.verdict.parse;
 
 import java.io.StringReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,8 +22,8 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.law.verdict.parse.model.Judgement;
 import com.law.verdict.parse.model.JudgementSimple;
-import com.law.verdict.parse.model.Lawler;
 
 public class Parse {
 	/**
@@ -33,9 +33,9 @@ public class Parse {
 	 * @return
 	 */
 	public static List<JudgementSimple> parseListContent(String content) {
-		
+
 		List<JudgementSimple> result = new LinkedList<JudgementSimple>();
-		if(null == content || content.trim().length() <= 0) {
+		if (null == content || content.trim().length() <= 0) {
 			return result;
 		}
 		content = content.substring(1, content.length() - 1);
@@ -84,64 +84,118 @@ public class Parse {
 		return null;
 	}
 
-	public static JudgementSimple parseContent(String content) {
+	public static Judgement parseContent(String content) {
 		if (null == content || content.isEmpty())
 			return null;
 		content = content.trim();
-
-		if (content.startsWith("var jsonHtmlData")) {
-			int begin = content.indexOf("\"");
-			int end = content.lastIndexOf("\"");
-			String tmp = content.substring(begin + 1, end);
-			tmp = tmp.replace("\\", "");
-			tmp = tmp.trim();
-			System.out.println(tmp);
-			JsonReader jsonReader = new JsonReader(new StringReader(tmp));// 其中jsonContext为String类型的Json数据
-			jsonReader.setLenient(true);
-
-			JsonElement elements = new JsonParser().parse(jsonReader);
-			JsonObject obj = elements.getAsJsonObject();
-			System.out.println(obj.get("Title").getAsString());
-			System.out.println(obj.get("PubDate").getAsString());
-			System.out.println(obj.get("Html").getAsString());
-
+		content = getMainBody(content);
+		content = content.replace("\\", "");
+		content = content.trim();
+		JsonReader jsonReader = new JsonReader(new StringReader(content));
+		jsonReader.setLenient(true);
+		JsonElement elements = new JsonParser().parse(jsonReader);
+		JsonObject obj = elements.getAsJsonObject();
+		String title = obj.get("Title").getAsString();
+		String pubDate = obj.get("PubDate").getAsString();
+		String text = obj.get("Html").getAsString();
+		Judgement judgement = parseHtmlContent(text);
+		judgement.setTitle(title);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			judgement.setPubDate(sdf.parse(pubDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-
-		JudgementSimple simple = new JudgementSimple();
-		return simple;
+		return judgement;
 	}
 
-	public static Map<String, Object> parseHtmlContent(String html) {
+	/**
+	 * 从字符串中，提取装有正文内容的json字符串
+	 * 
+	 * @param content
+	 * @return
+	 */
+	private static String getMainBody(String content) {
+		String begin = "= \"";
+		int beginIndex = content.indexOf(begin);
+		String end = "\"; ";
+		int endIndex = content.indexOf(end);
+		return content.substring(beginIndex + begin.length(), endIndex);
+	}
+
+	public static Judgement parseHtmlContent(String html) {
 		Document doc = Jsoup.parseBodyFragment(html);
-		Elements e =  doc.getElementsByAttributeValue("name", "WBSB");
-		for(Element item: e) {
-			System.out.println(item.tagName());
-			System.out.println(item.nextSibling().outerHtml());
+		Elements headContent = doc.getElementsByAttributeValue("name", "WBSB");
+		Judgement detail = new Judgement();
+		StringBuilder sb = new StringBuilder();
+		List<String> parseResult = parseDetailContent(headContent);
+		for (String item : parseResult) {
+			sb.append(item).append("\n");
 		}
-		return null;
+		detail.setHead(sb.toString());
+		sb = new StringBuilder();
+		Elements headContent1 = doc.getElementsByAttributeValue("name", "DSRXX");
+
+		parseResult = parseDetailContent(headContent1);
+		for (String item : parseResult) {
+			sb.append(item).append("\n");
+		}
+		detail.setHead2(sb.toString());
+		sb = new StringBuilder();
+
+		Elements facts = doc.getElementsByAttributeValue("name", "SSJL");
+		if (facts.isEmpty()) {
+			facts = doc.getElementsByAttributeValue("name", "AJJBQK");
+		}
+
+		parseResult = parseDetailContent(facts);
+		for (String item : parseResult) {
+			sb.append(item).append("\n");
+		}
+		detail.setFacts(sb.toString());
+		sb = new StringBuilder();
+
+		Elements cause = doc.getElementsByAttributeValue("name", "CPYZ");
+		parseResult = parseDetailContent(cause);
+		for (String item : parseResult) {
+			sb.append(item).append("\n");
+		}
+		detail.setCause(sb.toString());
+		sb = new StringBuilder();
+		Elements judgeResult = doc.getElementsByAttributeValue("name", "PJJG");
+		parseResult = parseDetailContent(judgeResult);
+		for (String item : parseResult) {
+			sb.append(item).append("\n");
+		}
+		detail.setJudgeResult(sb.toString());
+		sb = new StringBuilder();
+
+		Elements tailContent = doc.getElementsByAttributeValue("name", "WBWB");
+
+		parseResult = parseDetailContent(tailContent);
+		for (String item : parseResult) {
+			sb.append(item).append("\n");
+		}
+		detail.setTailContent(sb.toString());
+		sb = new StringBuilder();
+
+		return detail;
 	}
 
-	public static void test() {
-		Document doc = null;
-		Pattern p = Pattern.compile("(.[^：]*)：([^，]*)，([^。]*)。");
-
-		Elements divs = doc.getElementsByTag("div");
-
-		List<Lawler> lawlers = new ArrayList<>();
-		Matcher matcher = null;
-		for (Element div : divs) {
-			String tmp = div.text();
-			matcher = p.matcher(tmp);
-			if (matcher.find()) {
-				System.out.println(tmp);
-				System.out.println(matcher.group(1));
-				System.out.println(matcher.group(2));
-				System.out.println(matcher.group(3));
-			} else {
-				System.out.println(tmp);
+	// 解析正文内容
+	private static List<String> parseDetailContent(Elements begin) {
+		List<String> result = new ArrayList<>();
+		for (Element item : begin) {
+			Element tmp = (Element) item.nextSibling();
+			while (null != tmp) {
+				result.add(tmp.text());
+				tmp = tmp.nextElementSibling();
+				if (null == tmp || "a".equals(tmp.tagName())) {
+					break;
+				}
 			}
 		}
-
+		return result;
 	}
 
 	public static JsonElement replaceKey(JsonElement source, Map<String, String> rep) {
