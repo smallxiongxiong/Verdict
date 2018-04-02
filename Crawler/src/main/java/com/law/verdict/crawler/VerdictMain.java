@@ -104,6 +104,7 @@ public class VerdictMain {
 					}
 				} else {
 					data1=data2;
+					Index =1;
 					times *= 2;
 				}
 				//System.out.println("Time: " + data1 + "  " + data2);
