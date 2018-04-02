@@ -35,7 +35,7 @@ public class Parse {
 	public static List<JudgementSimple> parseListContent(String content) {
 		
 		List<JudgementSimple> result = new LinkedList<JudgementSimple>();
-		if(null != content || content.trim().length() <= 0) {
+		if(null == content || content.trim().length() <= 0) {
 			return result;
 		}
 		content = content.substring(1, content.length() - 1);
