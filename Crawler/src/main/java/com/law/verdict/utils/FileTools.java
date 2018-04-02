@@ -1037,6 +1037,31 @@ public class FileTools {
 			}
 		}
 	}
+	
+	public static void writeAndChangeRow(File file, String content, boolean isAppend) {
+		FileWriter fileWriter = null;
+		try {
+			if (!file.exists()) {
+				File parent = file.getParentFile();
+				if(!parent.exists()){
+					parent.mkdirs();
+				}
+				file.createNewFile();
+			}
+			fileWriter = new FileWriter(file.getPath(), isAppend);
+			fileWriter.write(content+"\r\n");
+		} catch (Exception ex) {
+
+		} finally {
+			if (null != fileWriter) {
+				try {
+					fileWriter.close();
+				} catch (IOException ex) {
+
+				}
+			}
+		}
+	}
 
 	/**
 	 * tail 添加文件内容content到文件的index位置
