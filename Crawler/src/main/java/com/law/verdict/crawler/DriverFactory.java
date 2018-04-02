@@ -13,7 +13,7 @@ public class DriverFactory {
     public static WebDriver create() {
         
         // TODO Auto-generated method stub
-        String chromdriver="D:\\chromedriver.exe";
+        String chromdriver="src/main/resources/scripts/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", chromdriver);
         ChromeOptions options = new ChromeOptions();
      
