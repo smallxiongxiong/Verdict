@@ -28,9 +28,9 @@ public class VerdictMain {
 		causeOfActionKey.removeAll(isCrawlerWords);
 		
 		String caseType="民事案件";
-		String data1 = "2016-01-01";
+		String data1 = "2014-01-01";
 		Calendar cal = Calendar.getInstance();
-		int scope = 30;
+		int scope = 7;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(data1);
 		cal.setTime(date);
@@ -105,8 +105,8 @@ public class VerdictMain {
 				if (sdf.parse(data2).after(new Date())) {
 					break;
 				}
-				if(Index>100){
-					break;
+				if(Index==100){
+					times =1;
 				}
 			} while (!list.startsWith("RF"));
 			
