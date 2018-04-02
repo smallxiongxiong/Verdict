@@ -1026,7 +1026,7 @@ public class FileTools {
 			fileWriter = new FileWriter(file.getPath(), isAppend);
 			fileWriter.write(content);
 		} catch (Exception ex) {
-
+			System.out.println(ex);
 		} finally {
 			if (null != fileWriter) {
 				try {
