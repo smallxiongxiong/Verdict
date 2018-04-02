@@ -8,6 +8,6 @@
   <description>Parent Project of The Verdict Document</description>
   <modules>
   	<module>Crawler</module>
-	<module>Utils</module>
+	<!--module>Utils</module-->
   </modules>
 </project>
