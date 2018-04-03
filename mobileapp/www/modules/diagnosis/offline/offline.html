@@ -1,0 +1,35 @@
+<form ng-submit="subForm()">
+<ion-header-bar align-title="center" class="bar-dark">
+    <div class="h1 title login-title">New Article</div>
+    <div class="buttons">
+        <button class="button no-animation" type="submit">Add
+        </button>
+    </div>
+</ion-header-bar>
+<ion-view>
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+            <ion-list>
+                <ion-item>
+                    <ion-label color="primary">Title:</ion-label><input type="text" name="title" ng-model="newArticle.title"/>
+
+
+                </ion-item>
+
+                <ion-item>
+                    <ion-label color="primary" fixed>Tag:</ion-label><input type="text" name="tags" ng-model="newArticle.tags"/>
+
+
+                </ion-item>
+
+                <ion-item>
+                    <textarea placeholder="Enter a description" rows="11" name="content" ng-model="newArticle.content"></textarea>
+                </ion-item>
+            </ion-list>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+</form>
+

@@ -1,0 +1,23 @@
+<ion-header-bar align-title="center" class="bar-dark">
+    <div class="h1 title login-title">{{ 'module.menutree.onu.info.article' | translate }}</div>
+    <!--<div class="buttons">-->
+        <!--<button class="button no-animation button-icon icon ion-android-add" >-->
+            <!--<a ></a>-->
+        <!--</button>-->
+    <!--</div>-->
+</ion-header-bar>
+<ion-view>
+    <ion-content class="nff-bg">
+        <ion-list>
+            <ion-item ng-repeat="article in articles" ng-click="gotoDetails(article._id)">
+                <!--<ion-avatar item-start>-->
+                    <!--<img src="img/avatar-cher.png">-->
+                <!--</ion-avatar>-->
+                <h2>{{ article.title }}</h2>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
+
