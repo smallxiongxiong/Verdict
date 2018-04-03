@@ -1,0 +1,18 @@
+﻿
+{
+    "module": {
+
+        "home": {
+
+        },
+        "header": {
+			"skin": "主题 / 外观",
+			"pageTitle": "Test Page",
+            "logout": "Logout"
+        },
+        "info": {
+
+        }
+
+    }
+}
