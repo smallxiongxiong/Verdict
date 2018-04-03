@@ -1,0 +1,4 @@
+cd mobileapp
+npm install
+bower install
+cordova build android

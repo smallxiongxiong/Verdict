@@ -7,9 +7,9 @@ logging:
         tk.mybatis: TRACE
 
 druid:
-    url: jdbc:mysql://localhost:3306/verdict
+    url: jdbc:mysql://47.96.17.143:3306/verdict
     username: root
-    password: root
+    password: mysql
     initial-size: 1
     min-idle: 1
     max-active: 20
