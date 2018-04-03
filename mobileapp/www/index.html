@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Water</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+  <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+
+
+  <link href="assets/template/ionic/css/ionic.min.css" rel="stylesheet">
+  <link href="assets/template/css/style.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="assets/template/css/demo.css" />
+
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+  <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload-all.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+
+  <script src="modules/app.js"></script>
+
+  <script src="modules/connector/connector.js"></script>
+  <script src="modules/home/home.js"></script>
+  <script src="modules/info/ontInfo.js"></script>
+  <script src="modules/details/details.js"></script>
+
+
+  <script src="modules/diagnosis/offline/offline.js"></script>
+  <script src="modules/system/reboot/reboot.js"></script>
+  <script src="modules/system/recovery/recovery.js"></script>
+ 
+  <script src="modules/system/setting.js"></script>
+
+  <!-- services -->
+  <script src="common/services/storageService.js"></script>
+  <script src="common/services/logoutService.js"></script>
+  <script src="common/services/AuthService.js"></script>
+  <script src="common/services/UsersService.js"></script>
+  <script src="common/services/CartService.js"></script>
+  <script src="common/services/HttpTokenAuthService.js"></script>
+  <script src="common/services/ArticlesService.js"></script>
+
+  <script src="common/services/telnetService.js"></script>
+  <script src="common/services/ontService.js"></script>
+  <script src="common/services/httpUserService.js"></script>
+  <!-- resource -->
+  <script src="common/resources/ontResource.js"></script>
+  <script src="common/resources/diagnosisResource.js"></script>
+  <script src="common/resources/localSaveResource.js"></script>
+  <script src="common/resources/ontInstallResource.js"></script>
+
+  <script src="common/resources/managementResource.js"></script>
+  <script src="common/resources/versionsResouce.js"></script>
+  <script src="common/directives/diagnosisTable/diagnosisTable.js"></script>
+
+  <script src="common/filters/trustUrl.js"></script>
+  <script src="common/filters/trustHtml.js"></script>
+  <script src="common/filters/convertToHtmlElem.js"></script>
+  <script src="common/filters/convertToDate.js"></script>
+
+  <script src="assets/template/ionic/js/ionic.bundle.min.js"></script>
+<script src="cordova.js"></script>
+ 
+</head>
+
+<body ng-app="nff" block-ui="wholeBlock">
+
+<div ui-view>
+  <ion-nav-view animation="slide-left-right">
+  </ion-nav-view>
+</div>
+
+
+<toaster-container toaster-options="{'time-out': 3000,'close-button':true, 'position-class': 'toast-bottom-right'}" ></toaster-container>
+
+
+</body>
+</html>

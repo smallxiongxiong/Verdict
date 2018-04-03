@@ -1,0 +1,48 @@
+.fix-footer{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  padding-bottom: 5px;
+}
+/* Scroll Top Top */
+.scroll-to-top {
+  display: inline-block;
+  padding: 1px;
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  z-index: 9990;
+  right: 10px;
+}
+.scroll-to-top > i {
+  display: inline-block;
+  color: #687991;
+  font-size: 30px;
+  opacity: 0.6 ;
+}
+.scroll-to-top:hover {
+  cursor: pointer;
+}
+.scroll-to-top:hover > i {
+  opacity: 1 ;
+
+}
+
+@media (min-width: 992px) {
+  /* 992px */
+  .scroll-to-top {
+    right: 20px;
+  }
+}
+@media (max-width: 991px) {
+  /* 991px */
+  .scroll-to-top {
+    bottom: 10px;
+    right: 10px;
+  }
+  .scroll-to-top > i {
+    font-size: 28px;
+  }
+}
