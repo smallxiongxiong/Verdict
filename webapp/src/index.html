@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <title>Application</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/split-pane/split-pane.css" />
+  <link rel="stylesheet" href="bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+  <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+
+  <link rel="stylesheet" href="styles/main.css">
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/split-pane/split-pane.js"></script>
+  <script src="bower_components/angular-split-pane/angular-split-pane.js"></script>
+  <script src="bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+  <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+
+  <!-- modules script -->
+  <script src="modules/app.js"></script>
+
+  <script src="modules/connector/connector.js"></script>
+  <script src="modules/home/home.js"></script>
+
+  <!--script src="modules/layout/menutree/menutree.js"></script-->
+  <script src="modules/info/ontInfo.js"></script>
+
+  <!-- services -->
+  <script src="common/services/storageService.js"></script>
+  <script src="common/services/messageService.js"></script>
+  <script src="common/services/logoutService.js"></script>
+  <script src="common/services/telnetService.js"></script>
+  <script src="common/services/ontService.js"></script>
+  <script src="common/services/httpUserService.js"></script>
+  <!-- resource -->
+  <script src="common/resources/ontResource.js"></script>
+  <script src="common/resources/diagnosisResource.js"></script>
+  <script src="common/resources/localSaveResource.js"></script>
+  <script src="common/resources/ontInstallResource.js"></script>
+  <script src="common/resources/commandsResource.js"></script>
+  <script src="common/resources/managementResource.js"></script>
+  <script src="common/resources/versionsResouce.js"></script>
+  <!-- directives -->
+  <script src="common/directives/nffHeader/nffHeader.js"></script>
+  <script src="common/directives/nffFooter/nffFooter.js"></script>
+  <script src="common/directives/nffMessage/nffMessage.js"></script>
+
+  <script src="common/filters/trustUrl.js"></script>
+  <script src="common/filters/trustHtml.js"></script>
+  <script src="common/filters/convertToHtmlElem.js"></script>
+  <script src="common/filters/convertToDate.js"></script>
+  <script src="common/filters/nffUpgtadeFilter.js"></script>
+
+
+</head>
+
+<body ng-app="nff">
+
+<div ui-view class="home-frame">
+
+</div>
+
+
+<toaster-container toaster-options="{'time-out': 3000,'close-button':true, 'position-class': 'toast-bottom-right'}" ></toaster-container>
+
+
+</body>
+</html>
