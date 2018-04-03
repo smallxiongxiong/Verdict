@@ -24,7 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.law.verdict.parse.Parse;
-import com.law.verdict.parse.model.Judgement;
+import com.law.verdict.parse.db.model.Judgement;
 import com.law.verdict.parse.model.JudgementSimple;
 import com.law.verdict.utils.DateTools;
 
@@ -83,14 +83,6 @@ public class ContentParseTest {
 		for (String item : content) {
 			Judgement result = Parse.parseContent(item);
 			System.out.println(result.toString());
-		}
-	}
-
-	//@Test
-	public void testHtml() {
-		for (String item : html) {
-			Judgement result = Parse.parseHtmlContent(item);
-			System.out.println(result);
 		}
 	}
 

@@ -22,7 +22,8 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.law.verdict.parse.model.Judgement;
+import com.law.verdict.parse.db.model.Judgement;
+import com.law.verdict.parse.db.model.JudgementWithBLOBs;
 import com.law.verdict.parse.model.JudgementSimple;
 
 public class Parse {
@@ -84,7 +85,7 @@ public class Parse {
 		return null;
 	}
 
-	public static Judgement parseContent(String content) {
+	public static JudgementWithBLOBs parseContent(String content) {
 		if (null == content || content.isEmpty())
 			return null;
 		content = content.trim();
@@ -98,7 +99,7 @@ public class Parse {
 		String title = obj.get("Title").getAsString();
 		String pubDate = obj.get("PubDate").getAsString();
 		String text = obj.get("Html").getAsString();
-		Judgement judgement = parseHtmlContent(text);
+		JudgementWithBLOBs judgement = parseHtmlContent(text);
 		judgement.setTitle(title);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -123,10 +124,10 @@ public class Parse {
 		return content.substring(beginIndex + begin.length(), endIndex);
 	}
 
-	public static Judgement parseHtmlContent(String html) {
+	private static JudgementWithBLOBs parseHtmlContent(String html) {
 		Document doc = Jsoup.parseBodyFragment(html);
 		Elements headContent = doc.getElementsByAttributeValue("name", "WBSB");
-		Judgement detail = new Judgement();
+		JudgementWithBLOBs detail = new JudgementWithBLOBs();
 		StringBuilder sb = new StringBuilder();
 		List<String> parseResult = parseDetailContent(headContent);
 		for (String item : parseResult) {

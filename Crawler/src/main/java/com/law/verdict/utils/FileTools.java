@@ -79,7 +79,7 @@ public class FileTools {
 	 * @return
 	 */
 	public static List<File> cp(String source, String destination, boolean loop) {
-		List<File> list = new ArrayList();
+		List<File> list = new ArrayList<>();
 		try {
 			File srcFile = new File(source);
 			File desFile = new File(destination);
