@@ -1,15 +1,18 @@
 package crawler;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.law.verdict.constant.CrawlerConstant;
 import com.law.verdict.crawler.VerdictCrawler;
+import com.law.verdict.utils.JavaScriptTools;
 
 public class Test {
 	public static void main(String[] args) {
+		System.out.println("============="+ new Date().toString());
 		VerdictCrawler crawler = new VerdictCrawler();
-		String url = "http://wenshu.court.gov.cn/List/List?sorttype=1&conditions=searchWord+1+AJLX++%E6%A1%88%E4%BB%B6%E7%B1%BB%E5%9E%8B:%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6";
-		Map<String, String> specialParams =crawler.getSpecialParams(url);
+		Map<String, String> specialParams = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
 		Map<String, String> params = new HashMap<String,String>();
 		params.put("Index", "1");
 		params.put("Page", "20");
@@ -17,7 +20,9 @@ public class Test {
 		params.put("Order", "法院层级");
 		params.put("Direction", "asc");
 		params.put("vl5x", specialParams.get("vl5x"));
+		System.out.println("------------------");
 		String list = crawler.getContentList("http://wenshu.court.gov.cn/List/ListContent",params,specialParams.get("vjkl5"));
+		System.out.println("contentList: ===" + list.length());
 		Map<String, String> params2 = new HashMap<String,String>();
 		params2.put("docId", "8252121f-8260-4241-b707-018d52d151ca");
 		params2.put("court", "最高人民法院");
