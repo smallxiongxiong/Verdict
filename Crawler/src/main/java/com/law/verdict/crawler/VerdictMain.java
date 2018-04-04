@@ -11,17 +11,18 @@ import java.util.Map;
 
 import org.openqa.selenium.os.WindowsUtils;
 
+import com.law.verdict.constant.CrawlerConstant;
 import com.law.verdict.parse.Parse;
 import com.law.verdict.parse.model.JudgementSimple;
-import com.law.verdict.utils.DateTools;
 import com.law.verdict.utils.FileTools;
+import com.law.verdict.utils.JavaScriptTools;
 import com.law.verdict.utils.StringTools;
 
 public class VerdictMain {
 	public static void main(String[] args) throws ParseException {
 		VerdictCrawler crawler = new VerdictCrawler();
 		String url = "http://wenshu.court.gov.cn/List/List?sorttype=1&conditions=searchWord+1+AJLX++%E6%A1%88%E4%BB%B6%E7%B1%BB%E5%9E%8B:%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6";
-		Map<String, String> specialParams = crawler.getSpecialParams(url);
+		Map<String, String> specialParams = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
 		Map<String, String> params = new HashMap<String, String>();
 		List<String> causeOfActionKey = FileTools.readTolines(new File("src/main/resources/casedict.txt"));
 		List<String> isCrawlerWords = FileTools.readTolines(new File("src/main/resources/isCrawlerWords.txt"));
@@ -72,9 +73,7 @@ public class VerdictMain {
 						specialParams.get("vjkl5"));
 				System.out.println("list content:" + list);
 				if (list.startsWith("RF")||list.contains("remind key")) {
-					WindowsUtils.killByName("chrome.exe");
-					crawler.driver = DriverFactory.create();
-					specialParams = crawler.getSpecialParams(url);
+					specialParams = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
 					params.put("vl5x", specialParams.get("vl5x"));
 					continue;
 				} else if (list.length() > 22) {

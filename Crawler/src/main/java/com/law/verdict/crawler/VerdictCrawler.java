@@ -5,39 +5,18 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import com.law.verdict.constant.CrawlerConstant;
+import com.law.verdict.utils.JavaScriptTools;
 
 public class VerdictCrawler {
-	public WebDriver driver;
+	//public WebDriver driver;
 	public VerdictCrawler() {
 		super();
-		this.driver = DriverFactory.create();
 	}
-	public Map<String, String> getSpecialParams(String url) {
-		Map<String, String> res = new HashMap<String, String>();
-		driver.get(url);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		String vl5x = (String) ((JavascriptExecutor) driver).executeScript("return getKey();");
-		res.put("vl5x", vl5x);
-		for (Cookie ck : driver.manage().getCookies()) {
-			if ("vjkl5".equals(ck.getName())) {
-				res.put("vjkl5", ck.getValue().trim());
-			}
-		}
-		return res;
-	}
+	
 	public String getContentList(String baseUrl,Map<String,String> params,String vjkl5) {
-		String guid = (String) ((JavascriptExecutor) driver).executeScript(
-				"return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)+'-'+(((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)+'-'+(((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)+'-'+(((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);");
+		String guid = (String) JavaScriptTools.executeJsFile(CrawlerConstant.PATH_JS_GUID, "getGuid", new HashMap<>());
 		String number = HttpRequest.sendPost("http://wenshu.court.gov.cn/ValiCode/GetCode", "guid=" + guid, vjkl5);
 		params.put("guid", guid);
 		params.put("number", number);
