@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.os.WindowsUtils;
-
 import com.law.verdict.constant.CrawlerConstant;
 import com.law.verdict.parse.Parse;
 import com.law.verdict.parse.model.JudgementSimple;
@@ -120,6 +118,5 @@ public class VerdictMain {
 
 		}
 
-		WindowsUtils.killByName("chrome.exe");
 	}
 }
