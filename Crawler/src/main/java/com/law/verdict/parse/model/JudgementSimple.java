@@ -122,7 +122,6 @@ public class JudgementSimple {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
-			System.out.println("=================");
 			date = sdf.parse(this.adjudicatTime);
 			this.timestamp = date.getTime();
 		} catch (ParseException e) {
