@@ -59,7 +59,7 @@ public class Parse {
 			Gson gson = new Gson();
 			JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
 			simple.setTimestamp(0);
-			System.out.println(simple.toString());
+			
 			result.add(simple);
 		}
 		return result;
@@ -128,7 +128,6 @@ public class Parse {
 	 * @return
 	 */
 	private static String getMainBody(String content) {
-		System.out.println("getMainBody: " + content);
 		String begin = "= \"";
 		int beginIndex = content.indexOf(begin);
 		String end = "\"; ";
