@@ -6,11 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.law.verdict.CrawlerMain;
 import com.law.verdict.constant.CrawlerConstant;
 import com.law.verdict.utils.JavaScriptTools;
 
 public class VerdictCrawler {
-	//public WebDriver driver;
+	private static Logger logger = LoggerFactory.getLogger(VerdictCrawler.class);
 	public VerdictCrawler() {
 		super();
 	}
@@ -21,6 +25,7 @@ public class VerdictCrawler {
 		params.put("guid", guid);
 		params.put("number", number);
 		String paramStr = formatParam(params);
+		logger.info("getContentList: url: {}, param: {}, vjkl5: {}", baseUrl,paramStr,vjkl5);
 		return HttpRequest.sendPost(baseUrl,paramStr,vjkl5);
 	}
 	private String formatParam(Map<String,String> params) {
@@ -29,9 +34,8 @@ public class VerdictCrawler {
 			try {
 				resStr += "&"+en.getKey()+"="+ URLEncoder.encode(en.getValue(), "utf-8");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println(" Format Params error!");
+				logger.error("Format Params error!", e);
 			} 
 		}
 		return resStr.substring(1);
@@ -41,13 +45,16 @@ public class VerdictCrawler {
 		
 	}
 	public String getRelatedFiles(String url, Map<String, String> params2, String cookie) {
+		//logger.info("docID: {},  get RelatedFiles by get method", docId);
 		String paramStr = formatParam(params2);
 		return HttpRequest.sendPost(url,paramStr,cookie);
 	}
 	public String getSummary(String url, String docId, String cooke) {
+		logger.info("docID: {},  get getSummary by get method", docId);
 		return HttpRequest.sendPost(url,"docId="+docId,cooke);
 	}
 	public String getContentDetail(String url, String docId, String cookie) {
+		logger.info("docID: {},  get detail Content by get method", docId);
 		return HttpRequest.sendGet(url,"DocID="+docId,cookie);
 	}
 	

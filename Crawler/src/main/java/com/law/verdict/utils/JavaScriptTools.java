@@ -19,13 +19,13 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import com.law.verdict.constant.CrawlerConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JavaScriptTools {
+	private static Logger logger = LoggerFactory.getLogger(JavaScriptTools.class);
 	
-	public static void main(String[] args) {
-		System.out.println(executeJsFile(CrawlerConstant.PATH_JS_GUID, "getGuid", new HashMap<>()));
-	}
+	
 	
 	/**
 	 * 
@@ -101,8 +101,9 @@ public class JavaScriptTools {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			logger.error("get vjkl5 error, ", e);
 		}
-		System.out.println(result);
+		logger.info("get vjkl5 value: {}", result);
 		return result;
 	}
 

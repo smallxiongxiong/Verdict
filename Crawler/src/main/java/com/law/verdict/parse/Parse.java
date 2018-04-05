@@ -14,6 +14,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -25,8 +27,10 @@ import com.google.gson.stream.JsonReader;
 import com.law.verdict.parse.db.model.Judgement;
 import com.law.verdict.parse.db.model.JudgementWithBLOBs;
 import com.law.verdict.parse.model.JudgementSimple;
+import com.law.verdict.services.CrawlerDBOpt;
 
 public class Parse {
+	private static Logger logger = LoggerFactory.getLogger(Parse.class);
 	/**
 	 * 解析列表页内容
 	 * 
@@ -92,20 +96,27 @@ public class Parse {
 		content = getMainBody(content);
 		content = content.replace("\\", "");
 		content = content.trim();
-		JsonReader jsonReader = new JsonReader(new StringReader(content));
-		jsonReader.setLenient(true);
-		JsonElement elements = new JsonParser().parse(jsonReader);
-		JsonObject obj = elements.getAsJsonObject();
-		String title = obj.get("Title").getAsString();
-		String pubDate = obj.get("PubDate").getAsString();
-		String text = obj.get("Html").getAsString();
-		JudgementWithBLOBs judgement = parseHtmlContent(text);
-		judgement.setTitle(title);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		JudgementWithBLOBs judgement = null;
 		try {
-			judgement.setPubDate(sdf.parse(pubDate));
-		} catch (ParseException e) {
-			e.printStackTrace();
+			
+			JsonReader jsonReader = new JsonReader(new StringReader(content));
+			jsonReader.setLenient(true);
+			JsonElement elements = new JsonParser().parse(jsonReader);
+			JsonObject obj = elements.getAsJsonObject();
+			String title = obj.get("Title").getAsString();
+			String pubDate = obj.get("PubDate").getAsString();
+			String text = obj.get("Html").getAsString();
+			judgement = parseHtmlContent(text);
+			judgement.setTitle(title);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				judgement.setPubDate(sdf.parse(pubDate));
+			} catch (ParseException e) {
+				e.printStackTrace();
+				logger.error("dateParseException",e);
+			}
+		}catch(Exception e) {
+			logger.error("json parse Exception, content:{}", content);
 		}
 		return judgement;
 	}
@@ -117,6 +128,7 @@ public class Parse {
 	 * @return
 	 */
 	private static String getMainBody(String content) {
+		System.out.println("getMainBody: " + content);
 		String begin = "= \"";
 		int beginIndex = content.indexOf(begin);
 		String end = "\"; ";
