@@ -1,7 +1,0 @@
-cd webapp
-npm install
-cd webapp/server
-npm install
-
-cd ..
-grunt server
