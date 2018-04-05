@@ -18,15 +18,14 @@
 	<!--输出到debug -->
 	<appender name="debug"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${log.path}/logback-debug.log</file>
+		<file>${log.path}/debug/logback-debug.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.path}/logback-debug-%d{yyyy-MM-dd}.log
-			</fileNamePattern>
+			<fileNamePattern>${log.path}/debug/logback-debug-%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			
 		</rollingPolicy>
 		<append>true</append>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg
-				%class:%line %n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg %class:%line %n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印DEBUG日志 -->
@@ -39,15 +38,14 @@
 	<!--输出到info -->
 	<appender name="info"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${log.path}/logback-info.log</file>
+		<file>${log.path}/info/logback-info.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.path}/logback-info-%d{yyyy-MM-dd}.log
+			<fileNamePattern>${log.path}/info/logback-info-%d{yyyy-MM-dd-HH}.log
 			</fileNamePattern>
 		</rollingPolicy>
 		<append>true</append>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg
-				%class:%line %n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg %class:%line %n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印INFO日志 -->
@@ -60,15 +58,14 @@
 	<!--输出到error -->
 	<appender name="error"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${log.path}/logback-error.log</file>
+		<file>${log.path}/error/logback-error.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.path}/logback-error-%d{yyyy-MM-dd}.log
+			<fileNamePattern>${log.path}/error/logback-error-%d{yyyy-MM-dd-HH}.log
 			</fileNamePattern>
 		</rollingPolicy>
 		<append>true</append>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg
-				%class:%line %n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg %class:%line %n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印ERROR日志 -->
@@ -81,15 +78,14 @@
 	<!--输出到warn -->
 	<appender name="warn"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${log.path}/logback-warn.log</file>
+		<file>${log.path}/warn/logback-warn.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.path}/logback-warn-%d{yyyy-MM-dd}.log
-			</fileNamePattern>
+			<fileNamePattern>${log.path}/warn/logback-warn-%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+			 <maxHistory>60</maxHistory>
 		</rollingPolicy>
 		<append>true</append>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg
-				%class:%line %n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %msg %class:%line %n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印WARN日志 -->

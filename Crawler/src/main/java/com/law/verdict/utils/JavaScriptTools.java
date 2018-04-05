@@ -60,6 +60,7 @@ public class JavaScriptTools {
 	
 	
 	public static Map<String, String> getCookiesByJsFile(String path) {
+		logger.info("get Cookies value");
 		Map<String, String> result = new HashMap<>();
 		ScriptEngineManager m = new ScriptEngineManager();
 		// 获取JavaScript执行引擎
@@ -80,6 +81,7 @@ public class JavaScriptTools {
 			e.printStackTrace();
 		}
 		result.put("vjkl5", jsParam);
+		logger.info("vjkl5 value: {}", jsParam);
 		return result;
 	}
 

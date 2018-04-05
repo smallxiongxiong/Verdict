@@ -31,6 +31,7 @@ import com.law.verdict.services.CrawlerDBOpt;
 
 public class Parse {
 	private static Logger logger = LoggerFactory.getLogger(Parse.class);
+
 	/**
 	 * 解析列表页内容
 	 * 
@@ -59,12 +60,18 @@ public class Parse {
 			Gson gson = new Gson();
 			JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
 			simple.setTimestamp(0);
-			
+
 			result.add(simple);
 		}
 		return result;
 	}
 
+	/**
+	 * 解析doc的关联doc
+	 * 
+	 * @param content
+	 * @return
+	 */
 	public static List<JudgementSimple> parseRelatedFiles(String content) {
 		JsonElement elements = new JsonParser().parse(content);
 		JsonObject data = elements.getAsJsonObject();
@@ -84,11 +91,23 @@ public class Parse {
 		return result;
 	}
 
+	/**
+	 * 解析文书的摘要摘要文档
+	 * 
+	 * @param content
+	 * @param docid
+	 * @return
+	 */
 	public static JudgementSimple parseSummary(String content, String docid) {
 
 		return null;
 	}
 
+	/**
+	 * 解析文书的正文文档
+	 * @param content
+	 * @return
+	 */
 	public static JudgementWithBLOBs parseContent(String content) {
 		if (null == content || content.isEmpty())
 			return null;
@@ -98,7 +117,7 @@ public class Parse {
 		content = content.trim();
 		JudgementWithBLOBs judgement = null;
 		try {
-			
+
 			JsonReader jsonReader = new JsonReader(new StringReader(content));
 			jsonReader.setLenient(true);
 			JsonElement elements = new JsonParser().parse(jsonReader);
@@ -113,9 +132,9 @@ public class Parse {
 				judgement.setPubDate(sdf.parse(pubDate));
 			} catch (ParseException e) {
 				e.printStackTrace();
-				logger.error("dateParseException",e);
+				logger.error("dateParseException", e);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("json parse Exception, content:{}", content);
 		}
 		return judgement;

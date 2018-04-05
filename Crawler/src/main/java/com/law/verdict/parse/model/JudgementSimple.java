@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class JudgementSimple {
@@ -21,7 +20,6 @@ public class JudgementSimple {
 	private String endMethod; // 结案方式
 	private String administrativeScope; // 行政管理范围
 	private String administrativeType; // 行政行为种类
-	private String[] appellor; // 当事人
 	private Statute legalBase; // 法条依赖
 	private String originType;		//与原文Type对应
 

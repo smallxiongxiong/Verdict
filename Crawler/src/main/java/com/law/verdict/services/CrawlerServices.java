@@ -59,7 +59,7 @@ public class CrawlerServices {
 		public void run() {
 			logger.info("begin run Crawler, caseType:{}", caseType);
 			VerdictCrawler crawler = new VerdictCrawler();
-			Map<String, String> specialParams = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
+			Map<String, String> specialParams = this.getCookies();
 			Map<String, String> params = new HashMap<String, String>();
 			List<String> causeOfActionKey = FileTools.readTolines(new File(CrawlerConstant.PATH_CASE_DICT));
 			List<String> isCrawlerWords = FileTools.readTolines(new File(CrawlerConstant.PATH_CRAWLER_WORDS));
@@ -107,7 +107,7 @@ public class CrawlerServices {
 					
 					//指定时间内抓取列表页，超过三次后，如果还没有抓取到正文内容，则记录到文本中。
 					do {
-						Callable<String> task = new DownladListContentCallable(crawler, params, specialParams.get(CrawlerConstant.KEY_VJKL5));
+						Callable<String> task = new DownloadListContentCallable(crawler, params, specialParams.get(CrawlerConstant.KEY_VJKL5));
 						Future<String> future = pool.submit(task);
 						try {
 							listContent = future.get(2, TimeUnit.MINUTES);
@@ -118,9 +118,10 @@ public class CrawlerServices {
 					
 					logger.info("contentList return size： {}", listContent.length());
 					if (listContent.startsWith("RF") || listContent.contains("remind key")) {
-						specialParams = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
+						logger.info(" DownLoadList return value： {}", listContent);
+						specialParams = this.getCookies();
 						params.put(CrawlerConstant.KEY_VL5X, specialParams.get(CrawlerConstant.KEY_VL5X));
-						FileTools.write(FILE_UN_SEARCH, params.toString(), true);
+						FileTools.writeAndChangeRow(FILE_UN_SEARCH, params.toString(), true);
 						continue;
 					} else if (listContent.length() > 22) {
 						FileTools.write(PRE_FILE_PATH, fileName, listContent, false);
@@ -143,7 +144,7 @@ public class CrawlerServices {
 							index = 0;
 							//抓取内容指定时间，超过三次后，如果还没有抓取到正文内容，则记录到文本中。
 							do {
-								Callable<String> task = new DownladDetailContentCallable(crawler, js.getCaseID(),
+								Callable<String> task = new DownloadDetailContentCallable(crawler, js.getCaseID(),
 										specialParams.get(CrawlerConstant.KEY_VJKL5));
 								Future<String> future = pool.submit(task);
 								try {
@@ -155,7 +156,7 @@ public class CrawlerServices {
 
 							if (null == detail) {
 								System.out.println("========detail is null========");
-								FileTools.write(FILE_UN_CRAWLER, js.getCaseID(), true);
+								FileTools.writeAndChangeRow(FILE_UN_CRAWLER, js.getCaseID(), true);
 								continue;
 							}
 							logger.info("get content detail, docID: {}, caseType: {}, cause: {}, detail.length: {}",
@@ -190,6 +191,30 @@ public class CrawlerServices {
 			logger.info("caseType {} crawler end", this.caseType);
 		}
 
+		public Map<String, String> getCookies(){
+			Map<String, String> result = new HashMap<>();
+			int index = 0;
+			do {
+				if(index > 0) {
+					try {
+						index *=2;
+						logger.info("get cookies time sleep, {} ms", index);
+						Thread.sleep(1000 * index);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+						logger.error("get cookies was interrupted", e);
+					}
+				}
+				Callable<Map<String,String>> task = new GetCookiesCallable();
+				Future<Map<String,String>> future = pool.submit(task);
+				try {
+					result = future.get(2, TimeUnit.MINUTES);
+				} catch (Exception e) {
+					logger.error("get cookies timeout", e);
+				}
+			} while (result == null || result.isEmpty());
+			return result;
+		}
 	}
 
 	abstract class CrawlerOption<T>{
@@ -198,14 +223,24 @@ public class CrawlerServices {
 			return done();
 		}
 	}
-	class DownladListContentCallable extends CrawlerOption<String> implements Callable<String> {
+	
+	class GetCookiesCallable extends CrawlerOption<Map<String, String>> implements Callable<Map<String, String>>{
+
+		@Override
+		public Map<String, String> done() {
+			return JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
+		}
+		
+	}
+	
+	class DownloadListContentCallable extends CrawlerOption<String> implements Callable<String> {
 		
 		private String keyVjkl5;
 		private VerdictCrawler crawler;
 		private Map<String, String> params;
 		
 		
-		public DownladListContentCallable(VerdictCrawler crawler, Map<String, String> params, String keyVjkl5) {
+		public DownloadListContentCallable(VerdictCrawler crawler, Map<String, String> params, String keyVjkl5) {
 			this.crawler = crawler;
 			this.params = params;
 			this.keyVjkl5 = keyVjkl5;
@@ -220,16 +255,16 @@ public class CrawlerServices {
 		
 	}
 	
-	class DownladDetailContentCallable extends CrawlerOption<String> implements Callable<String> {
+	class DownloadDetailContentCallable extends CrawlerOption<String> implements Callable<String> {
 		private String docID;
 		private String param;
 		private VerdictCrawler crawler;
 
-		public DownladDetailContentCallable(VerdictCrawler crawler, Map<String, Object> param) {
+		public DownloadDetailContentCallable(VerdictCrawler crawler, Map<String, Object> param) {
 			
 		}
 		
-		public DownladDetailContentCallable(VerdictCrawler crawler, String docID, String param) {
+		public DownloadDetailContentCallable(VerdictCrawler crawler, String docID, String param) {
 			super();
 			this.crawler = crawler;
 			this.docID = docID;
