@@ -18,4 +18,5 @@ copy %curDir%\src\main\resources\javascript\*.js %targetDir%\config\javascript\
 call mvn clean package -Dmaven.test.skip=true
 copy %curDir%\target\*.jar %targetDir%\
 copy %curDir%\*.sh %targetDir%\
+copy %curDir%\start.bat %targetDir%\
 pause
