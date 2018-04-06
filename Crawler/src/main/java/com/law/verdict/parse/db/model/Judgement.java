@@ -7,11 +7,7 @@ public class Judgement {
 
     private String docId;
 
-    private String title;
-
     private Date pubDate;
-
-    private String tailContent;
 
     public Integer getId() {
         return id;
@@ -29,14 +25,6 @@ public class Judgement {
         this.docId = docId == null ? null : docId.trim();
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
     public Date getPubDate() {
         return pubDate;
     }
@@ -44,20 +32,4 @@ public class Judgement {
     public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
-
-    public String getTailContent() {
-        return tailContent;
-    }
-
-    public void setTailContent(String tailContent) {
-        this.tailContent = tailContent == null ? null : tailContent.trim();
-    }
-
-	@Override
-	public String toString() {
-		return "Judgement [id=" + id + ", docId=" + docId + ", title=" + title + ", pubDate=" + pubDate
-				+ ", tailContent=" + tailContent + "]";
-	}
-    
-    
 }

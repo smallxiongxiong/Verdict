@@ -1,6 +1,8 @@
 package com.law.verdict.parse.db.model;
 
 public class JudgementWithBLOBs extends Judgement {
+    private String title;
+
     private String head;
 
     private String head2;
@@ -10,6 +12,16 @@ public class JudgementWithBLOBs extends Judgement {
     private String cause;
 
     private String judgeResult;
+
+    private String tailContent;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
 
     public String getHead() {
         return head;
@@ -49,5 +61,13 @@ public class JudgementWithBLOBs extends Judgement {
 
     public void setJudgeResult(String judgeResult) {
         this.judgeResult = judgeResult == null ? null : judgeResult.trim();
+    }
+
+    public String getTailContent() {
+        return tailContent;
+    }
+
+    public void setTailContent(String tailContent) {
+        this.tailContent = tailContent == null ? null : tailContent.trim();
     }
 }

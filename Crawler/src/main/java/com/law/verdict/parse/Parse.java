@@ -1,7 +1,6 @@
 package com.law.verdict.parse;
 
 import java.io.StringReader;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,10 +23,8 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.law.verdict.parse.db.model.Judgement;
 import com.law.verdict.parse.db.model.JudgementWithBLOBs;
 import com.law.verdict.parse.model.JudgementSimple;
-import com.law.verdict.services.CrawlerDBOpt;
 
 public class Parse {
 	private static Logger logger = LoggerFactory.getLogger(Parse.class);
@@ -37,8 +34,9 @@ public class Parse {
 	 * 
 	 * @param content
 	 * @return
+	 * @throws Exception 
 	 */
-	public static List<JudgementSimple> parseListContent(String content) {
+	public static List<JudgementSimple> parseListContent(String content) throws RuntimeException {
 
 		List<JudgementSimple> result = new LinkedList<JudgementSimple>();
 		if (null == content || content.trim().length() <= 0) {
@@ -49,19 +47,23 @@ public class Parse {
 		JsonElement elements = new JsonParser().parse(content);
 		JsonArray data = elements.getAsJsonArray();
 		Iterator<JsonElement> it = data.iterator();
-		while (it.hasNext()) {
-			JsonElement e = it.next();
-			JsonObject obj = e.getAsJsonObject();
-			if (obj.has("Count")) {
-				continue;
+		try {
+			while (it.hasNext()) {
+				JsonElement e = it.next();
+				JsonObject obj = e.getAsJsonObject();
+				if (obj.has("Count")) {
+					continue;
+				}
+				e = replaceKey(e, JudgementSimple.KEY_MAP);
+				obj = e.getAsJsonObject();
+				Gson gson = new Gson();
+				JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
+				simple.setTimestamp(0);
+				
+				result.add(simple);
 			}
-			e = replaceKey(e, JudgementSimple.KEY_MAP);
-			obj = e.getAsJsonObject();
-			Gson gson = new Gson();
-			JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
-			simple.setTimestamp(0);
-
-			result.add(simple);
+		}catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 		return result;
 	}
@@ -86,7 +88,6 @@ public class Parse {
 			JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
 			simple.setTimestamp(0);
 			result.add(simple);
-			System.out.println(simple.toString());
 		}
 		return result;
 	}
@@ -105,6 +106,7 @@ public class Parse {
 
 	/**
 	 * 解析文书的正文文档
+	 * 
 	 * @param content
 	 * @return
 	 */
@@ -128,12 +130,7 @@ public class Parse {
 			judgement = parseHtmlContent(text);
 			judgement.setTitle(title);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			try {
-				judgement.setPubDate(sdf.parse(pubDate));
-			} catch (ParseException e) {
-				e.printStackTrace();
-				logger.error("dateParseException", e);
-			}
+			judgement.setPubDate(sdf.parse(pubDate));
 		} catch (Exception e) {
 			logger.error("json parse Exception, content:{}", content);
 		}

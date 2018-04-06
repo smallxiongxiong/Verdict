@@ -3,6 +3,7 @@ package com.law.verdict.services;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -112,7 +113,7 @@ public class CrawlerServices {
 						try {
 							listContent = future.get(2, TimeUnit.MINUTES);
 						} catch (Exception e) {
-							logger.error("get List Content timeOut", e);
+							logger.error("get List Content timeOut, param: " + params.toString(), e);
 						}
 					} while (listContent == null && ++index < 3);
 					
@@ -125,7 +126,14 @@ public class CrawlerServices {
 						continue;
 					} else if (listContent.length() > 22) {
 						FileTools.write(PRE_FILE_PATH, fileName, listContent, false);
-						List<JudgementSimple> jsList = Parse.parseListContent(listContent);
+						List<JudgementSimple> jsList = new ArrayList<>();
+						try{
+							jsList = Parse.parseListContent(listContent);
+						}catch(Exception e) {
+							logger.error(params.toString());
+							logger.error("parse list Content has Error ", e);
+							jsList = new ArrayList<>();
+						}
 						logger.info("paser jsList size: {}", jsList.size());
 						for (JudgementSimple js : jsList) {
 							try {
@@ -150,12 +158,12 @@ public class CrawlerServices {
 								try {
 									detail = future.get(2, TimeUnit.MINUTES);
 								} catch (Exception e) {
-									logger.error("get Content timeOut", e);
+									logger.error("get Content timeOut, docId: " + js.getCaseID(), e);
 								}
 							} while (detail == null && ++index < 3);
 
 							if (null == detail) {
-								System.out.println("========detail is null========");
+								logger.error("detail is null, docID: {}", js.getCaseID());
 								FileTools.writeAndChangeRow(FILE_UN_CRAWLER, js.getCaseID(), true);
 								continue;
 							}
@@ -185,23 +193,22 @@ public class CrawlerServices {
 						times = 1;
 					}
 				} while (!listContent.startsWith("RF"));
-				FileTools.writeAndChangeRow(new File("src/main/resources/isCrawlerWords.txt"), cause, true);
+				FileTools.writeAndChangeRow(new File(CrawlerConstant.PATH_CRAWLER_WORDS), cause, true);
 
 			}
 			logger.info("caseType {} crawler end", this.caseType);
 		}
 
-		public Map<String, String> getCookies(){
+		private Map<String, String> getCookies(){
 			Map<String, String> result = new HashMap<>();
 			int index = 0;
 			do {
 				if(index > 0) {
 					try {
-						index *=2;
+						index *= 2;
 						logger.info("get cookies time sleep, {} ms", index);
 						Thread.sleep(1000 * index);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
 						logger.error("get cookies was interrupted", e);
 					}
 				}
@@ -215,6 +222,7 @@ public class CrawlerServices {
 			} while (result == null || result.isEmpty());
 			return result;
 		}
+		
 	}
 
 	abstract class CrawlerOption<T>{

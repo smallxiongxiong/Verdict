@@ -5,11 +5,11 @@ public final class CrawlerConstant {
 	public static final String URL_LIST_CONTENT = "http://wenshu.court.gov.cn/List/ListContent";
 	public static final String URL_DETAIL_CONTENT = "http://wenshu.court.gov.cn/CreateContentJS/CreateContentJS.aspx";
 	
-	
-	public static final String PATH_JS_COOKIE = "src/main/resources/javascript/getkey.js";
-	public static final String PATH_JS_GUID = "src/main/resources/javascript/getGuid.js";
-	public static final String PATH_CASE_DICT = "src/main/resources/casedict.txt";
-	public static final String PATH_CRAWLER_WORDS = "src/main/resources/isCrawlerWords.txt";
+	public static final String PATH_PRE = System.getProperty("pathPre");
+	public static final String PATH_JS_COOKIE = PATH_PRE + "/javascript/getkey.js";
+	public static final String PATH_JS_GUID = PATH_PRE + "/javascript/getGuid.js";
+	public static final String PATH_CASE_DICT = PATH_PRE + "/casedict.txt";
+	public static final String PATH_CRAWLER_WORDS = PATH_PRE + "/isCrawlerWords.txt";
 	
 	public static final String KEY_VJKL5 = "vjkl5";
 	public static final String KEY_VL5X = "vl5x";

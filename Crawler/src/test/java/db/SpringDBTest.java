@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.law.verdict.CrawlerMain;
 import com.law.verdict.parse.Parse;
 import com.law.verdict.parse.dao.JudgementMapper;
-import com.law.verdict.parse.db.model.Judgement;
 import com.law.verdict.parse.db.model.JudgementWithBLOBs;
 
 import util.FileReader;

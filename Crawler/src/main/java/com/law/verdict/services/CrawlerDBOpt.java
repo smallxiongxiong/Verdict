@@ -51,8 +51,13 @@ public class CrawlerDBOpt {
 				logger.info("caseType: {}, cause: {}, docID: {}, parseFailure ", this.caseType, this.cause, this.docId);
 			} else {
 				result.setDocId(this.docId);
-				int record = judgeMentMapper.insert(result);
-				logger.info("docID: {}, insert result: {}", this.docId, record > 0);
+				try {
+					int record = judgeMentMapper.insert(result);
+					logger.info("docID: {}, insert result: {}", this.docId, record > 0);
+					
+				}catch(Exception e){
+					logger.error("insert db has erro, docid: " + this.docId, e);
+				}
 			}
 		}
 
