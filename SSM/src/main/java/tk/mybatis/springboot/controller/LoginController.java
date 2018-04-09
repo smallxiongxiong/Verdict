@@ -24,8 +24,7 @@
 
 package tk.mybatis.springboot.controller;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,52 +32,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import tk.mybatis.springboot.model.UserInfo;
+import tk.mybatis.springboot.service.UserInfoService;
 
-import com.github.pagehelper.PageInfo;
-
-import tk.mybatis.springboot.model.Judgement;
-import tk.mybatis.springboot.service.JudgementService;
+import java.util.List;
 
 /**
  * @author liuzh
  * @since 2015-12-19 11:10
  */
 @RestController
-@RequestMapping("/judgements")
-public class JudgementController {
+@RequestMapping("/usermanage")
+public class LoginController {
 
     @Autowired
-    private JudgementService judgementService;
-
-    @RequestMapping
-    public PageInfo<Judgement> getAll(Judgement judgement) {
-        List<Judgement> countryList = judgementService.getAll(judgement);
-        return new PageInfo<Judgement>(countryList);
-    }
-
-    @RequestMapping(value = "/add")
-    public Judgement add() {
-        return new Judgement();
-    }
-
-    @RequestMapping(value = "/split")
-    public String split(String str) {
-        return judgementService.splitSentence("");
-    }
-    @RequestMapping(value = "/view/{id}")
-    public Judgement view(@PathVariable Integer id) {
-        ModelAndView result = new ModelAndView();
-        Judgement judgement = judgementService.getById(id);
-        return judgement;
-    }
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelMap save(Judgement judgement) {
+    private UserInfoService userInfoService;
+ 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelMap login(UserInfo userInfo) {
+    	userInfo = new UserInfo();
+    	userInfo.setUsername("test2");
+    	userInfo.setPassword("aaaa");
         ModelMap result = new ModelMap();
-        String msg = judgement.getId() == null ? "新增成功!" : "更新成功!";
-        judgementService.save(judgement);
-        result.put("judgement", judgement);
+        UserInfo u =userInfoService.getByNameAndPwd(userInfo);
+        String msg = u == null ? "fail" : "ok";
+        //session save TODO
+        result.put("userInfo", userInfo);
         result.put("msg", msg);
         return result;
     }
+    
 }

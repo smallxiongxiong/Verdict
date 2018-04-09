@@ -27,7 +27,10 @@ package tk.mybatis.springboot.service;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.springboot.mapper.UserInfoMapper;
+import tk.mybatis.springboot.model.Judgement;
 import tk.mybatis.springboot.model.UserInfo;
 
 import java.util.List;
@@ -53,6 +56,23 @@ public class UserInfoService {
         return userInfoMapper.selectByPrimaryKey(id);
     }
 
+    public UserInfo getByNameAndPwd(UserInfo info) {
+        Example example = new Example(Judgement.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (info.getUsername() != null ) {
+            criteria.andEqualTo("username", info.getUsername());
+        }
+        if (info.getPassword()!= null ) {
+            criteria.andEqualTo("password", info.getPassword());
+        }
+        List<UserInfo> users = userInfoMapper.selectByExample(example);
+        if(users.size()>0){
+        	return users.get(0);
+        }else{
+        	return null;
+        }
+    }
+    
     public void deleteById(Integer id) {
         userInfoMapper.deleteByPrimaryKey(id);
     }

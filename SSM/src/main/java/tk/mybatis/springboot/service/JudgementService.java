@@ -1,17 +1,19 @@
 package tk.mybatis.springboot.service;
 
-import com.github.pagehelper.PageHelper;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
+import com.hankcs.hanlp.tokenizer.NLPTokenizer;
+import com.sun.xml.internal.xsom.impl.Ref.Term;
+
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.Weekend;
 import tk.mybatis.mapper.weekend.WeekendCriteria;
-import tk.mybatis.springboot.mapper.CountryMapper;
 import tk.mybatis.springboot.mapper.JudgementMapper;
-import tk.mybatis.springboot.model.Country;
 import tk.mybatis.springboot.model.Judgement;
-
-import java.util.List;
 
 @Service
 public class JudgementService {
@@ -66,5 +68,11 @@ public class JudgementService {
         } else {
         	judgementMapper.insert(judgement);
         }
+    }
+    
+    public String splitSentence(String s){
+    	List<com.hankcs.hanlp.seg.common.Term> termList = NLPTokenizer.segment("中国科学院计算技术研究所的宗成庆教授正在教授自然语言处理课程");
+    	System.out.println(termList);
+    	return termList.toString();
     }
 }
