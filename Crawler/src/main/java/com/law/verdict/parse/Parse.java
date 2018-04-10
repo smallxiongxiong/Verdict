@@ -25,6 +25,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.law.verdict.parse.db.model.JudgementWithBLOBs;
 import com.law.verdict.parse.model.JudgementSimple;
+import com.law.verdict.parse.model.Statute;
+import com.law.verdict.utils.StringTools;
 
 public class Parse {
 	private static Logger logger = LoggerFactory.getLogger(Parse.class);
@@ -34,7 +36,7 @@ public class Parse {
 	 * 
 	 * @param content
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static List<JudgementSimple> parseListContent(String content) throws RuntimeException {
 
@@ -59,10 +61,10 @@ public class Parse {
 				Gson gson = new Gson();
 				JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
 				simple.setTimestamp(0);
-				
+
 				result.add(simple);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return result;
@@ -75,7 +77,9 @@ public class Parse {
 	 * @return
 	 */
 	public static List<JudgementSimple> parseRelatedFiles(String content) {
-		JsonElement elements = new JsonParser().parse(content);
+		JsonReader jsonReader = new JsonReader(new StringReader(content));
+		jsonReader.setLenient(true);
+		JsonElement elements = new JsonParser().parse(jsonReader);
 		JsonObject data = elements.getAsJsonObject();
 		JsonArray relatedJudges = data.get("RelateFile").getAsJsonArray();
 		Iterator<JsonElement> it = relatedJudges.iterator();
@@ -99,9 +103,90 @@ public class Parse {
 	 * @param docid
 	 * @return
 	 */
-	public static JudgementSimple parseSummary(String content, String docid) {
+	public static void parseSummary(String content, JudgementSimple js) {
+		System.out.println(content);
+		content = content.substring(1, content.length() - 1);
+		content = content.replace("\\u0027", "'");		
+		content = content.replace("\\", "");
+		try {
+			System.out.println(content);
+			JsonReader jsonReader = new JsonReader(new StringReader(content));
+			jsonReader.setLenient(true);
+			JsonElement elements = new JsonParser().parse(jsonReader);
+			JsonObject relatedObj = elements.getAsJsonObject();
+			JsonArray relateInfoArray = relatedObj.get("RelateInfo").getAsJsonArray();
+			parseRelatedInfoSummary(js, relateInfoArray);
+			JsonArray legalBase = relatedObj.get("LegalBase").getAsJsonArray();
+			parseLegalBaseSummary(js, legalBase);
+		} catch (Exception e) {
+			logger.error("json parse Summary Exception, content:" + content, e);
+			
+		}
+	}
 
-		return null;
+	/**
+	 * 解析摘要文档中的发条信息
+	 * @param js
+	 * @param legalBase
+	 */
+	private static void parseLegalBaseSummary(JudgementSimple js, JsonArray legalBase) {
+		System.out.println(legalBase.toString());
+		Iterator<JsonElement> it = legalBase.iterator();
+		try {
+			while (it.hasNext()) {
+				JsonElement e = it.next();
+				Statute tmp = new Statute();
+				JsonObject tmpObj = e.getAsJsonObject();
+				tmp.setName(tmpObj.get("法规名称").getAsString());
+				JsonArray legalItem = tmpObj.get("Items").getAsJsonArray();
+				System.out.println("=====" + legalItem.toString());
+				Iterator<JsonElement> itemsIt = legalItem.iterator();
+				System.out.println(itemsIt.toString());
+				while (itemsIt.hasNext()) {
+					JsonElement legal = itemsIt.next();
+					System.out.println("--" + legal.toString());
+					Statute.ArticlesLaw law = new Statute.ArticlesLaw();
+					law.setName(legal.getAsJsonObject().get("法条名称").getAsString());
+					law.setContent(legal.getAsJsonObject().get("法条内容").getAsString());
+					tmp.addDetailLaw(law);
+				}
+				js.addStatute(tmp);
+			}
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 解析摘要中的摘要信息
+	 * 
+	 * @param js
+	 * @param relateInfoArray
+	 */
+	private static void parseRelatedInfoSummary(JudgementSimple js, JsonArray relateInfoArray) {
+		Iterator<JsonElement> it = relateInfoArray.iterator();
+		try {
+			while (it.hasNext()) {
+				JsonElement e = it.next();
+				JsonObject obj = e.getAsJsonObject();
+				String key = obj.get("key").getAsString();
+				String name = obj.get("name").getAsString();
+				String value = obj.get("value").getAsString();
+				if ("reason".equals(key)) {
+					if ("行政管理范围".equals(name)) {
+						js.setAdministrativeScope(value);
+					} else {
+						js.setAdministrativeType(value);
+					}
+				} else if ("appellor".equals(key)) {
+					js.setAppellor(value.replace(",", " "));
+				}
+
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -119,7 +204,6 @@ public class Parse {
 		content = content.trim();
 		JudgementWithBLOBs judgement = null;
 		try {
-
 			JsonReader jsonReader = new JsonReader(new StringReader(content));
 			jsonReader.setLenient(true);
 			JsonElement elements = new JsonParser().parse(jsonReader);
