@@ -1,0 +1,13 @@
+spring:
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://47.96.17.143:3306/verdict?useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: mysql
+mybatis:
+    #config-location: classpath:/mybatis/mybatis-config.xml
+    type-aliases-package: com.law.verdict.parse.db.model
+    mapper-locations: classpath:com/law/verdict/parse/db/model/*.xml
+    configuration.map-underscore-to-camel-case: true
+    configuration.default-fetch-size: 100    
+    configuration.default-statement-timeout: 30
