@@ -7,13 +7,9 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.law.verdict.CrawlerMain;
 
 public class HttpRequest {
 	private static Logger logger = LoggerFactory.getLogger(HttpRequest.class);

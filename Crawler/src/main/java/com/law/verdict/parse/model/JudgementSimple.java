@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class JudgementSimple {
@@ -16,14 +18,22 @@ public class JudgementSimple {
 	private String judgmentProcess; // 审判程序
 	private String caseNum; // 案号
 	private String adjudicatCourt; // 审理法院，法院名称
+	
 	private String mark; // 标记
 	private String endMethod; // 结案方式
 	private String administrativeScope; // 行政管理范围
 	private String administrativeType; // 行政行为种类
 	private Statute legalBase; // 法条依赖
 	private String originType;		//与原文Type对应
+	private String appellor; 		//当事人
 
+	
+	private List<Statute> statutes = new LinkedList<>();
 	private long timestamp; // 用来映射裁判日期
+	
+	
+	
+	private List<JudgementSimple> relatedFile = new LinkedList<>();
 
 	public static final Map<String, String> KEY_MAP = new HashMap<String, String>() {
 		/**
@@ -46,6 +56,10 @@ public class JudgementSimple {
 			put("结案方式", "endMethod");
 		}
 	};
+	
+	public void addStatute(Statute statute) {
+		this.statutes.add(statute);
+	}
 
 	public String getJudicialGist() {
 		return judicialGist;
@@ -115,6 +129,64 @@ public class JudgementSimple {
 	public long getTimestamp() {
 		return timestamp;
 	}
+	
+	
+
+	public String getMark() {
+		return mark;
+	}
+
+	public void setMark(String mark) {
+		this.mark = mark;
+	}
+
+	public String getEndMethod() {
+		return endMethod;
+	}
+
+	public void setEndMethod(String endMethod) {
+		this.endMethod = endMethod;
+	}
+
+	public String getAdministrativeScope() {
+		return administrativeScope;
+	}
+
+	public void setAdministrativeScope(String administrativeScope) {
+		this.administrativeScope = administrativeScope;
+	}
+
+	public String getAdministrativeType() {
+		return administrativeType;
+	}
+
+	public void setAdministrativeType(String administrativeType) {
+		this.administrativeType = administrativeType;
+	}
+
+	public Statute getLegalBase() {
+		return legalBase;
+	}
+
+	public void setLegalBase(Statute legalBase) {
+		this.legalBase = legalBase;
+	}
+
+	public String getOriginType() {
+		return originType;
+	}
+
+	public void setOriginType(String originType) {
+		this.originType = originType;
+	}
+
+	public List<JudgementSimple> getRelatedFile() {
+		return relatedFile;
+	}
+
+	public void setRelatedFile(List<JudgementSimple> relatedFile) {
+		this.relatedFile = relatedFile;
+	}
 
 	public void setTimestamp(long timestamp) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -128,12 +200,25 @@ public class JudgementSimple {
 
 	}
 
+	public String getAppellor() {
+		return appellor;
+	}
+
+	public void setAppellor(String appellor) {
+		this.appellor = appellor;
+	}
+
 	@Override
 	public String toString() {
 		return "JudgementSimple [judicialGist=" + judicialGist + ", caseType=" + caseType + ", adjudicatTime="
 				+ adjudicatTime + ", caseName=" + caseName + ", caseID=" + caseID + ", judgmentProcess="
-				+ judgmentProcess + ", caseNum=" + caseNum + ", adjudicatCourt=" + adjudicatCourt + ", timestamp="
-				+ timestamp + "]";
+				+ judgmentProcess + ", caseNum=" + caseNum + ", adjudicatCourt=" + adjudicatCourt + ", mark=" + mark
+				+ ", endMethod=" + endMethod + ", administrativeScope=" + administrativeScope + ", administrativeType="
+				+ administrativeType + ", legalBase=" + legalBase + ", originType=" + originType + ", appellor="
+				+ appellor + ", statutes=" + statutes + ", timestamp=" + timestamp + ", relatedFile=" + relatedFile
+				+ "]";
 	}
+
+
 
 }

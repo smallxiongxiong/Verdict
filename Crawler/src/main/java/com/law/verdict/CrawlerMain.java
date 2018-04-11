@@ -1,8 +1,6 @@
 package com.law.verdict;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,13 +18,11 @@ public class CrawlerMain implements CommandLineRunner {
 	CrawlerServices crawlerServices;
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("======================");
 		SpringApplication.run(CrawlerMain.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("=========== run begin ===========");
 		if (null == crawlerServices) {
 			System.out.println("CrawlerServices crawlerServices is null");
 			System.exit(0);

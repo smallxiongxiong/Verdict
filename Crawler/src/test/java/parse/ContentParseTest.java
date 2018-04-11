@@ -26,6 +26,8 @@ import com.google.gson.stream.JsonReader;
 import com.law.verdict.parse.Parse;
 import com.law.verdict.parse.db.model.Judgement;
 import com.law.verdict.parse.model.JudgementSimple;
+import com.law.verdict.services.CrawlerServices;
+import com.law.verdict.services.CrawlerServices.CrawlerTask;
 import com.law.verdict.utils.DateTools;
 
 import util.FileReader;
@@ -54,27 +56,41 @@ public class ContentParseTest {
 		html = FileReader.readByLine(HTML_PATH);
 		dict = FileReader.readByLine("src/test/resources/data/dict.txt");
 		keyWords = FileReader.readByLine("src/test/resources/data/treeContent.txt");
+		System.setProperty("pathPre", "src/main/resources/");
+	}
+
+	@Test
+	public void testCrawlerServices() {
+		CrawlerServices cs = new CrawlerServices();
+		CrawlerServices.CrawlerTask task = cs.new CrawlerTask("刑事案件");
+		task.run();
 	}
 
 	// @Test
 	public void test() {
 		for (String item : listContents) {
 			List<JudgementSimple> result = Parse.parseListContent(item);
+
 			assertEquals(5, result.size());
 		}
 	}
 
-	// @Test
+	@Test
 	public void testRelatedFiles() {
 		for (String item : relatedFiles) {
-			Parse.parseRelatedFiles(item);
+			List<JudgementSimple> result = Parse.parseRelatedFiles(item);
+			for (JudgementSimple value : result) {
+				System.out.println(value.toString());
+			}
 		}
 	}
 
-	// @Test
+	@Test
 	public void testSummary() {
 		for (String item : summary) {
-			Parse.parseSummary(item, "");
+			JudgementSimple js = new JudgementSimple();
+			Parse.parseSummary(item, js);
+			System.out.println(js.toString());
 		}
 	}
 
@@ -98,17 +114,17 @@ public class ContentParseTest {
 		}
 	}
 
-	//@Test
+	// @Test
 	public void testCalendr() {
 		String content = "2018-03-01";
 		List<String> result = new ArrayList<>();
 		result.add(content);
 		int scope = 5;
 		int times = 10;
-		 result = DateTools.getScopeDay(content, scope, times);
-		 for(String item: result) {
-			 System.out.println(item);
-		 }
+		result = DateTools.getScopeDay(content, scope, times);
+		for (String item : result) {
+			System.out.println(item);
+		}
 
 	}
 

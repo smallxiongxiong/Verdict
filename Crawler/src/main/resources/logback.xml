@@ -9,8 +9,7 @@
 			<level>debug</level>
 		</filter>
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %contextName [%thread] %-5level
-				%msg %class:%line%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %contextName [%thread] %-5level %msg %class:%line %n</pattern>
 			<charset>utf-8</charset>
 		</encoder>
 	</appender>
@@ -97,7 +96,7 @@
 
 	<!--分别设置对应的日志输出节点 -->
 	<root level="info">
-		<!-- <appender-ref ref="console" />  -->
+		<appender-ref ref="console" />  
 		<appender-ref ref="debug" />
 		<appender-ref ref="info" />
 		<appender-ref ref="error" />
