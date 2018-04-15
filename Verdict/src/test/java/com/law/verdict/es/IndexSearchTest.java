@@ -15,13 +15,18 @@ public class IndexSearchTest {
 
 	@Autowired
 	private IndexSearchService indexSearchService;
+	
+	
 	@Test
 	public void testQuery() {
-		String content = "{\n" + "  \"query\": {\n" + "    \"match\": {\n" + "      \"user\": \"kimchy\"\n" + "    }\n"
-				+ "  }\n" + "}";
-		
+		String content = "{  \"query\": {\"match\": {\"appellor\": \"耐克国际有限公司\"} }}";
+		System.out.println(content);
 		String result = indexSearchService.queryIndex(content);
 		System.out.println(result);
+		
+	}
+	
+	public void testAddIndexDocument() {
 		
 	}
 }
