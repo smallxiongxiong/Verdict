@@ -1,0 +1,12 @@
+<div class="alert alert-{{type || 'info'}} message-position message-fade" ng-show="message" style="padding: 5px 2px;">
+    <div>
+        <div style="padding:1px 0 5px 5px;width:100px;line-height:18px;text-align:left;overflow:hidden;float: left;font-size: 12px;">消息提示</div>
+        <div style="float:right;padding:1px 0 5px 0;width:16px;color:red;font-size:12px;font-weight:bold;text-align:center;cursor:pointer;overflow:hidden;">
+            <span class="glyphicon glyphicon-remove" class="close"  ng-click="hideAlert() "></span>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div>
+        <div style="margin:0 5px 0 5px;border:#b9c9ef 1px solid;padding:10px 0 10px 5px;font-size:14px;width:150px;height:80px;color:#1f336b;text-align:left;overflow:hidden;">{{message}}</div>
+    </div>
+</div>

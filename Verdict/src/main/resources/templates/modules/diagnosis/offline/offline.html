@@ -1,0 +1,37 @@
+<div ng-cloak>
+    <ul class="breadcrumb">
+        <li>
+            <span>{{'module.menutree.onu.diagnose.offline' | translate }}</span>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>{{ontInfo.GPONSN |uppercase}}</h2>
+            </div>
+            <div class="box-content">
+
+                <table class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <td width="10%">ID</td>
+                            <td width="40%">标题</td>
+                            <td width="50%">正文标题</td>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat='item in judgements'>
+                        <td width="10%">{{item.id}}
+                        </td>
+                        <td width="40%">{{item.title}}
+                        </td>
+                        <td width="50%">{{item.head}}
+                        </td>
+                    </tr>
+                </table>
+                <md-button ng-click="getPre()" class="md-raised md-primary">上一页</md-button>{{pageNum}}<md-button ng-click="getNext()" class="md-raised md-primary">下一页</md-button>
+            </div>
+        </div>
+    </div>
+</div>

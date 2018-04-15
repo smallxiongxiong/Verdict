@@ -1,0 +1,175 @@
+{
+    "proper":
+        {
+        "hunan":"湖南(hunan)", 
+        "biejing":"北京(beijing)",
+        "chongqing":"重庆(chongqing)",
+        "fujian":"福建(fujian)",
+        "gansu":"甘肃(gansu)",
+        "guang":"广东(guangdong)",
+        "guanxi":"广西(guangxi)",
+        "guizhou":"贵州(guizhou)",
+        "hainan":"海南(hainan)",
+        "hebei":"河北(hebei)",
+        "heiljiang":"黑龙江(heiljiang)",
+        "henan":"河南(henan)",
+        "hubei":"湖北(hubei)",
+        "anwei":"安微(anwei)",  
+        "jiangsu":"江苏(jiangsu)",
+        "jiangxi":"江西(jiangxi)",
+        "jiling":"吉林(jilin)",
+        "liaoning":"辽宁(liaoning)",
+        "neimenggu":"内蒙古(neimenggu)",
+        "ningxia":"宁夏(ningxia)",
+        "qinghai":"青海(qinghai)",
+        "shandong":"山东(shandong)",
+        "shanghai":"上海(shanghai)",
+        "shanxi":"山西(shanxi)",
+        "shanxi":"陕西(shanxi)",
+        "sichuan":"四川(sichuan)",
+        "tianjing":"天津(tianjin)",
+        "xingjiang":"新疆(xinjiang)",
+        "xizang":"西藏(xizang)",
+        "yunnan":"云南(yunnan)",
+        "zhejiang":"浙江(zhejiang)"
+        }
+    ,
+    "preUrls":
+         {"dianxing":"电信(dianxing)",
+        "liantong":"联通(liantong)",
+        "yidong":"移动HGU(yidong)"
+        }
+    ,
+    "preId":{
+         "guangdian":"广电(guangdian)"
+    }
+    ,
+    "operident":{
+        "anweiDianxing":"AHXA(安微电信)",
+        "anweiliantong":"AHXB(安微联通)",
+        "anweiyidonghgu":"AHXC(安微移动HGU)",
+        "anweiguangdian":"AHXG(安微广电)",
+        
+        "beijingdianxing":"BJXA(北京电信)",
+        "biejingliantong":"BJXB(北京联通)",
+        "beijingyidonghgu":"BJXC(北京移动HGU)",
+        
+        "chongqingdianxing":"CQXA(重庆电信)",
+        "chongqingliantong":"CQXB(重庆联通)",
+        "chongqingyidonghgu":"CQXC(重庆移动HGU)",
+        
+        "fujiandianxing":"FJXA(福建电信)",
+        "fujianliantong":"FJXB(福建联通)",
+        "fujianyingdonghgu":"FJXC(福建移动HGU)",
+        
+        "gansudianxing":"GSXA(甘肃电信)",
+        "gansuliantong":"GSXB(甘肃联通)",
+        "gansuyidonghgu":"GSXC(甘肃移动HGU)",
+        
+        "guangdongdianxing":"GDXA(广东电信)",
+        "guangdongliantong":"GDXB(广东联通)",
+        "guangdongyidonghgu":"GDXC(广东移动HGU)",
+        
+        "guangxidianxing":"GXXA(广西电信)",
+        "guangxiliantong":"GXXB(广西联通)",
+        "guangxiyidonghgu":"GXXC(广西移动HGU)",
+        
+        "guizhoudianxing":"GZXA(贵州电信)",
+        "guizhouliantong":"GZXB(贵州联通)",
+        "guizhouyidonghgu":"GZXC(贵州移动HGU)",
+        
+        "hainandianxing":"HLXA(海南电信)",
+        "hainanliantong":"HLXB(海南联通)",
+        "hainanyidonghgu":"HLXC(海南移动HGU)",
+        
+        "hebeidianxing":"EBXA(河北电信)",
+        "hebeiliantong":"EBXB(河北联通)",
+        "hebeiyidonghgu":"EBXC(河北移动HGU)",
+        
+        "heilognjiangdianxing":"HLXA(黑龙江电信)",
+        "heilongjiangliantong":"HLXB(黑龙江联通)",
+        "heilongjiangyidonghgu":"HLXC(黑龙江移动HGU)",
+        
+        "heandianxing":"ENXA(河南电信)",
+        "henanliantong":"ENXB(河南联通)",
+        "henanyidonghgu":"ENXC(河南移动HGU)",
+        
+        "hubeidianxing":"HBXA(湖北电信)",
+        "hubeiliantong":"HBXB(湖北联通)",
+        "hubeiyidonghgu":"HBXC(湖北移动HGU)",
+        
+        "hunandianxing":"HNXA(湖南电信)",
+        "hunanliantong":"HNXB(湖南联通)",
+        "hunanyidonghgu":"HNXC(湖南移动HGU)",
+        
+        "jiangsudianxing":"JSXA(江苏电信)",
+        "jiangsuliantong":"JSXB(江苏联通)",
+        "jiangsuyidonghgu":"JSXC(江苏移动HGU)",
+        
+        "jiangxidianxing":"JXXA(江西电信)",
+        "jangxiliangtong":"JXXB(江西联通)",
+        "jiangxiyidonghgu":"JXXC(江西移动HGU)",
+        
+        "jilindianxing":"JLXA(吉林电信)",
+        "jilinliantong":"JLXB(吉林联通)",
+        "jilinyidonghgu":"JLXC(吉林移动HGU)",
+        
+        "liaoningdianxing":"LNXA(辽宁电信)",
+        "liaoningliantong":"LNXB(辽宁联通)",
+        "liaoningyidonghgu":"LNXC(辽宁移动HGU)",
+        
+        "neimenggudianxing":"NMXA(内蒙古电信)",
+        "neimengguliangtong":"NMXB(内蒙古联通)",
+        "neimengguyidonghgu":"NMXC(内蒙古移动HGU)",
+        
+        "ningxiadianxing":"NXXA(宁夏电信)",
+        "ningxialiantong":"NXXB(宁夏联通)",
+        "ningxiayidonghgu":"NXXC(宁夏移动HGU)",
+        
+        "qinghaidianxing":"QHXA(青海电信)",
+        "qinghailiantong":"QHXB(青海联通)",
+        "qinghaiyidonghgu":"QHXC(青海移动HGU)",
+        
+        "shandongdianxing":"SDXA(山东电信)",
+        "shandongliantong":"SDXB(山东联通)",
+        "shandongyidonghgu":"SDXC(山东移动HGU)",
+        
+        "shanghaidianxing":"SHXA(上海电信)",
+        "shanghailiantong":"SHXB(上海联通)",
+        "shanghaiyidonghgu":"SHXC(上海移动HGU)",
+        
+        "shanxidianxing":"SXXA(山西电信)",
+        "shanxiliantong":"SXXB(山西联通)",
+        "shanxiyidonghgu":"SXXC(山西移动HGU)",
+        
+        "shanxdiangxing":"SNXA(陕西电信)",
+        "shanxliantong":"SNXB(陕西联通)",
+        "shanxiyidonghgu":"SNXC(陕西移动HGU)",
+        "shanxiguangdian":"SNXG(陕西广电)",
+        
+        "sichuandianxing":"SCXA(四川电信)",
+        "sichuanliantong":"SCXB(四川联通)",
+        "sichuangyidonghgu":"SCXC(四川移动HGU)",
+        
+        "tianjindianxing":"TJXA(天津电信)",
+        "tianjinliantong":"TJXB(天津联通)",
+        "tianjinyidonghgu":"TJXC(天津移动HGU)",
+        
+        "xingjiangdianxing":"XJXA(新疆电信)",
+        "xingjiangliantong":"XJXB(新疆联通)",
+        "xingjiangyidonghgu":"XJXC(新疆移动HGU)",
+        
+        "xizangdianxing":"XZXA(西藏电信)",
+        "xizangliantong":"XZXB(西藏联通)",
+        "xizangyidonghgu":"XZXC(西藏移动HGU)",
+        
+        "yunnandianxing":"YNXA(云南电信)",
+        "yunnanliantong":"YNXB(云南联通)",
+        "yunnanyidonghgu":"YNXC(云南移动HGU)",
+        
+        "zhejiangdianxing":"ZJXA(浙江电信)",
+        "zhejiangliantong":"ZJXB(浙江联通)",
+        "zhejiangyidonghgu":"ZJXC(浙江移动HGU)"
+    }
+    
+}

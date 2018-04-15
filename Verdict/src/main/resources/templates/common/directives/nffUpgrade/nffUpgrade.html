@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>{{'module.upgrade.title' | translate }}</h2>
+
+                <!--div class="box-icon">
+                    <a href="#" class="btn btn-setting btn-round btn-default"><i
+                            class="glyphicon glyphicon-cog"></i></a>
+                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                            class="glyphicon glyphicon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round btn-default"><i
+                            class="glyphicon glyphicon-remove"></i></a>
+                </div-->
+            </div>
+            <div class="box-content">
+                <div style="border: 1px solid  #dbdbdb;padding: 10px;">
+                	
+                    <div class="alert" style="background-color: #F3565D;border-color: #f13e64;color: white;">
+                        <span class="glyphicon glyphicon-warning-sign" style="font-size: 14px;color: white"></span>
+                        {{'module.upgrade.head-title' | translate }}
+                        ({{'module.upgrade.head-route' | translate }}) 
+                    </div>
+                    <md-input-container style="width:100%">
+                        <div class="row">
+                            <div class="col-md-9" flex="100" layout-margin>
+                                <label>{{'module.upgrade.upgradeFile' | translate }}</label>
+                                <md-select ng-model="imageSelected" id="selectedImage" md-on-open="getImages()">
+                                    <md-option ng-value="image" ng-repeat="image in images">{{image}}</md-option>
+                                </md-select>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-default" ng-click="upgradeFile('upgrade')">{{'module.upgrade.startUpgrade' | translate }}</button>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

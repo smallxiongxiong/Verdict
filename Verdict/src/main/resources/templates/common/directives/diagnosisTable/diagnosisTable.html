@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="box col-md-12">
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>{{mytitle | translate }}</h2>
+
+                    <div class="box-icon">
+
+                        <a href="#" class="btn btn-setting btn-round btn-default"  ng-disabled="testBtnDisabled"  ng-click="testBtnDisabled || startTestSelectedItems()" title="{{ 'module.diagnosis.test' | translate }}">
+                            <span class="glyphicon glyphicon-play">{{ 'module.diagnosis.test' | translate }}</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="box-content">
+
+                <table id="table" class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="category" >{{ 'module.diagnosis.category' | translate }}
+                        </th>
+                        <th class="port" ng-if="showPortCol">{{ 'module.diagnosis.port' | translate }}
+                        </th>
+                        <th class="checkAll" >
+                            <input type="checkbox" ng-model="selectAllTestItem" ng-click="chkAll()">
+                            <span>{{ 'module.diagnosis.checkAll' | translate }}</span>
+                        </th>
+                        <th class="items">{{ 'module.diagnosis.items' | translate }}
+                        </th>
+
+                        <th class="diagnosis-progress" >{{ 'module.diagnosis.progress' | translate }}
+                        </th>
+                        <th class="confirm" >{{ 'module.diagnosis.confirm' | translate }}
+                        </th>
+                        <th class="comment" >{{ 'module.diagnosis.comment' | translate }}
+                        </th>
+                        <th class="suggestion">{{ 'module.diagnosis.suggestion' | translate }}
+                        </th>
+                        <th class="diagnosis-result">{{ 'module.diagnosis.result' | translate }}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat='testType in testItems'>
+                    <tr>
+                        <td class="category" rowspan="{{testType.rowspanValue}}">{{'module.diagnosis.' + testType.category | translate}}</td>
+                    </tr>
+                    <tr ng-repeat-start='testPort in testType["ports"] track by $index'>
+                        <td class="port" ng-if="showPortCol" rowspan="{{testPort.items.length}}">{{'module.diagnosis.' + testPort.port | translate}}{{testPort.portNum}}</td>
+                        <td class="checkAll" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" style="border-right:1px solid #dbdbdb">
+                            <input type="checkbox" ng-model="testPort.items[0].checkValue" ng-click="chk(testPort.items[0],checkValue)">
+                        </td>
+                        <td class="items" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}">{{'module.diagnosis.' + testPort.items[0].item | translate}}</td>
+                        <td class="diagnosis-progress" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" style="border-right:1px solid #dbdbdb">{{'module.diagnosis.' + testPort.items[0].progress | translate}}</td>
+                        <td class="confirm" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" ng-if="testPort.items[0].autoCfm" style="border-right:1px solid #dbdbdb">{{ 'module.diagnosis.auto' | translate }}</td>
+                        <td class="confirm" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" ng-if="!testPort.items[0].autoCfm" style="border-right:1px solid #dbdbdb">{{ 'module.diagnosis.manual' | translate }}</td>
+                        <td class="comment" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" style="border-right:1px solid #dbdbdb;">
+                            <div style="min-height: 40px;max-height: 80px; overflow: auto;">
+                                <span ng-model="testPort.items[0].comment" ng-bind-html="testPort.items[0].comment  | convertToHtmlElem |trustHtml"></span>
+                            </div>
+                        </td>
+                        <td class="suggestion" ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" style="border-right:1px solid #dbdbdb;">
+                            <div ng-if="testPort.items[0].suggestion">
+                                <div class="row">
+                                    <div class="col-md-2" ng-if="testPort.items[0].showCheckbox">
+                                        <input type="checkbox" ng-model="testPort.items[0].shine">
+                                    </div>
+                                    <div class="col-md-6" ng-if="testPort.items[0].showCheckbox" style="padding-left: 0">
+                                        <a>{{'module.diagnosis.' + testPort.items[0].suggestion | translate}}{{testPort.items[0].suggestionPrefix}}</a>
+                                    </div>
+                                    <div class="col-md-8" ng-if="!testPort.items[0].showCheckbox">
+                                        <a>{{'module.diagnosis.' + testPort.items[0].suggestion | translate}}{{testPort.items[0].suggestionPrefix}}</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <md-button ng-disabled="testPort.items[0].btnStartDisabled" ng-click="startTestCurrentItem()" class="md-fab md-mini" title="{{'module.diagnosis.' + testPort.items[0].suggestion | translate}}">
+                                            <span class="glyphicon glyphicon-play" ></span>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="diagnosis-result"  ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" ng-if="testPort.items[0].autoCfm" style="border-right:1px solid #dbdbdb">{{'module.diagnosis.' + testPort.items[0].result | translate}}</td>
+                        <td class="diagnosis-result"  ng-class="{'nff-red':testPort.items[0].result==='fail'||testPort.items[0].result==='timeOut'||testPort.items[0].result==='offline','nff-green':testPort.items[0].result==='success'||testPort.items[0].result==='online'}" ng-if="!testPort.items[0].autoCfm" style="border-right:1px solid #dbdbdb;text-align: center">
+                            <md-button ng-disabled="testPort.items[0].btnDisabled" ng-click="confirmResult(testPort.items[0],'timeOut')"  class="md-fab md-mini" title="{{ 'module.diagnosis.timeOut' | translate }}">
+                                <span class="glyphicon glyphicon-time" ></span><a>{{ 'module.diagnosis.timeOut' | translate }}</a>
+                            </md-button>
+                            <md-button ng-disabled="testPort.items[0].btnDisabled" ng-click="confirmResult(testPort.items[0],'success')" class="md-fab md-mini" title="{{ 'module.diagnosis.success' | translate }}">
+                                <span class="glyphicon glyphicon-ok" ></span><a>{{ 'module.diagnosis.success' | translate }}</a></md-button>
+                            <md-button ng-disabled="testPort.items[0].btnDisabled" ng-click="confirmResult(testPort.items[0],'fail')" class="md-fab md-mini" title="{{ 'module.diagnosis.failed' | translate }}">
+                                <span class="glyphicon glyphicon-remove" ></span><a>{{ 'module.diagnosis.failed' | translate }}</a></md-button>
+                        </td>
+                    </tr>
+                    <tr ng-repeat-end ng-repeat='testItem in testPort.items track by $index'  ng-hide="$first" ng-class="{'nff-red':testItem.result==='fail'||testItem.result==='timeOut'||testItem.result==='offline','nff-green':testItem.result==='success'||testItem.result==='online'}" >
+                        <td class="checkAll">
+                            <input type="checkbox" ng-model="testItem.checkValue" ng-click="chk(testItem,checkValue)">
+                        </td>
+                        <td class="items">{{'module.diagnosis.' + testItem.item | translate}}</td>
+                        <td class="diagnosis-progress" >{{'module.diagnosis.' + testItem.progress | translate}}</td>
+                        <td class="confirm" ng-if="testItem.autoCfm" >{{ 'module.diagnosis.auto' | translate }}</td>
+                        <td class="confirm" ng-if="!testItem.autoCfm" >{{ 'module.diagnosis.manual' | translate }}</td>
+                        <td class="comment" >
+                            <div style="min-height: 40px;max-height: 80px;overflow:auto;">
+                                <span ng-model="testItem.comment" ng-bind-html="testItem.comment | convertToHtmlElem |trustHtml"></span>
+                            </div>
+                        </td>
+                        <td class="suggestion" >
+                            <div ng-if="testItem.suggestion">
+                                <div class="row">
+                                    <div class="col-md-2" ng-if="testItem.showCheckbox">
+                                        <input type="checkbox" ng-model="testItem.shine">
+                                    </div>
+                                    <div class="col-md-6" ng-if="testItem.showCheckbox" style="padding-left: 0">
+                                        <a>{{'module.diagnosis.' + testItem.suggestion | translate}}{{selectedItem.suggestionPrefix}}</a>
+                                    </div>
+                                    <div class="col-md-8" ng-if="!testItem.showCheckbox">
+                                        <a>{{'module.diagnosis.' + testItem.suggestion | translate}}{{selectedItem.suggestionPrefix}}</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <md-button ng-disabled="testItem.btnStartDisabled" ng-click="startTestCurrentItem()"  class="md-fab md-mini" title="{{'module.diagnosis.' + testPort.items[0].suggestion | translate}}">
+                                            <span class="glyphicon glyphicon-play" ></span>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="diagnosis-result" ng-if="testItem.autoCfm" >{{'module.diagnosis.' + testItem.result | translate}}</td>
+                        <td class="diagnosis-result" ng-if="!testItem.autoCfm" >
+                            <md-button ng-disabled="testItem.btnDisabled" ng-click="confirmResult(testItem,'timeOut')"  class="md-fab md-mini" title="{{ 'module.diagnosis.timeOut' | translate }}">
+                                <span class="glyphicon glyphicon-time" ></span><a>{{ 'module.diagnosis.timeOut' | translate }}</a></md-button>
+                            <md-button ng-disabled="testItem.btnDisabled" ng-click="confirmResult(testItem,'success')"  class="md-fab md-mini" title="{{ 'module.diagnosis.success' | translate }}">
+                                <span class="glyphicon glyphicon-ok" ></span><a>{{ 'module.diagnosis.success' | translate }}</a></md-button>
+                            <md-button ng-disabled="testItem.btnDisabled" ng-click="confirmResult(testItem,'fail')"  class="md-fab md-mini" title="{{ 'module.diagnosis.failed' | translate }}">
+                                <span class="glyphicon glyphicon-remove" ></span><a>{{ 'module.diagnosis.failed' | translate }}</a></md-button >
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+    </div>
+    <div ng-if="type=='offline'" style="margin-left: 10px">
+        <md-button ng-click="changeStatus()" class="md-raised md-primary">
+            {{'module.diagnosis.self' | translate }}
+        </md-button>
+        {{selfDiagnosisResult}}
+    </div>
+</div>

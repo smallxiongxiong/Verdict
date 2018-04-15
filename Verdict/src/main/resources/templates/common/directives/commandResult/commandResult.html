@@ -1,0 +1,19 @@
+<div>
+    <div class="result-background">
+        <div class="result-window">
+            <div class="result-title">
+                <span>{{'module.batch.executeResult' | translate }}</span>
+            </div>
+
+            <div id="result-text">
+                <span ng-model="executeCommandsResult" ng-bind-html="executeCommandsResult | convertToHtmlElem |trustHtml"></span>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 20px;text-align:center">
+        <button ng-if="queryBtnDisabled" class="btn btn-default" ng-click="getCommandResult()">{{'module.commands.get' | translate }}</button>
+        <!--md-button class="md-raised md-primary" ng-click="saveCommandResult()">{{'module.commands.save' | translate }}</md-button-->
+        <button class="btn btn-default" ng-click="clearCommandResult()">{{'module.commands.clear' | translate }}</button>
+    </div>
+</div>
+

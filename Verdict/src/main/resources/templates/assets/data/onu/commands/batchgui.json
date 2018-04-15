@@ -1,0 +1,30 @@
+[{
+  "name" : "optical",
+  "item" : "optical",
+  "selected" : false
+},{
+  "name" : "interface",
+  "item" : "interface",
+  "selected" : false
+},{
+  "name" : "ri",
+  "item" : "ri",
+  "selected" : false
+},{
+  "name" : "image",
+  "item" : "image",
+  "selected" : false
+},{
+  "name" : "timezone",
+  "item" : "timezone",
+  "selected" : false
+},{
+  "name" : "software",
+  "item" : "software",
+  "selected" : false
+},{
+  "name" : "process",
+  "item" : "process",
+  "selected" : false
+}
+]

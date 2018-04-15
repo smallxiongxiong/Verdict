@@ -1,0 +1,18 @@
+{
+		"Name":	  "xxxxxx",
+		"Type":		"xxxxxx",
+		"Interface": {
+			"Lan":  "4",
+			"Voice":"2",
+			"Wifi":	"1",
+			"Wan":  "3"
+		},
+		"PN":		  "xxxxxx",
+		"SN":		  "xxxxxx",
+		"ID":		  "xxxxxx",
+		"Barcode":"xxxxxx",
+		"GPONSN":	"xxxxxx",
+		"MAC":		"00:0D:B6:39:93:83",
+		"Date":		"2016-11-11",
+		"Image":	"3FE56773AFDB62"
+	}

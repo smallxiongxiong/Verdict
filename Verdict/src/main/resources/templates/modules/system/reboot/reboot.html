@@ -1,0 +1,42 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <span>{{ 'module.menutree.onu.system.title' | translate }}</span>
+        </li>
+        <li>
+            <span>{{ 'module.menutree.onu.system.reboot' | translate }}</span>
+        </li>
+    </ul>
+
+    <div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>{{'module.reboot.head-title' | translate }}</h2>
+
+                <!--div class="box-icon">
+                    <a href="#" class="btn btn-setting btn-round btn-default"><i
+                            class="glyphicon glyphicon-cog"></i></a>
+                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                            class="glyphicon glyphicon-chevron-up"></i></a>
+                    <a href="#" class="btn btn-close btn-round btn-default"><i
+                            class="glyphicon glyphicon-remove"></i></a>
+                </div-->
+            </div>
+            <div class="box-content">
+                <div style="border: 1px solid  #dbdbdb;padding: 10px;">
+                    <div class="alert" style="background-color: #F3565D;border-color: #f13e64;color: white;">
+                        <span class="glyphicon glyphicon-warning-sign" style="font-size: 14px;color: white"></span> {{'module.reboot.head-title' | translate }}
+                    </div>
+                    <div>
+                        <span ng-model="executeCommandResult" ng-bind-html="executeCommandResult"></span>
+                    </div>
+                    <div style="margin-top: 20px;text-align:center">
+                        <button class="btn btn-default" ng-click="executeCommand()">{{'module.reboot.execute' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

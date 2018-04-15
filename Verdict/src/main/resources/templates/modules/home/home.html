@@ -1,0 +1,49 @@
+<div>
+  <nff-header></nff-header>
+</div>
+<div class="ch-container" block-ui="wholeBlock">
+    <div class="row">
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+                    </div>
+                    <menu-tree></menu-tree>
+                </div>
+            </div>
+        </div>
+
+        <!--noscript>
+            <div class="alert alert-block col-md-12">
+                <h4 class="alert-heading">Warning!</h4>
+
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+                    enabled to use this site.</p>
+            </div>
+        </noscript-->
+        <div id="content" class="col-lg-10 col-sm-10">
+            <div block-ui="partBlock">
+                <div ui-view="ontView"></div>
+            </div>
+            <!--div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Dashboard</a>
+                    </li>
+                </ul>
+            </div-->
+        </div>
+    </div>
+
+</div>
+<div class="fix-footer">
+
+            <span href="#" target="_blank">{{ 'module.connector.form.copyRight' | translate }}</span>
+
+    <!--div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div-->
+</div>

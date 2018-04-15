@@ -1,0 +1,70 @@
+<div>
+    <div>
+        <ul class="breadcrumb">
+            <li>
+                <span>{{ 'module.menutree.onu.batchCommand.title' | translate }}</span>
+            </li>
+
+        </ul>
+    </div>
+    <div class="row">
+        <div class="box col-md-12">
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>{{ 'module.menutree.onu.batchCommand.title' | translate }}</h2>
+
+                    <!--div class="box-icon">
+                        <a href="#" class="btn btn-setting btn-round btn-default"><i
+                                class="glyphicon glyphicon-cog"></i></a>
+                        <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a href="#" class="btn btn-close btn-round btn-default"><i
+                                class="glyphicon glyphicon-remove"></i></a>
+                    </div-->
+                </div>
+                <div class="box-content">
+
+                    <div class="row">
+                    	<div class="checkbox" style="margin-left: 27px;">
+                            <label>
+                                <input type="checkbox"  ng-model="selectAllCommand" ng-click="chkAll()"/>{{'module.batch.selectAll' | translate }}/{{'module.batch.notSelect' | translate }}
+                            </label>
+                        </div>
+                        <div class="box col-md-12">
+                            <div class="box-inner">
+                                <div class="box-header well" data-original-title="">
+                                    <h2><i class="glyphicon glyphicon-th"></i>{{'module.batch.title' | translate}}</h2>
+
+                                    <!--div class="box-icon">
+                                        <a href="#" class="btn btn-setting btn-round btn-default" ng-click="executeSelectedCommand()"><i
+                                                class="glyphicon glyphicon-cog"></i></a>
+                                       
+                                        
+                                    </div-->
+                                </div>
+                                <div class="box-content">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3" ng-repeat="command in commandsArr track by $index | limitTo:4">
+                                            <input type="checkbox" ng-model="command.selected" ng-click="chk(command,selected)" dynamic-name="command.label"></md-checkbox>
+                                            <!--span>{{'module.batch.' + command.name | translate}}</span-->
+                                            <span>{{command.label}}</span>
+                                        </div>
+                                    </div>
+                                     <br/>
+                                    <div>
+                                        
+                                        <button type="submit" class="btn btn-default" ng-click="executeBatchCommands()">{{'module.batch.execute' | translate }}</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div><!--/row-->
+                    <command-result></command-result>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

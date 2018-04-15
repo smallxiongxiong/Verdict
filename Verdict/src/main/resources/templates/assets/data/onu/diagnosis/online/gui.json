@@ -1,0 +1,64 @@
+[{
+    "category": "cpuTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "cpu",
+        "autoCfm": true,
+        "path": "cpu"
+    }]
+}, {
+    "category": "memoryTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "memory",
+        "autoCfm": true,
+        "path": "memory"
+    }]
+}, {
+    "category": "txrxTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "txrx",
+        "autoCfm": true,
+        "path": "txrx"
+    }]
+}, {
+    "category": "oltTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "register",
+        "autoCfm": true,
+        "path": "register"
+    }]
+}, {
+    "category": "trafficTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "traffic",
+        "autoCfm": true,
+        "path": "traffic"
+    }]
+}, {
+    "category": "wanTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "wan",
+        "autoCfm": true,
+        "path": "wan"
+    }]
+}, {
+    "category": "wifiTest",
+    "progress": "prepare",
+    "testType": "online",
+    "items": [{
+        "item": "wifi",
+        "autoCfm": true,
+        "path": "wifi"
+    }]
+}]

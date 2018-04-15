@@ -1,0 +1,66 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <span>{{ 'module.menutree.onu.system.title' | translate }}</span>
+        </li>
+        <li>
+            <span>{{ 'module.menutree.onu.system.operator' | translate }}</span>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="box col-md-12">
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>{{'module.menutree.onu.system.operator' | translate }}</h2>
+                </div>
+                <div class="box-content">
+                    <div style="border: 1px solid  #dbdbdb;padding: 10px;">
+                        <div class="alert" style="background-color: #F3565D;border-color: #f13e64;color: white;">
+                            <span class="glyphicon glyphicon-warning-sign" style="font-size: 14px;color: white"></span>
+                            <span> {{'module.upgrade.select-point' | translate }}</span>
+                        </div>
+                        <div style="border: 1px solid  #dbdbdb;padding: 10px;">
+                            <span>{{ 'module.info.operatorid' | translate }} {{ontInfo.OperatorID | uppercase}}</span>
+                        </div>
+                        <div style="border: 1px solid  #dbdbdb;padding: 10px;margin-top: 10px;">
+
+                            <div class="selectOne">
+                                <span class="selectSpanA">{{'module.upgrade.province' | translate }}:</span>
+                                <div class="selectTwo" >
+                                    <input class="form-control"  ng-click = "hideName=false" ng-blur="hideName=true" ng-change="changeProper(properld)"
+                                           ng-model="properld" style="width: 135px;position: relative;"/>
+                                    <div ng-hide="hideName" class="selectThree">
+                                        <div  ng-focus="getProper(proName)" ng-model="proName" ng-repeat="proName in myProName"class="clickx" >{{proName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selectOneA" >
+                                <span class="selectSpanA">{{'module.upgrade.operator' | translate }}:</span>
+                                <div class="selectTwo" >
+                                    <input class="form-control"   ng-click = "hideUrl=false" ng-blur="hideUrl=true"ng-change="changePreUrls(preUrlsld)"
+                                           ng-model="preUrlsld" style="width: 135px;position: relative;"/>
+                                    <div ng-hide="hideUrl" class="selectThree" >
+                                        <div  ng-focus="getPreUrls(preName)" ng-model="preName" ng-repeat="preName in myUrlName"class="clickx" >{{preName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="selectOneB">
+                                <input class="form-control" value="{{properld}} {{preUrlsld}}" type="text"  style="width: 111px;"/>
+                            </div>
+
+                            <div style="margin-top: 20px;text-align:center">
+                                <button ng-click="updateOerator()" class="btn btn-default" >{{'module.batch.modify' | translate }}</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

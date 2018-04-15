@@ -1,0 +1,87 @@
+<div>
+    <div>
+        <ul class="breadcrumb">
+            <li>
+                <span>{{ 'module.menutree.onu.system.title' | translate }}</span>
+            </li>
+            <li>
+                <span>{{ 'module.menutree.onu.system.upload' | translate }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="box col-md-12">
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>{{'module.uploadDownLoad.title' | translate }}</h2>
+
+                    <!--div class="box-icon">
+                        <a href="#" class="btn btn-setting btn-round btn-default"><i
+                                class="glyphicon glyphicon-cog"></i></a>
+                        <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a href="#" class="btn btn-close btn-round btn-default"><i
+                                class="glyphicon glyphicon-remove"></i></a>
+                    </div-->
+                </div>
+                <div class="box-content">
+                    <div style="border: 1px solid  #dbdbdb;padding: 10px;">
+                        <div style="border: 1px solid  #dbdbdb;padding: 10px 0px 0px 10px;margin-bottom: 10px;">
+                            <div style="background-color: rgb(221, 221, 221);padding: 4px;border-radius: 2px 2px 0 0;margin-right: 10px;">
+                                <span class="glyphicon glyphicon-upload" style="font-size: 14px;"></span>{{'module.uploadDownLoad.uploadFile' | translate }}
+                            </div>
+
+                            <div class="row" style="margin-bottom: -20px;">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <md-input-container>
+                                        <label>{{'module.uploadDownLoad.ontPath' | translate }}</label>
+                                        <input name="ontPath" ng-model="ontPath">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <md-input-container>
+                                        <label>{{'module.uploadDownLoad.serverFile' | translate }}</label>
+                                        <input name="serverFile" ng-model="serverFile">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <button style="margin-top: 15px;" class="btn btn-default" ng-click="uploadDownload('upload')">{{'module.uploadDownLoad.upload' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="border: 1px solid  #dbdbdb;padding: 10px 0px 0px 10px;">
+                            <div style="background-color: rgb(221, 221, 221);padding: 4px;border-radius: 2px 2px 0 0;margin-right: 10px;">
+                                <span class="glyphicon glyphicon-download" style="font-size: 14px;"></span>{{'module.uploadDownLoad.downloadFile' | translate }}
+                            </div>
+                            <div class="row" style="margin-bottom: -20px;">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <md-input-container style="float: left">
+                                        <label>{{'module.uploadDownLoad.ontFile' | translate }}</label>
+                                        <input name="ontFile" ng-model="ontFile">
+                                    </md-input-container>
+                                    <md-input-container id="hide-span" style="margin-left: -68px;">
+                                        <md-select ng-model="ontFile" md-on-open="getParams()">
+                                            <md-select-header style="padding-left: 16px;font-weight: bold;"><span>{{'module.uploadDownLoad.ontFile' | translate }}:</span></md-select-header>
+                                            <md-option ng-value="param" ng-repeat="param in params" >{{param}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <md-input-container>
+                                        <label>{{'module.uploadDownLoad.serverPath' | translate }}</label>
+                                        <input name="serverPath" ng-model="serverPath">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <button style="margin-top: 15px;" class="btn btn-default" ng-click="uploadDownload('download')">{{'module.uploadDownLoad.download' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

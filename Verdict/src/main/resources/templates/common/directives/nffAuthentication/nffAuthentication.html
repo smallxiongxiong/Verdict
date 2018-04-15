@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>{{'module.authentication.title' | translate }}</h2>
+
+            </div>
+             <div class="box-content">
+                <label style="margin-left: 15px;">{{'module.authentication.auth-label' | translate }}</label>
+                    <md-input-container style="width: 25%;text-align: center">
+                                <!--label>{{'module.authentication.auth-label' | translate }}</label-->
+                                <md-select ng-model="paramSelected" id="selectedParam" md-on-open="getParams()">
+                                    <md-option ng-value="param" ng-repeat="param in params">{{'module.authentication.' + param | translate}}</md-option>
+                                </md-select>
+                    </md-input-container>
+                    
+                    <md-input-container style="width: 35%;top:12px;">
+                        <input type="text" ng-model="inputValueForItem"   required style="text-align: center">
+
+                    </md-input-container>
+	                <a href="#" class="btn btn-setting btn-round btn-default"  ng-click="startTestSelectedItems()" title="{{ 'module.diagnosis.test' | translate }}">
+	                    <span class="glyphicon glyphicon-cog">{{ 'module.authentication.execute' | translate }}</span>
+	                </a>
+
+            </div>
+        </div>
+    </div>
+</div>

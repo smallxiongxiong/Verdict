@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base href="/templates/">
+  <title>Verdict App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/split-pane/split-pane.css" />
+  <link rel="stylesheet" href="bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+  <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+
+  <!--link id="bs-css" href="assets/template/css/bootstrap-cerulean.min.css" rel="stylesheet"-->
+  <link href="assets/template/css/charisma-app.css" rel="stylesheet">
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/split-pane/split-pane.js"></script>
+  <script src="bower_components/angular-split-pane/angular-split-pane.js"></script>
+  <script src="bower_components/angular-bootstrap-nav-tree/dist/abn_tree_directive.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+  <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <!-- endbower -->
+
+
+  <!-- modules script -->
+  <script src="modules/app.js"></script>
+
+  <script src="modules/connector/connector.js"></script>
+  <script src="modules/home/home.js"></script>
+
+  <!--script src="modules/layout/menutree/menutree.js"></script-->
+  <script src="modules/info/ontInfo.js"></script>
+
+  <script src="modules/diagnosis/offline/offline.js"></script>
+  <script src="modules/diagnosis/online/online.js"></script>
+
+  <script src="modules/commands/batch/batch.js"></script>
+  <script src="modules/commands/interfaces/interfaces.js"></script>
+  <script src="modules/commands/power/power.js"></script>
+  <script src="modules/commands/image/image.js"></script>
+  <script src="modules/commands/process/process.js"></script>
+  <script src="modules/commands/ri/ri.js"></script>
+  <script src="modules/commands/timezone/timezone.js"></script>
+  <script src="modules/commands/version/version.js"></script>
+  <script src="modules/commands/customCommand/customCommand.js"></script>
+
+  <script src="modules/system/debug/debug.js"></script>
+  <script src="modules/system/reboot/reboot.js"></script>
+  <script src="modules/system/recovery/recovery.js"></script>
+  <script src="modules/system/upgrade/upgrade.js"></script>
+  <script src="modules/system/upload/upload.js"></script>
+  <script src="modules/system/operator/operator.js"></script>
+
+
+
+  <!-- services -->
+  <script src="common/services/storageService.js"></script>
+  <script src="common/services/messageService.js"></script>
+  <script src="common/services/logoutService.js"></script>
+
+  <!-- resource -->
+  <script src="common/resources/ontResource.js"></script>
+  <script src="common/resources/brandResource.js"></script>
+  <script src="common/resources/diagnosisResource.js"></script>
+  <script src="common/resources/localSaveResource.js"></script>
+  <script src="common/resources/ontInstallResource.js"></script>
+  <script src="common/resources/commandsResource.js"></script>
+  <script src="common/resources/managementResource.js"></script>
+  <script src="common/resources/userResource.js"></script>
+  <!-- directives -->
+  <script src="common/directives/nffHeader/nffHeader.js"></script>
+  <script src="common/directives/nffFooter/nffFooter.js"></script>
+  <script src="common/directives/nffMessage/nffMessage.js"></script>
+  <script src="common/directives/menuTree/menuTree.js"></script>
+  <script src="common/directives/diagnosisTable/diagnosisTable.js"></script>
+  <script src="common/directives/commandResult/commandResult.js"></script>
+  <script src="common/directives/commandPage/commandPage.js"></script>
+  <script src="common/directives/nffAlert/nffAlert.js"></script>
+  <script src="common/directives/nffUpgrade/nffUpgrade.js"></script>
+  <script src="common/directives/nffAuthentication/nffAuthentication.js"></script>
+  <!-- filters -->
+  <script src="common/filters/trustUrl.js"></script>
+  <script src="common/filters/trustHtml.js"></script>
+  <script src="common/filters/convertToHtmlElem.js"></script>
+  <script src="common/filters/convertToDate.js"></script>
+  <script src="common/filters/nffUpgtadeFilter.js"></script>
+
+  <!--script src="modules/connector/httpInterceptor.js"></script-->
+  <!-- endbuild -->
+
+</head>
+
+<body ng-app="nff">
+<!--[if lte IE 8] >
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<! [endif]-->
+
+<div ui-view class="home-frame">
+
+</div>
+
+
+<toaster-container toaster-options="{'time-out': 3000,'close-button':true, 'position-class': 'toast-bottom-right'}" ></toaster-container>
+
+
+</body>
+</html>

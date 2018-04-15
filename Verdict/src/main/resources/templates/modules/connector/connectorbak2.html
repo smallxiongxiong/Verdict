@@ -1,0 +1,130 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">VERDICT</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+                <!--<li><a href="#">Link</a></li>-->
+                <!--<li class="dropdown">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="#">Action</a></li>-->
+                        <!--<li><a href="#">Another action</a></li>-->
+                        <!--<li><a href="#">Something else here</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a href="#">Separated link</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a href="#">One more separated link</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--<form class="navbar-form navbar-left">-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text" class="form-control" placeholder="Search">-->
+                <!--</div>-->
+                <!--<button type="submit" class="btn btn-default">Submit</button>-->
+            <!--</form>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"></a></li>
+                <!--<li class="dropdown">-->
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="#">Action</a></li>-->
+                        <!--<li><a href="#">Another action</a></li>-->
+                        <!--<li><a href="#">Something else here</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <!--<li><a href="#">Separated link</a></li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid space">
+    <div class="row">
+        <div class="col-xs-18 col-md-12"> <br></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-18 col-md-12"> <br></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-18 col-md-12"><br> </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 col-md-4"></div>
+        <div class="col-xs-6 col-md-4">
+            <div class="navbar-form">
+                <div class="form-group">
+                    <select class="form-control" ng-model="st">
+                        <option ng-selected="true" value="1">商标名</option>
+                        <option value="3">申请人</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input id="searchLen" type="text" class="form-control" placeholder="Search" ng-model="searchKey">
+                </div>
+                <input type="hidden" ng-model="pageNo" value="1"/>
+                <button class="btn btn-default" ng-click="search(searchKey,st,pageNo)">查询</button>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4"></div>
+    </div>
+</div>
+<div class="container-fluid space">
+    <div class="row">
+        <div class="col-xs-18 col-md-12"> <br></div>
+    </div>
+</div>
+<div class="context-span">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="panel-title">查询结果</span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td class="active">商标名称</td>
+                    <td class="success">注册号</td>
+                    <td class="warning">申请人</td>
+                    <td class="danger">申请日期</td>
+                    <td class="info">商标状态</td>
+                    <td class="info">类别</td>
+                </tr>
+                </thead>
+                <tr ng-repeat='brand in brands'>
+                    <td >{{brand.tmname}}</td>
+                    <td >{{brand.regno}}</td>
+                    <td >{{brand.appname}}</td>
+                    <td >{{brand.csrq}}</td>
+                    <td >{{brand.newprocess}}</td>
+                    <td >{{brand.intcls}}</td>
+                </tr>
+            </table>
+<div class="row">
+                <div class="col-xs-17 col-md-10"></div>
+                <div class="col-xs-1 col-md-2">
+                    <select class="form-control" ng-model="pageNo" ng-change="search(searchKey,st,pageNo)">
+                        <option ng-selected="true" value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

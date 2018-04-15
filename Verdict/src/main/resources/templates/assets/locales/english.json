@@ -1,0 +1,259 @@
+{
+     "module": {
+          "menutree":{
+		          "onu" : {
+		               "info": {
+		                   "title":"ONU Information"
+		      },
+		        "diagnose": {
+		             "title":"ONU Diagnosis",
+		             "online":"Online Diagnosis",
+		             "offline":"Offline Diagnostics"
+	          },
+		        "command":{
+			        "title": "State Query",
+		            "lightPower": "ONU Optical Power ",
+		            "interface": "Network Interface",
+		            "RIInfo": "RI Infromation",
+		            "imageInfo": "Image Infromation",
+		            "timeZone": "Time and time zone",
+		            "version": "Version information",
+		            "process": "Process information"
+	          },
+	           "batchCommand": {
+	                 "title":"Total Collection"
+	          },
+	           "system": {
+			          "title":"Terminal Management",
+			          "recovery":"Recovery",
+			          "upload":"Upload",
+			          "upgrade":"Upgrade",
+			          "reboot":"Reboot",
+			          "debug":"Debug",
+			          "operator":"Operator logo modification"
+	        }
+	      }
+	    },
+		    "connector":{
+			      "form" : {
+			         "welcome" : "Welcome ONU System",
+			         "ip": "ONU IP",
+			         "telUserName": "HTTP User",
+			         "telPassword": "HTTP Password",
+			         "submit" : "Login",
+			         "errorInfo":"Please Enter IP",
+			         "connectBtn":"Connect",
+			         "install":"install",
+			         "lang":"Language",
+			         "copyRight":"Copyright @ 2016 nokia"
+				      }
+		    },
+
+		    "index":{
+		            "indexTitle":"ONT index page"
+		      },
+		    "login": {
+						"loginPageTitle":"Login",
+						"headingTitle":"Akant lucnet",
+						"loginBtn":"Login",
+					  "rememberPasswordCheckBox": "Remember password",
+						"usernamePlaceholderTxt": "User name",
+						"PasswordPlaceholderTxt": "password",
+						"inputErrorHint":"User name password incorrect,please trt again"
+			    },
+			    "home":{
+			
+			    },
+			    "header":{
+			        "skin": "Theme / Appearance",
+				    	"pageTitle": "ONU Local Diagnostic System",
+		          "logout": " Logout"
+			    },
+			    "info":{
+			         "gponsn": "GPON SN",
+		           "name": "Name",
+		           "type": "Model",
+							 "code":"Code Number",
+							 "software":"Software version",
+							 "hardware":"Hardware version",
+							 "loid":"LOID",
+					   	 "password":"LOID Password",
+							 "slid":"SLID(password)",
+							 "mac": "MAC Address",
+							 "serial":"Serial Number",
+							 "operatorid":"Operator Identification",
+               "date": "Date Of Manufacture",
+							 "version":"Version",
+							 "interface":"Interface"
+			    },
+			    "diagnosis":{
+					      "":"",
+		            "category": "Category",
+		            "port": "Port",
+		            "items": "Term",
+		            "checkAll": "CheckAll",
+		            "progress": "Progress",
+		            "confirm": "Confirm",
+		            "comment": "    DetailedInformation    ",
+								"suggestion": "OperationSuggestion",
+								"txTestSuggesion":"Terminal forced light,please connect the optical power meter to carry out the light ratio",
+								"wifiTestSuggesion":"Make sure that you connect to the terminal hostpot and keep at least 1 test connections for the WIFI terminal",
+								"lanTestSuggesion":"Please confirm the terminal connection of LAN port",
+								"ringingTestSuggesion":"Please verify that the tester is connected and click on the send button ",
+								"dialtTestSuggesion":"Click on the send tone dial tone",
+								"offhookTestSuggesion":"Please click one the hook and then click on the trigger off hook,check",
+								"onhookTestSuggesion":"Please click hang up and click hang up to check",
+								"start":"Start",
+		            "result": "Result",
+		            "timeOut": "OverTime",
+		            "success": "Success",
+		            "failed": "Failed",
+								"fail": "Fail",
+								"offline": "Offline",
+		            "test": " Test",
+		            "save": "Save",
+		            "auto": "Auto",
+		            "manual": "Manual",
+		            "prepare": "Waiting  test",
+		            "testing": "Testing",
+		            "finished": "Completed",
+		            "cpuTest": "CPU test",
+		            "memoryTest": "Memory test",
+		            "txrxTest": "Bandwidth test",
+		            "oltTest": "OLT test",
+		            "trafficTest": "Flow measurement",
+		            "wanTest": "WAN test",
+		            "wifiTest": "WIFI test",
+		            "cpu": "CPU",
+		            "txrx": "Input/Output",
+		            "wifi": "WIFI",
+		            "memory": "Memory",
+		            "register": "OLT register",
+		            "traffic": "flow",
+		            "wan": "WAN",
+		            "selfTest": "Self test",
+		            "opTest": "Light test",
+		            "wifiTest": "WIFI test",
+		            "lanTest": "LAN test",
+		            "voiceTest": "Voice test",
+		            "ledTest": "LED test",
+		            "system": "System",
+		            "soc": "Chip",
+								"wifisoc":"wifi chip",
+								"physoc":"phy chip",
+								"bosasoc":"bosa chip",
+		            "tx/rx": "Input/Output",
+		            "wifi": "WIFI",
+		            "lan": "LAN",
+		            "onhook": "Hang up",
+			          "offhook": "Off hook",
+		            "ringing": "Ringing",
+		            "dialt": "Dial tone",
+		            "led": "LED",
+		            "VoicePort":"Voice port",
+		            "LanPort":"LAN port",
+								"rx":"Input",
+								"tx":"Output",
+								"rxTestSuggesion":"Please connect to confirm the terminal PON port to light up",
+								"ssid":"SSID",
+								"password":"Password",
+	                    "self":"Self Diagnosis"
+			     },
+		    
+			    "batch": {
+								"title": "Please select command",
+								"selectAll": "Select all",
+								"notSelect": "Cancel",
+								"execute": "implement",
+								"executeResult": "Execute result",
+								"optical": "Optical power",
+								"interface": "Interface",
+								"ri": "RI",
+								"image": "Image",
+								"timezone": "Time and time zone",
+								"software": "Software",
+								"process": "Process",
+								"modify":"Modify"
+			
+			    },
+			      "commands": {
+						    "get":"Implement",
+						    "save":"Save",
+						    "clear":"Clear",
+			        "image": {
+			        "title": "Image information"
+					        },
+			        "interface": {
+			            "title": "Network interface"
+			        },
+			        "optical": {
+			            "title": "ONU optical power"
+			        },
+			        "process": {
+			            "title": "Process information"
+			        },
+			        "ri": {
+			            "title": "RI information"
+			        },
+			        "timezone": {
+			            "title": "Time and time zone"
+			        },
+			        "version": {
+			            "title": "Version information"
+			        }
+			    },
+			    "recovery":{
+			        "head-title":"Recovery will cause all data to be lost,please confirm the risk !",
+			        "execute": "execute"
+			    },
+			    "reboot":{
+			        "head-title":"Confirm restart?",
+			        "execute": "Execute"
+			    },
+		       "uploadDownLoad":{
+			         "title":"Upload and download files",
+						   "ontPath":"ONT path",
+						   "serverFile":"Local file",
+						   "ontFile":"ONT file",
+						   "serverPath":"Local path",
+			         "uploadFile": "Upload files to  ONU",
+						   "downloadFile": "Download the ONU file to the local",
+						   "upload": "Upload",
+						   "download": "Download"
+		        },
+			    "upgrade":{
+			        "title":"Upgrade version",
+					    "head-title":"Please select the upgrade file",
+					    "upgradeFile":"Upgrade file",
+			        "startUpgrade": "Start upgrade",
+			        "head-route":"Please put the upgrade file: nff/win32/data/ont/image directory",
+			        "select-point":"Warm tips, please search provinces and operators, such as: hunan: Telecommunications",
+			        "province":"Province",
+			        "operator":"Operator"
+			    },
+			     "authentication":{
+			        "title":"Authentication Mode Setting",
+			        "auth-label":"Authentication Mode",
+					    "LOID":"LOID",
+					    "PASSWORD":"Password",
+			        "execute":" Execute"
+			    },
+			      "msg" : {
+			        "openSuccess":"Open Terminal Management Software",
+			        "upgradeInProgress":"Being Upgraded",
+			        "upgradeSuccess":"Upgrade Success",
+			        "reboot":"Reboot Device",
+			        "upgradeFailed":"Upgrade Failed",
+			        "testSuccessful":"Set  Successfully!",
+			        "testFail":"Set  Fail",
+			        "success":"Success",
+			        "fail":"Fail",
+			        "connectOntAt":"Connect ONT Fail",
+			        "saveFileWithError":"Save File With Error",
+			        "saveFileSuccessfully":"Save File Successfully",
+			        "getFtpServerfail":"Get FTP Server Fail",
+			        "selectCertification":"Select authentication mode",
+                    "inputNotnull":"The input information cannot be empty"
+			    }
+       }
+}

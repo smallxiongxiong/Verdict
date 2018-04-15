@@ -1,0 +1,260 @@
+﻿
+{
+    "module": {
+        "menutree": {
+            "onu": {
+                "info": {
+                    "title": "统计数据"
+                },
+                "diagnose": {
+                    "title": "判决文书",
+                    "online": "文书分词",
+                    "offline": "判决文书"
+                },
+                "command": {
+                    "title": "自定义词典",
+                    "lightPower": "ONU 光功率",
+                    "interface": "网络接口",
+                    "RIInfo": "RI 信息",
+                    "imageInfo": "Image 信息",
+                    "timeZone": "时间与时区",
+                    "version": "版本信息",
+                    "process": "进程信息"
+                },
+                "batchCommand": {
+                    "title": "模型训练"
+                },
+                "system": {
+                    "title": "分词功能",
+                    "recovery": "中文分词",
+                    "upload": "关键字提取",
+                    "upgrade": "文本推荐",
+                    "reboot": "句法分析",
+                    "debug": "word2vec",
+                    "operator":"文本分类"
+                }
+            }
+        },
+
+        "connector": {
+            "form": {
+                "welcome": "欢迎进入后台",
+                "ip": "ONU IP 地址",
+                "telUserName": "HTTP用户名",
+                "telPassword": "HTTP密码",
+                "submit": "进入",
+                "errorInfo": "请输入有效的IP地址",
+                "connectBtn": "连接",
+                "install": "安装",
+                "lang": "语 言",
+                "copyRight": "版权所有 @ 2016"
+            }
+        },
+
+        "index": {
+            "indexTitle": "ONT 索引页 "
+        },
+        "login": {
+            "loginPageTitle": "登录",
+            "headingTitle": "阿尔卡特朗讯",
+            "loginBtn": "登录",
+            "rememberPasswordCheckBox": "记住密码",
+            "usernamePlaceholderTxt": "用户名",
+            "PasswordPlaceholderTxt": "密码",
+            "inputErrorHint": "用户名或密码有误，请重试。"
+        },
+        "home": {
+
+        },
+        "header": {
+			"skin": "主题 / 外观",
+			"pageTitle": "Verdict管理平台",
+            "logout": "注销"
+        },
+        "info": {
+            "gponsn": "GPON SN",
+            "name": "名称",
+            "type": "型号",
+			"code":"code号",
+			"software":"软件版本",
+			"hardware":"硬件版本",
+			"loid":"LOID",
+			"password":"LOID Password",
+			"slid":"SLID(password)",
+			"mac": "MAC地址",
+			"serial":"序列号",
+			"operatorid":"运营商标识",
+            "date": "生产日期",
+			"version":"版本",
+			"interface":"接口"
+        },
+        "diagnosis": {
+            "":"",
+            "category": "类别",
+            "port": "端口",
+            "items": "项",
+            "checkAll": "全选",
+            "progress": "进度",
+            "confirm": "确认方式",
+            "comment": "详细信息",
+			"suggestion": "操作建议",
+			"txTestSuggesion":"终端强制发光，请连接光功率计进行收光比对",
+			"wifiTestSuggesion":"请确认连接终端热点，至少保持1个WIFI终端的测试连接。",
+			"lanTestSuggesion":"请确认LAN口的终端连接",
+			"ringingTestSuggesion":"请确认测试话机已连接，点击触发送震铃",
+			"dialtTestSuggesion":"点击触发送拨号音",
+			"offhookTestSuggesion":"请摘机后再点击，点击触发摘机检查",
+			"onhookTestSuggesion":"请挂机后再点击，点击触发挂机检查",
+			"start":"开始",
+            "result": "结果",
+            "timeOut": "超时",
+            "success": "成功",
+            "failed": "失败",
+			"fail": "失败",
+			"offline": "离线",
+            "test": "测试",
+            "save": "保存",
+            "auto": "自动",
+            "manual": "手动",
+            "prepare": "待测试",
+            "testing": "测试中",
+            "finished": "已完成",
+            "cpuTest": "CPU测试",
+            "memoryTest": "内存测试",
+            "txrxTest": "光口测试",
+            "oltTest": "OLT测试",
+            "trafficTest": "流量测试",
+            "wanTest": "WAN测试",
+            "wifiTest": "WIFI测试",
+            "cpu": "CPU",
+            "txrx": "输入/输出",
+            "wifi": "WIFI",
+            "memory": "内存",
+            "register": "OLT注册",
+            "traffic": "流量",
+            "wan": "WAN",
+            "selfTest": "自测试",
+            "opTest": "光口测试",
+            "wifiTest": "WIFI测试",
+            "lanTest": "LAN测试",
+            "voiceTest": "语音测试",
+            "ledTest": "LED测试",
+            "system": "系统",
+            "soc": "芯片",
+			"wifisoc":"wifi芯片",
+			"physoc":"phy芯片",
+			"bosasoc":"bosa芯片",
+            "tx/rx": "输入/输出",
+            "wifi": "WIFI",
+            "lan": "LAN",
+            "onhook": "挂机",
+			"offhook": "摘机",
+            "ringing": "震铃",
+            "dialt": "拨号音",
+            "led": "LED",
+            "VoicePort":"语音端口",
+            "LanPort":"LAN端口",
+			"rx":"输入",
+			"tx":"输出",
+			"rxTestSuggesion":"请连接确认终端PON口收光",
+			"ssid":"SSID",
+			"password":"密码",
+	    "self":"自检诊断"
+        },
+        "batch": {
+            "title": "请选择命令",
+            "selectAll": "全选",
+            "notSelect": "取消",
+            "execute": "执行",
+            "executeResult": "执行结果",
+            "optical": "光功率",
+            "interface": "接口",
+            "ri": "RI",
+            "image": "镜像",
+			"timezone": "时间与时区",
+            "software": "软件",
+            "process": "进程",
+            "modify":"修改"
+
+        },
+        "commands": {
+			"get":"执行",
+			"save":"保存",
+			"clear":"清除",
+            "image": {
+                "title": "Image信息"
+            },
+            "interface": {
+                "title": "网络接口"
+            },
+            "optical": {
+                "title": "ONU光功率"
+            },
+            "process": {
+                "title": "进程信息"
+            },
+            "ri": {
+                "title": "RI信息"
+            },
+            "timezone": {
+                "title": "时间与时区"
+            },
+            "version": {
+                "title": "版本信息"
+            }
+        },
+        "recovery":{
+            "head-title":"恢复出厂将会导致更新的数据全部丢失，请确认风险！",
+            "execute": "执行"
+        },
+        "reboot":{
+            "head-title":"确认重启?",
+            "execute": "执行"
+        },
+		"uploadDownLoad":{
+            "title":"上传下载文件",
+			"ontPath":"ONT路径",
+			"serverFile":"本地文件",
+			"ontFile":"ONT文件",
+			"serverPath":"本地路径",
+            "uploadFile": "上传文件到ONU",
+			"downloadFile": "下载ONU文件到本地",
+			"upload": "上传",
+			"download": "下载"
+        },
+		"upgrade":{
+            "title":"升级版本",
+			"head-title":"请选择升级文件",
+			"upgradeFile":"升级文件",
+            "startUpgrade": "开始升级",
+            "head-route":"请将升级文件放到 :nff/win32/data/ont/image目录下",
+            "select-point":"温馨提示、请搜索省和运营商，如：湖南:电信",
+            "province":"省",
+            "operator":"运营商"
+        },
+        "authentication":{
+            "title":"认证方式设置",
+            "auth-label":"认证方式",
+			"LOID":"LOID",
+			"PASSWORD":"SLID(password)",
+            "execute":"执行"
+        },
+        "msg" : {
+             "openSuccess":"打开终端管理软件成功",
+            "upgradeInProgress":"正在升级",
+            "upgradeSuccess":"升级成功",
+            "reboot":"重启设备",
+            "upgradeFailed":"升级失败",
+            "testSuccessful":"设置成功",
+            "testFail":"设置失败",
+            "success":"成功",
+            "fail":"失败",
+            "connectOntAt":"连接ONT失败",
+            "saveFileWithError":"保存文件错误",
+            "saveFileSuccessfully":"保存文件成功",
+            "getFtpServerfail":"获取服务器失败",
+            "selectCertification":"选择认证方式",
+            "inputNotnull":"输入信息不能为空" 
+		}	
+    }
+}
