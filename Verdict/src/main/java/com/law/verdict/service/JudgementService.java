@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.law.verdict.dao.JudgementMapper;
-import com.law.verdict.model.Judgement;
-import com.law.verdict.model.JudgementExample;
 import com.law.verdict.model.JudgementWithBLOBs;
 @Service
 public class JudgementService {
