@@ -19,7 +19,7 @@ public class Article {
 	private List<Thing> faces;//事实
 	private List<List<Opinion>> pOpinion;//甲方观点
 	private List<List<Opinion>> dOpinion;//乙方观点
-	private List<Opinion> cOpinion;//法院观点
+	private List<Viewpoint> viewpoint;//法院观点
 	private List<Law> basis;//法律依据，法条集合
 	private List<List<String>> result;//判决结果
 	private Date pubDate;
@@ -72,11 +72,12 @@ public class Article {
 	public void setdOpinion(List<List<Opinion>> dOpinion) {
 		this.dOpinion = dOpinion;
 	}
-	public List<Opinion> getcOpinion() {
-		return cOpinion;
+
+	public List<Viewpoint> getViewpoint() {
+		return viewpoint;
 	}
-	public void setcOpinion(List<Opinion> cOpinion) {
-		this.cOpinion = cOpinion;
+	public void setViewpoint(List<Viewpoint> viewpoint) {
+		this.viewpoint = viewpoint;
 	}
 	public List<Law> getBasis() {
 		return basis;
