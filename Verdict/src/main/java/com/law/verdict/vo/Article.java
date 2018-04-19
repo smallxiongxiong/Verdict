@@ -5,15 +5,9 @@ import java.util.List;
 
 public class Article {
 	private String id;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	private IObject [] plaintiff;//甲方
 	private IObject [] defendant;//乙方
-	private IObject [] courts;//法院
+	private IObject  courts;//法院
 	private String title;//文书标题
 	private String caseNum;//案件号
 	private List<Thing> faces;//事实
@@ -24,6 +18,18 @@ public class Article {
 	private List<List<String>> result;//判决结果
 	private Date pubDate;
 	
+	public Article() {
+		super();
+		this.plaintiff = new IObject[3];
+		this.defendant = new IObject[3];
+		this.courts = new IObject();
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public IObject[] getPlaintiff() {
 		return plaintiff;
 	}
@@ -36,10 +42,10 @@ public class Article {
 	public void setDefendant(IObject[] defendant) {
 		this.defendant = defendant;
 	}
-	public IObject[] getCourts() {
+	public IObject getCourts() {
 		return courts;
 	}
-	public void setCourts(IObject[] courts) {
+	public void setCourts(IObject courts) {
 		this.courts = courts;
 	}
 	public String getTitle() {

@@ -27,15 +27,9 @@ public class JudgementService {
 		if(list.size()>0){
 			blobs = list.get(0);
 		}
-		
 		ParseArticle parse =  new ParseArticle();
 		return parse.execute(blobs);
 		
-	}
-
-	private ParseArticle ParseArticle() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
