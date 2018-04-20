@@ -27,9 +27,9 @@ public class JudgementSimple {
 	private String originType;		//与原文Type对应
 	private String appellor; 		//当事人
 
-	
 	private List<Statute> statutes = new LinkedList<>();
 	private long timestamp; // 用来映射裁判日期
+
 	
 	
 	

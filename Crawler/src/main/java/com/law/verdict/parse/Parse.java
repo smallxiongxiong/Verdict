@@ -104,12 +104,10 @@ public class Parse {
 	 * @return
 	 */
 	public static void parseSummary(String content, JudgementSimple js) {
-		System.out.println(content);
 		content = content.substring(1, content.length() - 1);
-		content = content.replace("\\u0027", "'");		
+		content = content.replace("\\u0027", "'");
 		content = content.replace("\\", "");
 		try {
-			System.out.println(content);
 			JsonReader jsonReader = new JsonReader(new StringReader(content));
 			jsonReader.setLenient(true);
 			JsonElement elements = new JsonParser().parse(jsonReader);
@@ -120,17 +118,17 @@ public class Parse {
 			parseLegalBaseSummary(js, legalBase);
 		} catch (Exception e) {
 			logger.error("json parse Summary Exception, content:" + content, e);
-			
+
 		}
 	}
 
 	/**
 	 * 解析摘要文档中的发条信息
+	 * 
 	 * @param js
 	 * @param legalBase
 	 */
 	private static void parseLegalBaseSummary(JudgementSimple js, JsonArray legalBase) {
-		System.out.println(legalBase.toString());
 		Iterator<JsonElement> it = legalBase.iterator();
 		try {
 			while (it.hasNext()) {
@@ -139,12 +137,9 @@ public class Parse {
 				JsonObject tmpObj = e.getAsJsonObject();
 				tmp.setName(tmpObj.get("法规名称").getAsString());
 				JsonArray legalItem = tmpObj.get("Items").getAsJsonArray();
-				System.out.println("=====" + legalItem.toString());
 				Iterator<JsonElement> itemsIt = legalItem.iterator();
-				System.out.println(itemsIt.toString());
 				while (itemsIt.hasNext()) {
 					JsonElement legal = itemsIt.next();
-					System.out.println("--" + legal.toString());
 					Statute.ArticlesLaw law = new Statute.ArticlesLaw();
 					law.setName(legal.getAsJsonObject().get("法条名称").getAsString());
 					law.setContent(legal.getAsJsonObject().get("法条内容").getAsString());
@@ -169,22 +164,25 @@ public class Parse {
 		try {
 			while (it.hasNext()) {
 				JsonElement e = it.next();
-				JsonObject obj = e.getAsJsonObject();
-				String key = obj.get("key").getAsString();
-				String name = obj.get("name").getAsString();
-				String value = obj.get("value").getAsString();
-				if ("reason".equals(key)) {
-					if ("行政管理范围".equals(name)) {
-						js.setAdministrativeScope(value);
-					} else {
-						js.setAdministrativeType(value);
+				if (e.isJsonObject()) {
+					JsonObject obj = e.getAsJsonObject();
+					String key = obj.get("key").getAsString();
+					String name = obj.get("name").getAsString();
+					String value = obj.get("value").getAsString();
+					if ("reason".equals(key)) {
+						if ("行政管理范围".equals(name)) {
+							js.setAdministrativeScope(value);
+						} else {
+							js.setAdministrativeType(value);
+						}
+					} else if ("appellor".equals(key)) {
+						js.setAppellor(value.replace(",", " "));
 					}
-				} else if ("appellor".equals(key)) {
-					js.setAppellor(value.replace(",", " "));
-				}
 
+				}
 			}
 		} catch (Exception e) {
+			logger.error(relateInfoArray.toString(), e);
 			throw new RuntimeException(e);
 		}
 	}

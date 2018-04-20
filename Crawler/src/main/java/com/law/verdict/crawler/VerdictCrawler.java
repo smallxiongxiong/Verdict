@@ -18,7 +18,19 @@ public class VerdictCrawler {
 	public VerdictCrawler() {
 		super();
 	}
-
+	
+	/**
+	 * 获取关键词列表
+	 * @param baseUrl
+	 * @param params
+	 * @param vjkl5
+	 * @return
+	 */
+	public String getTreeContent(String baseUrl, Map<String, String> params, String vjkl5) {
+		
+		return null;
+	}
+ 
 	public String getContentList(String baseUrl, Map<String, String> params, String vjkl5) {
 		String guid = (String) JavaScriptTools.executeJsFile(CrawlerConstant.PATH_JS_GUID, "getGuid", new HashMap<>());
 		String number = HttpRequest.sendPost("http://wenshu.court.gov.cn/ValiCode/GetCode", "guid=" + guid, vjkl5);
@@ -57,5 +69,7 @@ public class VerdictCrawler {
 		logger.info("docID: {},  get detail Content by get method", docId);
 		return HttpRequest.sendGet(url, "DocID=" + docId, cookie);
 	}
+	
+	
 
 }

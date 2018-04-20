@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -24,7 +24,10 @@ import org.springframework.stereotype.Service;
 
 import com.law.verdict.constant.CrawlerConstant;
 import com.law.verdict.crawler.VerdictCrawler;
+import com.law.verdict.index.IndexDocument;
+import com.law.verdict.index.IndexOperation;
 import com.law.verdict.parse.Parse;
+import com.law.verdict.parse.db.model.JudgementWithBLOBs;
 import com.law.verdict.parse.model.JudgementSimple;
 import com.law.verdict.utils.FileTools;
 import com.law.verdict.utils.JavaScriptTools;
@@ -33,40 +36,106 @@ import com.law.verdict.utils.StringTools;
 @Service
 public class CrawlerServices {
 	private static Logger logger = LoggerFactory.getLogger(CrawlerServices.class);
-	private static final String PRE_FILE_PATH = "E:" + File.separator + "verdict";
 	private static final File FILE_UN_CRAWLER = new File(CrawlerConstant.PATH_UN_CRAWLER);
 	private static final File FILE_UN_SEARCH = new File(CrawlerConstant.PATH_UN_SEARCH);
-	private static ExecutorService pool = Executors.newFixedThreadPool(4);
+	private static ExecutorService pool = Executors.newFixedThreadPool(10);
 	@Autowired
 	CrawlerDBOpt crawlerdb;
+	@Autowired
+	IndexOperation<IndexDocument> indexOperation;
+	Map<String, String> specialParams = null;
 
 	public void beginCrawler(String caseType) {
-		Runnable target = new CrawlerTask(caseType);
+		specialParams = this.getCookies();
+		Runnable target = new CrawlerTask(caseType, "penal");
 		Thread thread = new Thread(target);
 		thread.setName("crawler_one");
-
 		thread.start();
+	}
+
+	public void beginCrawler(String[] caseTypes) {
+		specialParams = this.getCookies();
+		Thread[] crawlerThread = new Thread[4];
+		for (int i = 0; i < caseTypes.length; i++) {
+			Thread tmp = new Thread(new CrawlerTask(caseTypes[i], caseTypes[i]));
+			tmp.setName(caseTypes[i]);
+			crawlerThread[i] = tmp;
+		}
+
+		for (Thread tmp : crawlerThread) {
+			pool.execute(tmp);
+		}
+	}
+
+	public void beginCrawler(Map<String, String> caseTypes) {
+		specialParams = this.getCookies();
+		Set<String> keies = caseTypes.keySet();
+		Thread[] crawlerThread = new Thread[keies.size()];
+		int i = 0;
+		for (String item : keies) {
+			Thread tmp = new Thread(new CrawlerTask(caseTypes.get(item), item));
+			tmp.setName("crawler_" + item);
+			crawlerThread[i++] = tmp;
+		}
+
+		for (Thread tmp : crawlerThread) {
+			pool.execute(tmp);
+		}
+	}
+	
+	/**
+	 * 获取cookie信息
+	 * 
+	 * @return
+	 */
+	private Map<String, String> getCookies() {
+		Map<String, String> result = new HashMap<>();
+		int index = 0;
+		do {
+			if (index > 0) {
+				try {
+					index *= 2;
+					logger.info("get cookies time sleep, {} ms", index);
+					Thread.sleep(1000 * index);
+				} catch (InterruptedException e) {
+					logger.error("get cookies was interrupted", e);
+				}
+			}
+			Callable<Map<String, String>> task = new GetCookiesCallable();
+			Future<Map<String, String>> future = pool.submit(task);
+			try {
+				result = future.get(2, TimeUnit.MINUTES);
+			} catch (Exception e) {
+				logger.error("get cookies timeout", e);
+			}
+		} while (result == null || result.isEmpty());
+		logger.info("get cookies {}", result.toString());
+		return result;
 	}
 
 	public class CrawlerTask implements Runnable {
 		private String caseType;
+		private String keyFile;
 		VerdictCrawler crawler = new VerdictCrawler();
 
-		public CrawlerTask(String caseType) {
+		private final String PATH_FORMATE = "%s%s.txt";
+
+		public CrawlerTask(String caseType, String keyFile) {
 			super();
 			this.caseType = caseType;
+			this.keyFile = keyFile;
 		}
-
-		CyclicBarrier c = new CyclicBarrier(3, new Thread());
 
 		@Override
 		public void run() {
 			logger.info("begin run Crawler, caseType:{}", caseType);
 
-			Map<String, String> specialParams = this.getCookies();
+			
 			Map<String, String> params = new HashMap<String, String>();
-			List<String> causeOfActionKey = FileTools.readTolines(new File(CrawlerConstant.PATH_CASE_DICT));
-			List<String> isCrawlerWords = FileTools.readTolines(new File(CrawlerConstant.PATH_CRAWLER_WORDS));
+			List<String> causeOfActionKey = FileTools
+					.readTolines(new File(String.format(PATH_FORMATE, CrawlerConstant.PATH_CASE_DICT, keyFile)));
+			List<String> isCrawlerWords = FileTools
+					.readTolines(new File(String.format(PATH_FORMATE, CrawlerConstant.PATH_CRAWLER_WORDS, keyFile)));
 			causeOfActionKey.removeAll(isCrawlerWords);
 
 			String caseType = this.caseType;
@@ -77,7 +146,7 @@ public class CrawlerServices {
 			int times = 1;
 			for (String cause : causeOfActionKey) {
 				String data1 = "2014-01-01";
-				times = 1; //// 2018-04-02
+				times = 1; // 2018-04-02
 				int Index = 1;
 				params.put("Index", Index + "");
 				params.put("Page", "20");
@@ -94,9 +163,10 @@ public class CrawlerServices {
 					cal.set(Calendar.DATE, scope * times);
 					String data2 = sdf.format(cal.getTime());
 					params.put("Param", "案件类型:" + caseType + ",案由:" + cause + ",裁判日期:" + data1 + " TO " + data2);//// 关键词:继承,案由:遗嘱继承纠纷,裁判日期:2018-04-02
-					String fileName = params.get("Param").replace(":", "_").replace("-", "").replace(" ", "")
-							.replace(",", "_") + "_" + Index;
-					File listFileName = new File(PRE_FILE_PATH + File.separator + fileName);
+					String filePath = String.format("%s/%s/%s/", CrawlerConstant.PATH_PRE_FILE, caseType, cause);
+					String fileName = data1.replaceAll("-", "") + "TO" + data2.replaceAll("-", "") + "_" + Index;
+
+					File listFileName = new File(filePath + fileName);
 					if (listFileName.exists()) {
 						logger.info("fileName {} has exist!!", listFileName);
 						Index++;
@@ -114,13 +184,19 @@ public class CrawlerServices {
 					logger.info("contentList return size： {}", listContent.length());
 					if (null == listContent || listContent.startsWith("RF") || listContent.contains("remind key")) {
 						logger.info(" DownLoadList return value： {}", listContent);
-						specialParams = this.getCookies();
+						try {
+							Thread.sleep(1000 * 120);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						specialParams = getCookies();
 						params.put(CrawlerConstant.KEY_VL5X, specialParams.get(CrawlerConstant.KEY_VL5X));
 						FileTools.writeAndChangeRow(FILE_UN_SEARCH, params.toString(), true);
 						continue;
 					} else if (listContent.length() > 22) {
-						FileTools.write(PRE_FILE_PATH, fileName, listContent, false);
-						getMoreContent(listContent, params, vjkl5, caseType, cause);
+						FileTools.write(filePath, fileName, listContent, false);
+						getMoreMessage(listContent, params, vjkl5, caseType, cause);
 						if (StringTools.isResponseOK(listContent)) {
 							Index++;
 						}
@@ -148,34 +224,7 @@ public class CrawlerServices {
 			logger.info("caseType {} crawler end", this.caseType);
 		}
 
-		/**
-		 * 获取cookie信息
-		 * 
-		 * @return
-		 */
-		private Map<String, String> getCookies() {
-			Map<String, String> result = new HashMap<>();
-			int index = 0;
-			do {
-				if (index > 0) {
-					try {
-						index *= 2;
-						logger.info("get cookies time sleep, {} ms", index);
-						Thread.sleep(1000 * index);
-					} catch (InterruptedException e) {
-						logger.error("get cookies was interrupted", e);
-					}
-				}
-				Callable<Map<String, String>> task = new GetCookiesCallable();
-				Future<Map<String, String>> future = pool.submit(task);
-				try {
-					result = future.get(2, TimeUnit.MINUTES);
-				} catch (Exception e) {
-					logger.error("get cookies timeout", e);
-				}
-			} while (result == null || result.isEmpty());
-			return result;
-		}
+	
 
 		/**
 		 * 指定时间内抓取列表页，超过三次后，如果还没有抓取到正文内容，则记录到文本中。
@@ -208,7 +257,7 @@ public class CrawlerServices {
 		 * @param cause
 		 * @return
 		 */
-		private void getMoreContent(String listContent, Map<String, String> params, String vjkl5, String caseType,
+		private void getMoreMessage(String listContent, Map<String, String> params, String vjkl5, String caseType,
 				String cause) {
 			List<JudgementSimple> jsList = new ArrayList<>();
 			try {
@@ -226,37 +275,38 @@ public class CrawlerServices {
 					e.printStackTrace();
 				}
 				try {
-				Callable<String> getSummaryTask = new DownloadSummary(crawler, js, vjkl5);
-				Callable<String> getRelatedFileTask = new DownloadRelatedFile(crawler, js, vjkl5);
-				Callable<String> getDetailTask = new DownloadDetailContentCallable(crawler, js, vjkl5);
+					// CountDownLatch countDownLatch = new CountDownLatch(3);
+					Callable<String> getSummaryTask = new DownloadSummary(crawler, js, vjkl5);
+					Callable<String> getRelatedFileTask = new DownloadRelatedFile(crawler, js, vjkl5);
+					Callable<String> getDetailTask = new DownloadDetailContentCallable(crawler, js, vjkl5);
 
-				Map<String, Callable<String>> taskMap = new HashMap<>();
-				taskMap.put("summayTask", getSummaryTask);
-				taskMap.put("relattedFileTask", getRelatedFileTask);
-				taskMap.put("detailTask", getDetailTask);
+					Map<String, Callable<String>> taskMap = new HashMap<>();
+					taskMap.put("summayTask", getSummaryTask);
+					taskMap.put("relattedFileTask", getRelatedFileTask);
+					taskMap.put("detailTask", getDetailTask);
 
-				Map<String, String> taskReaults = doTasks(taskMap, 2);
+					Map<String, String> taskReaults = doTasks(taskMap, 2);
 
-				String summary = taskReaults.get("summayTask");
-				String relatedFile = taskReaults.get("relattedFileTask");
-				String detail = taskReaults.get("DetailTask");
-				
-				
-				
+					String summary = taskReaults.get("summayTask");
+					String relatedFile = taskReaults.get("relattedFileTask");
+					String detail = taskReaults.get("detailTask");
+					JudgementWithBLOBs judgementContent = Parse.parseContent(detail);
 
-				if (null == detail || null == summary || relatedFile == null) {
-					logger.error("some of verdict is empty, docID: {}, detail: {}, summary: {}, realtedFile:{}",
-							js.getCaseID(), null == detail, null == summary, null == relatedFile);
-					FileTools.writeAndChangeRow(FILE_UN_CRAWLER, js.getCaseID(), true);
-					continue;
-				}
-				logger.info("get content detail, docID: {}, caseType: {}, cause: {}, detail.length: {}", js.getCaseID(),
-						caseType, cause, detail.length());
-				}catch(Exception e) {
+					IndexDocument doc = new IndexDocument(js, judgementContent);
+					indexOperation.addIndexDocument(doc);
+					if (null == detail || null == summary || relatedFile == null) {
+						logger.error("some of verdict is empty, docID: {}, detail: {}, summary: {}, realtedFile:{}",
+								js.getCaseID(), null == detail, null == summary, null == relatedFile);
+						FileTools.writeAndChangeRow(FILE_UN_CRAWLER, js.getCaseID(), true);
+						continue;
+					}
+					logger.info("get content detail, docID: {}, caseType: {}, cause: {}, detail.length: {}",
+							js.getCaseID(), caseType, cause, detail.length());
+					crawlerdb.addToDb(js.getCaseID(), detail, caseType.trim(), cause.trim());
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
-				//crawlerdb.addToDb(js.getCaseID(), detail, caseType.trim(), cause.trim());
 			}
 		}
 
@@ -335,18 +385,26 @@ public class CrawlerServices {
 	}
 
 	abstract class CrawlerOption<T> {
+		CountDownLatch countDown;
+
 		public abstract T done();
 
 		public T call() {
 			return done();
 		}
+
+		public void setCountDown(CountDownLatch countDown) {
+			this.countDown = countDown;
+		}
+
 	}
 
 	class GetCookiesCallable extends CrawlerOption<Map<String, String>> implements Callable<Map<String, String>> {
 
 		@Override
 		public Map<String, String> done() {
-			return JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
+			Map<String, String> result = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
+			return result;
 		}
 
 	}
@@ -391,6 +449,7 @@ public class CrawlerServices {
 		public String done() {
 			String detail = crawler.getContentDetail(CrawlerConstant.URL_DETAIL_CONTENT, this.js.getCaseID(),
 					this.param);
+
 			return detail;
 		}
 	}
@@ -418,6 +477,7 @@ public class CrawlerServices {
 			String result = crawler.getRelatedFiles(CrawlerConstant.URL_RELATED_FILE, getReatedFileParam, this.cookie);
 			List<JudgementSimple> relatedJS = Parse.parseRelatedFiles(result);
 			this.js.setRelatedFile(relatedJS);
+
 			return result;
 		}
 

@@ -1,5 +1,8 @@
 package com.law.verdict.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringTools {
 //		public static boolean isResponseNULl(String responseStr){
 //			if(responseStr.startsWith("RF")){
@@ -39,5 +42,18 @@ public class StringTools {
 		
 		public static void main(String[] args) {
 			
+		}
+		
+		/**
+		 * 用来判断是否是ip地址
+		 * @param value
+		 * @return
+		 */
+		public static boolean isIPAddress(String value) {
+
+			String patternStr = "/^(([01]?\\d?\\d|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d?\\d|2[0-4]\\d|25[0-5])\\/(\\d{1}|[0-2]{1}\\d{1}|3[0-2])$/";
+			Pattern p = Pattern.compile(patternStr);
+			Matcher m = p.matcher(value);
+			return m.find();
 		}
 }

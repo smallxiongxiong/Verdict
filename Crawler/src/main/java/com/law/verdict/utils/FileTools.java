@@ -17,14 +17,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author s.watson
  */
 public class FileTools {
+	private static Logger log = LoggerFactory.getLogger(FileTools.class);
 
 	public FileTools() {
 
@@ -1018,7 +1020,7 @@ public class FileTools {
 		try {
 			if (!file.exists()) {
 				File parent = file.getParentFile();
-				if(!parent.exists()){
+				if (!parent.exists()) {
 					parent.mkdirs();
 				}
 				file.createNewFile();
@@ -1026,7 +1028,7 @@ public class FileTools {
 			fileWriter = new FileWriter(file.getPath(), isAppend);
 			fileWriter.write(content);
 		} catch (Exception ex) {
-			System.out.println(ex);
+			log.error("write file has Error, " + ex.getMessage(), ex);
 		} finally {
 			if (null != fileWriter) {
 				try {
@@ -1037,19 +1039,19 @@ public class FileTools {
 			}
 		}
 	}
-	
+
 	public static void writeAndChangeRow(File file, String content, boolean isAppend) {
 		FileWriter fileWriter = null;
 		try {
 			if (!file.exists()) {
 				File parent = file.getParentFile();
-				if(!parent.exists()){
+				if (!parent.exists()) {
 					parent.mkdirs();
 				}
 				file.createNewFile();
 			}
 			fileWriter = new FileWriter(file.getPath(), isAppend);
-			fileWriter.write(content+"\r\n");
+			fileWriter.write(content + "\r\n");
 		} catch (Exception ex) {
 
 		} finally {
@@ -1466,24 +1468,24 @@ public class FileTools {
 		}
 		return size;
 	}
+
 	/**
-     * 以列表的方式获取文件的所有行
-     *
-     * @param file 需要出来的文件
-     * @return 包含所有行的list
-     */
-    public final static List<String> readTolines(File file) {
-        List<String> list = new ArrayList<>();
-        try (
-                BufferedReader reader = new BufferedReader(new FileReader(file))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+	 * 以列表的方式获取文件的所有行
+	 *
+	 * @param file
+	 *            需要出来的文件
+	 * @return 包含所有行的list
+	 */
+	public final static List<String> readTolines(File file) {
+		List<String> list = new ArrayList<>();
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				list.add(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
