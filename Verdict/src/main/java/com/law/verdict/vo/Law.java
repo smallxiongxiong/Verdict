@@ -5,14 +5,15 @@ package com.law.verdict.vo;
  *
  */
 public class Law {
-	private String id;
 	private String bigItem;
 	private String smallItem;
-	public String getId() {
-		return id;
+	private String context;
+	
+	public String getContext() {
+		return context;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setContext(String context) {
+		this.context = context;
 	}
 	public String getBigItem() {
 		return bigItem;
