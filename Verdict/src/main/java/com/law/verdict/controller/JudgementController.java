@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.law.verdict.model.Judgement;
 import com.law.verdict.model.JudgementWithBLOBs;
 import com.law.verdict.service.JudgementService;
+import com.law.verdict.vo.Article;
 
 @RestController
 @RequestMapping("/")
@@ -30,5 +30,17 @@ public class JudgementController {
     public List<JudgementWithBLOBs> findAll(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
     	System.out.println("Num:"+pageNum+" size:"+pageSize);
         return judgementService.findAll(pageNum,pageSize);
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/article/{docId}", produces = {"application/json;charset=UTF-8"})
+    public Article findArticle(@PathVariable("docId") String docId){
+        return judgementService.findArticleByDocId(docId);
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/judgement/{docId}", produces = {"application/json;charset=UTF-8"})
+    public JudgementWithBLOBs findJudgement(@PathVariable("docId") String docId){
+        return judgementService.findJudgementByDocId(docId);
     }
 }

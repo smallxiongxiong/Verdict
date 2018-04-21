@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Viewpoint {
 	private String id;
+	private String context;
 	private List<String> conditions;//故意，致人轻伤
 	private String action;//伤害他人
 	private String crime;//罪名，故意伤害罪
@@ -12,6 +13,13 @@ public class Viewpoint {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
 	}
 	public List<String> getConditions() {
 		return conditions;

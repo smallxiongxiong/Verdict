@@ -40,4 +40,7 @@ public interface JudgementMapper {
     
     @Select("select * from judgement where id >1 order by id limit #{start}, #{offset}")
     public List<JudgementWithBLOBs> selectJudgement(@Param("start") int start , @Param("offset") int offset);
+    
+    @Select("select * from judgement where doc_id = #{docId}")
+    public List<JudgementWithBLOBs> selectJudgementByDocId(@Param("docId") String docId);
 }

@@ -19,16 +19,24 @@ public class JudgementService {
 		return judgementMapper.selectJudgement(pageNum*pageSize,20);
 	}
 	
-	public Article findBy(String docId){
-		JudgementExample example = new JudgementExample();
-		example.createCriteria().andDocIdEqualTo(docId);
-		List<JudgementWithBLOBs> list = judgementMapper.selectByExampleWithBLOBs(example);
+	public Article findArticleByDocId(String docId){
+		List<JudgementWithBLOBs> list = judgementMapper.selectJudgementByDocId(docId);
 		JudgementWithBLOBs blobs = null;
 		if(list.size()>0){
 			blobs = list.get(0);
 		}
 		ParseArticle parse =  new ParseArticle();
 		return parse.execute(blobs);
+		
+	}
+	
+	public JudgementWithBLOBs findJudgementByDocId(String docId){
+		List<JudgementWithBLOBs> list = judgementMapper.selectJudgementByDocId(docId);
+		JudgementWithBLOBs blobs = null;
+		if(list.size()>0){
+			blobs = list.get(0);
+		}
+		return blobs;
 		
 	}
 

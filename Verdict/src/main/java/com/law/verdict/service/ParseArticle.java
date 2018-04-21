@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hankcs.hanlp.corpus.document.sentence.Sentence;
 import com.hankcs.hanlp.corpus.document.sentence.word.IWord;
 import com.hankcs.hanlp.model.perceptron.PerceptronLexicalAnalyzer;
 import com.hankcs.hanlp.model.perceptron.PerceptronSegmenter;
 import com.law.verdict.model.JudgementWithBLOBs;
 import com.law.verdict.vo.Article;
 import com.law.verdict.vo.IObject;
+import com.law.verdict.vo.Opinion;
 import com.law.verdict.vo.Organization;
 import com.law.verdict.vo.Person;
+import com.law.verdict.vo.Viewpoint;
 
 public class ParseArticle {
 	private Article article ;
@@ -40,19 +43,53 @@ public class ParseArticle {
 	}
 
 	private void parseResult(String judgeResult) {
-		// TODO Auto-generated method stub
-		
+		List<String> res = new ArrayList<String>();
+		res.add(judgeResult);
+		article.getResult().add(res);
 	}
 
 	private void parseCause(String cause) {
-		// TODO Auto-generated method stub
-		
+		List<String> causes =splitSentence(cause);
+		for(String cau : causes){
+			Viewpoint point = new Viewpoint();
+			point.setContext(cau);
+			article.getViewpoint().add(point);
+		}
 	}
 
 	private void parseFace(String facts) {
+		String yuan_gao = "";
+		if(article.getPlaintiff()[0]!=null){
+			yuan_gao = article.getPlaintiff()[0].getPerson().getName();
+		}
+		String bei_gao = article.getDefendant()[0].getPerson().getName();
 		List<String> factList = splitSentence(facts);
-		for(String fact : factList){
-			//segmenter.
+		String current = "";
+		for(int i=0;i<factList.size();i++){
+			List<Opinion> pOpinion = new ArrayList<Opinion>();
+			List<Opinion> dOpinion = new ArrayList<Opinion>();
+			String str = factList.get(i);
+			Opinion op = new Opinion();
+			op.setContext(str);
+			Sentence sentence = segmenterAnalyzer.analyze(str);
+			IWord firstName = sentence.findFirstWordByLabel("nr");
+			if(firstName!=null && firstName.getValue().contains(yuan_gao) ){
+				current = yuan_gao;
+			}
+			if(firstName!=null && firstName.getValue().contains(bei_gao) ){
+				current = bei_gao;
+			}
+			
+			if(current.equals(yuan_gao)){
+				pOpinion.add(op);
+				article.getpOpinion().add(pOpinion);
+			}else if (current.equals(bei_gao)){//添加被告观点
+				dOpinion.add(op);
+				article.getdOpinion().add(dOpinion);
+			}else{
+				
+			}
+			
 		}
 	}
 
@@ -61,6 +98,16 @@ public class ParseArticle {
 		if(head2!=null&&!"".equals(head2.trim())){
 			List<IWord> words = segmenterAnalyzer.analyze(head2).wordList;
 			//原告 上诉人 罪犯  可以更新角色信息
+			if(words.size()<1)return;
+			if("罪犯".equals(words.get(0).getValue())){
+				//update 被告
+			}
+			if("原告".equals(words.get(0).getValue())){
+				//update 原告
+			}
+			if("上诉人".equals(words.get(0).getValue())){
+				//update 原告
+			}
 		}
 	}
 

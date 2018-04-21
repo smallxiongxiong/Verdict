@@ -1,10 +1,10 @@
 package com.law.verdict.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Article {
-	private String id;
 	private IObject [] plaintiff;//甲方
 	private IObject [] defendant;//乙方
 	private IObject  courts;//法院
@@ -23,12 +23,10 @@ public class Article {
 		this.plaintiff = new IObject[3];
 		this.defendant = new IObject[3];
 		this.courts = new IObject();
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
+		this.pOpinion = new ArrayList<List<Opinion>>();
+		this.dOpinion = new ArrayList<List<Opinion>>();
+		this.viewpoint = new ArrayList<Viewpoint>();
+		this.result = new ArrayList<List<String>>();
 	}
 	public IObject[] getPlaintiff() {
 		return plaintiff;
