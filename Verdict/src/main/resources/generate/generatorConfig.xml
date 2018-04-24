@@ -40,5 +40,11 @@
 			enableCountByExample="true" enableUpdateByExample="true"
 			enableDeleteByExample="true" enableSelectByExample="true"
 			selectByExampleQueryId="true"></table>
+		<table tableName="dict" domainObjectName="Dict"
+			enableCountByExample="true" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />  	
+		</table>
 	</context>
 </generatorConfiguration>  
