@@ -38,9 +38,12 @@ public interface JudgementMapper {
 
     int updateByPrimaryKey(Judgement record);
     
-    @Select("select * from judgement where id >1 order by id limit #{start}, #{offset}")
+    @Select("select * from judgement where id >0 order by id limit #{start}, #{offset}")
     public List<JudgementWithBLOBs> selectJudgement(@Param("start") int start , @Param("offset") int offset);
     
     @Select("select * from judgement where doc_id = #{docId}")
     public List<JudgementWithBLOBs> selectJudgementByDocId(@Param("docId") String docId);
+    
+    @Select("select * from judgement where id = #{idValue}")
+    public List<JudgementWithBLOBs> selectJudgementById(@Param("idValue") String idValue);
 }

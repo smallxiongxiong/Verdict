@@ -21,7 +21,7 @@ public class IndexSearchService {
 	private RestClient restClient;
 	
 	private static final String QUERY_METHOD="POST";
-	private static final String END_POINT = "/law/test/_search";
+	private static final String END_POINT = "/law/verdict/_search";
 
 	public String queryIndex(String content)  {
 		String method = "POST";

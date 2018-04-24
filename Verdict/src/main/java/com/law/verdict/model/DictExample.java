@@ -1,17 +1,16 @@
 package com.law.verdict.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class JudgementExample {
+public class DictExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public JudgementExample() {
+    public DictExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,133 +164,263 @@ public class JudgementExample {
             return (Criteria) this;
         }
 
-        public Criteria andDocIdIsNull() {
-            addCriterion("doc_id is null");
+        public Criteria andWordIsNull() {
+            addCriterion("word is null");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdIsNotNull() {
-            addCriterion("doc_id is not null");
+        public Criteria andWordIsNotNull() {
+            addCriterion("word is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdEqualTo(String value) {
-            addCriterion("doc_id =", value, "docId");
+        public Criteria andWordEqualTo(String value) {
+            addCriterion("word =", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdNotEqualTo(String value) {
-            addCriterion("doc_id <>", value, "docId");
+        public Criteria andWordNotEqualTo(String value) {
+            addCriterion("word <>", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdGreaterThan(String value) {
-            addCriterion("doc_id >", value, "docId");
+        public Criteria andWordGreaterThan(String value) {
+            addCriterion("word >", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdGreaterThanOrEqualTo(String value) {
-            addCriterion("doc_id >=", value, "docId");
+        public Criteria andWordGreaterThanOrEqualTo(String value) {
+            addCriterion("word >=", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdLessThan(String value) {
-            addCriterion("doc_id <", value, "docId");
+        public Criteria andWordLessThan(String value) {
+            addCriterion("word <", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdLessThanOrEqualTo(String value) {
-            addCriterion("doc_id <=", value, "docId");
+        public Criteria andWordLessThanOrEqualTo(String value) {
+            addCriterion("word <=", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdLike(String value) {
-            addCriterion("doc_id like", value, "docId");
+        public Criteria andWordLike(String value) {
+            addCriterion("word like", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdNotLike(String value) {
-            addCriterion("doc_id not like", value, "docId");
+        public Criteria andWordNotLike(String value) {
+            addCriterion("word not like", value, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdIn(List<String> values) {
-            addCriterion("doc_id in", values, "docId");
+        public Criteria andWordIn(List<String> values) {
+            addCriterion("word in", values, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdNotIn(List<String> values) {
-            addCriterion("doc_id not in", values, "docId");
+        public Criteria andWordNotIn(List<String> values) {
+            addCriterion("word not in", values, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdBetween(String value1, String value2) {
-            addCriterion("doc_id between", value1, value2, "docId");
+        public Criteria andWordBetween(String value1, String value2) {
+            addCriterion("word between", value1, value2, "word");
             return (Criteria) this;
         }
 
-        public Criteria andDocIdNotBetween(String value1, String value2) {
-            addCriterion("doc_id not between", value1, value2, "docId");
+        public Criteria andWordNotBetween(String value1, String value2) {
+            addCriterion("word not between", value1, value2, "word");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateIsNull() {
-            addCriterion("pub_date is null");
+        public Criteria andLabelIsNull() {
+            addCriterion("label is null");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateIsNotNull() {
-            addCriterion("pub_date is not null");
+        public Criteria andLabelIsNotNull() {
+            addCriterion("label is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateEqualTo(Date value) {
-            addCriterion("pub_date =", value, "pubDate");
+        public Criteria andLabelEqualTo(String value) {
+            addCriterion("label =", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateNotEqualTo(Date value) {
-            addCriterion("pub_date <>", value, "pubDate");
+        public Criteria andLabelNotEqualTo(String value) {
+            addCriterion("label <>", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateGreaterThan(Date value) {
-            addCriterion("pub_date >", value, "pubDate");
+        public Criteria andLabelGreaterThan(String value) {
+            addCriterion("label >", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("pub_date >=", value, "pubDate");
+        public Criteria andLabelGreaterThanOrEqualTo(String value) {
+            addCriterion("label >=", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateLessThan(Date value) {
-            addCriterion("pub_date <", value, "pubDate");
+        public Criteria andLabelLessThan(String value) {
+            addCriterion("label <", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateLessThanOrEqualTo(Date value) {
-            addCriterion("pub_date <=", value, "pubDate");
+        public Criteria andLabelLessThanOrEqualTo(String value) {
+            addCriterion("label <=", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateIn(List<Date> values) {
-            addCriterion("pub_date in", values, "pubDate");
+        public Criteria andLabelLike(String value) {
+            addCriterion("label like", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateNotIn(List<Date> values) {
-            addCriterion("pub_date not in", values, "pubDate");
+        public Criteria andLabelNotLike(String value) {
+            addCriterion("label not like", value, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateBetween(Date value1, Date value2) {
-            addCriterion("pub_date between", value1, value2, "pubDate");
+        public Criteria andLabelIn(List<String> values) {
+            addCriterion("label in", values, "label");
             return (Criteria) this;
         }
 
-        public Criteria andPubDateNotBetween(Date value1, Date value2) {
-            addCriterion("pub_date not between", value1, value2, "pubDate");
+        public Criteria andLabelNotIn(List<String> values) {
+            addCriterion("label not in", values, "label");
+            return (Criteria) this;
+        }
+
+        public Criteria andLabelBetween(String value1, String value2) {
+            addCriterion("label between", value1, value2, "label");
+            return (Criteria) this;
+        }
+
+        public Criteria andLabelNotBetween(String value1, String value2) {
+            addCriterion("label not between", value1, value2, "label");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyIsNull() {
+            addCriterion("frequency is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyIsNotNull() {
+            addCriterion("frequency is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyEqualTo(Integer value) {
+            addCriterion("frequency =", value, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyNotEqualTo(Integer value) {
+            addCriterion("frequency <>", value, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyGreaterThan(Integer value) {
+            addCriterion("frequency >", value, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyGreaterThanOrEqualTo(Integer value) {
+            addCriterion("frequency >=", value, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyLessThan(Integer value) {
+            addCriterion("frequency <", value, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyLessThanOrEqualTo(Integer value) {
+            addCriterion("frequency <=", value, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyIn(List<Integer> values) {
+            addCriterion("frequency in", values, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyNotIn(List<Integer> values) {
+            addCriterion("frequency not in", values, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyBetween(Integer value1, Integer value2) {
+            addCriterion("frequency between", value1, value2, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrequencyNotBetween(Integer value1, Integer value2) {
+            addCriterion("frequency not between", value1, value2, "frequency");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenIsNull() {
+            addCriterion("isOpen is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenIsNotNull() {
+            addCriterion("isOpen is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenEqualTo(Byte value) {
+            addCriterion("isOpen =", value, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenNotEqualTo(Byte value) {
+            addCriterion("isOpen <>", value, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenGreaterThan(Byte value) {
+            addCriterion("isOpen >", value, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenGreaterThanOrEqualTo(Byte value) {
+            addCriterion("isOpen >=", value, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenLessThan(Byte value) {
+            addCriterion("isOpen <", value, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenLessThanOrEqualTo(Byte value) {
+            addCriterion("isOpen <=", value, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenIn(List<Byte> values) {
+            addCriterion("isOpen in", values, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenNotIn(List<Byte> values) {
+            addCriterion("isOpen not in", values, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenBetween(Byte value1, Byte value2) {
+            addCriterion("isOpen between", value1, value2, "isopen");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsopenNotBetween(Byte value1, Byte value2) {
+            addCriterion("isOpen not between", value1, value2, "isopen");
             return (Criteria) this;
         }
     }

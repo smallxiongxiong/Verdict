@@ -38,9 +38,25 @@ public class JudgementController {
         return judgementService.findArticleByDocId(docId);
     }
     
+//    @ResponseBody
+//    @RequestMapping(value = "/judgement/{docId}", produces = {"application/json;charset=UTF-8"})
+//    public JudgementWithBLOBs findJudgement(@PathVariable("docId") String docId){
+//        return judgementService.findJudgementByDocId(docId);
+//    }
+    
     @ResponseBody
-    @RequestMapping(value = "/judgement/{docId}", produces = {"application/json;charset=UTF-8"})
-    public JudgementWithBLOBs findJudgement(@PathVariable("docId") String docId){
-        return judgementService.findJudgementByDocId(docId);
+    @RequestMapping(value = "/query/{idType}/{idValue}", produces = {"application/json;charset=UTF-8"})
+    public List<JudgementWithBLOBs> findJudgement(@PathVariable("idType") String idType,@PathVariable("idValue") String idValue){
+        String type = "";
+    	if("1".equals(idType)){
+    		return judgementService.findJudgementById(idValue);
+        }else if("2".equals(idType)){
+        	return judgementService.findJudgementByDocId(idValue);
+        }else if("3".equals(idType)){
+        	type = "case_num";
+        }else{
+        	
+        }
+    	return null;
     }
 }

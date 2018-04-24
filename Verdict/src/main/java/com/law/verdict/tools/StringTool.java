@@ -1,5 +1,6 @@
 package com.law.verdict.tools;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,4 +25,23 @@ public class StringTool {
 		Matcher m = p.matcher(value);
 		return m.find();
 	}
+	
+	public static List<String> splitSentence(String document)
+    {
+		String default_sentence_separator = "[。:：“”？?！!；;]";
+        List<String> sentences = new ArrayList<String>();
+        for (String line : document.split("[\r\n]"))
+        {
+            line = line.trim();
+            if (line.length() == 0) continue;
+            for (String sent : line.split(default_sentence_separator))		// [，,。:：“”？?！!；;]
+            {
+                sent = sent.trim();
+                if (sent.length() == 0) continue;
+                sentences.add(sent);
+            }
+        }
+
+        return sentences;
+    }
 }
