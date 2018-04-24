@@ -3,21 +3,15 @@ package parse;
 import static org.junit.Assert.assertEquals;
 
 import java.io.StringReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -27,7 +21,6 @@ import com.law.verdict.parse.Parse;
 import com.law.verdict.parse.db.model.Judgement;
 import com.law.verdict.parse.model.JudgementSimple;
 import com.law.verdict.services.CrawlerServices;
-import com.law.verdict.services.CrawlerServices.CrawlerTask;
 import com.law.verdict.utils.DateTools;
 
 import util.FileReader;
@@ -62,7 +55,7 @@ public class ContentParseTest {
 	@Test
 	public void testCrawlerServices() {
 		CrawlerServices cs = new CrawlerServices();
-		CrawlerServices.CrawlerTask task = cs.new CrawlerTask("刑事案件");
+		CrawlerServices.CrawlerTask task = cs.new CrawlerTask("刑事案件","test");
 		task.run();
 	}
 

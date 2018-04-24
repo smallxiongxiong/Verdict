@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.law.verdict.constant.CrawlerConstant;
 import com.law.verdict.parse.Parse;
 import com.law.verdict.parse.dao.JudgementMapper;
 import com.law.verdict.parse.db.model.JudgementWithBLOBs;
@@ -46,7 +47,7 @@ public class CrawlerDBOpt {
 		public void run() {
 			JudgementWithBLOBs result = Parse.parseContent(content);
 			if (null == result) {
-				FileTools.write("E:" + File.separator + "verdict" + File.separator + this.caseType + File.separator
+				FileTools.write(CrawlerConstant.PATH_PRE_FILE+ File.separator + this.caseType + File.separator
 						+ this.cause, this.docId, content, false);
 				logger.info("caseType: {}, cause: {}, docID: {}, parseFailure ", this.caseType, this.cause, this.docId);
 			} else {

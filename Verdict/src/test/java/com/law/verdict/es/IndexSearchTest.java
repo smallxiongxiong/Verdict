@@ -25,7 +25,6 @@ public class IndexSearchTest {
 		System.out.println(result);
 		
 	}
-	
 	public void testAddIndexDocument() {
 		
 	}

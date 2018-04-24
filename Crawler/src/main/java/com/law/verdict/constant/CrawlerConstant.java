@@ -10,10 +10,11 @@ public final class CrawlerConstant {
 	public static final String URL_SUMMARY_CONTENT = "http://wenshu.court.gov.cn/Content/GetSummary";
 
 	public static final String PATH_PRE = System.getProperty("pathPre");
+	public static final String PATH_PRE_FILE = System.getProperty("pathData");
 	public static final String PATH_JS_COOKIE = PATH_PRE + "/javascript/getkey.js";
 	public static final String PATH_JS_GUID = PATH_PRE + "/javascript/getGuid.js";
-	public static final String PATH_CASE_DICT = PATH_PRE + "/casedict.txt";
-	public static final String PATH_CRAWLER_WORDS = PATH_PRE + "/isCrawlerWords.txt";
+	public static final String PATH_CASE_DICT = PATH_PRE + "/keywords/";
+	public static final String PATH_CRAWLER_WORDS = PATH_PRE_FILE + "/haddone/";
 	public static final String PATH_UN_SEARCH = PATH_PRE + "/verdict" + File.separator + "unsearch.txt";
 	public static final String PATH_UN_CRAWLER = PATH_PRE + "/verdict" + File.separator + "uncralwer.txt";
 
