@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hankcs.hanlp.seg.common.Term;
+import com.law.verdict.model.Dict;
+import com.law.verdict.service.DictService;
 import com.law.verdict.service.HanlpService;
 
 @RestController
@@ -17,6 +19,8 @@ import com.law.verdict.service.HanlpService;
 public class HanlpController {
 	@Autowired
     private HanlpService hanlpService;
+	@Autowired
+    private DictService dictService;
 
     @ResponseBody
     @RequestMapping(value = "/crf", produces = {"application/json;charset=UTF-8"})
@@ -42,6 +46,12 @@ public class HanlpController {
     public String train(String words){
     	if(words==null)return null;
     	if(hanlpService.trainFC(words)){
+    		Dict d = new Dict();
+        	d.setWord(words);
+        	d.setLabel("long word");
+        	d.setFrequency(1);
+        	d.setIsopen((byte) 1);
+        	dictService.save(d);
     		return "ok";
     	}
     	return "fail";

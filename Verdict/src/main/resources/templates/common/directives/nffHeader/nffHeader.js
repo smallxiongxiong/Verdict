@@ -24,6 +24,9 @@
         $scope.go5 = function(){
             $state.go('home.customCommand');
         };
+        $scope.go6 = function(){
+            $state.go('home.batch');
+        };
     }
 
     /* @ngInject */
