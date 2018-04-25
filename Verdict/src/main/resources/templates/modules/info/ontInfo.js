@@ -19,7 +19,7 @@
                  views: {
                    'ontView': {
                      controller: 'ontInfoCtrl',
-                     templateUrl: 'modules/info/judgementDetail.html'
+                     templateUrl: 'modules/info/ontInfo.html'
                    }
                  }
         });

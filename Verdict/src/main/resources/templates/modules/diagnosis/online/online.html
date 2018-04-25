@@ -4,5 +4,182 @@
             <span>{{'module.menutree.onu.diagnose.online' | translate }}</span>
         </li>
     </ul>
-    <diagnosis-table ng-show="showColumnLabel" type="online"  diagnosis-items-data="diagnosisItemsData"></diagnosis-table>
 </div>
+
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2></h2>
+            </div>
+            <div class="box-content">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" ng-model="idType" ng-value="1"  name="optionsRadios" checked> ID
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="idType" ng-value="2" name="optionsRadios"> docI
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="idType" ng-value="3" name="optionsRadios"> 案号
+                        </label>
+                        <label class="sr-only" for="name">文书DocID</label>
+                        <input ng-model="idValue" type="text" class="form-control" id="name" placeholder="请输入docID">
+                    </div>
+                    <button type="button" class="btn btn-default" ng-click="findByID()">查询</button>
+                </div>
+            </div>
+
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                原始文书
+                            </div>
+                            <div class="panel-body">
+                                <h4>{{judgement.title}}</h4>
+                                <p>{{judgement.head}}</p>
+                                <p>{{judgement.head2}}</p>
+                                <p>{{judgement.facts}}</p>
+                                <p>{{judgement.cause}}</p>
+                                <p>{{judgement.judgeResult}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                文书分词
+                            </div>
+                            <div class="panel-body">
+                                <h4>{{splitRes.title}}</h4>
+                                <p>{{splitRes.head}}</p>
+                                <p>{{splitRes.head2}}</p>
+                                <p>{{splitRes.facts}}</p>
+                                <p>{{splitRes.cause}}</p>
+                                <p>{{splitRes.judgeResult}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner" style="margin: 5px;">
+            <div class="row" style="margin: 10px 0;">
+
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="name">文书DocID</label>
+                            <input ng-model="docID" type="text" class="form-control" id="name" placeholder="请输入docID">
+                        </div>
+                        <button type="button" ng-click="findByID()">查询</button>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3"> </div>
+            </div>
+        <div class="panel panel-default" style="padding: 5px;">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            原始文书
+                        </div>
+                        <div class="panel-body">
+                            <h4>{{judgement.title}}</h4>
+                            <p>{{judgement.head}}</p>
+                            <p>{{judgement.head2}}</p>
+                            <p>{{judgement.facts}}</p>
+                            <p>{{judgement.cause}}</p>
+                            <p>{{judgement.judgeResult}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            文书分词
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover" ng-if="article">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50px;">标题:</td>
+                                        <td>{{article.title}}</td>
+                                    </tr>
+                                    <tr ng-if="article.plaintiff[0].person">
+                                        <td>原告:</td>
+                                        <td>{{article.plaintiff[0].person.name}}</td>
+                                    </tr>
+                                    <tr ng-if="article.plaintiff[0].person">
+                                        <td>原告观点:</td>
+                                        <td>
+                                            <div ng-repeat="pOpinions in article.pOpinion">
+                                                <div ng-repeat="(pIndex,pOp) in pOpinions">
+                                                    {{pIndex+1}}、{{pOp.context}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>被告:</td>
+                                        <td>{{article.defendant[0].person.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>被告观点:</td>
+                                        <td>
+                                            <div ng-repeat="dOpinions in article.dOpinion">
+                                                <div ng-repeat="(dIndex,dOp) in dOpinions">
+                                                    {{dIndex+1}}、{{dOp.context}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>法院:</td>
+                                        <td>{{article.courts.organization.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>法院认为:</td>
+                                        <td>
+                                            <div ng-repeat="(vIndex,pointItem) in article.viewpoint">
+                                                {{vIndex+1}}、{{pointItem.context}}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td>法律依据:</td>
+                                        <td>
+                                            <p ng-repeat="(lIndex,law) in article.basis">
+                                                {{lIndex+1}}、{{law.context}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>判决结果:</td>
+                                        <td>
+                                            <p ng-repeat="resultItems in article.result">
+                                                <p ng-repeat="(rIndex,resItem) in resultItems">
+                                                    {{rIndex+1}}、{{resItem}}
+                                                </p>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>-->

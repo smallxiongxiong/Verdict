@@ -4,19 +4,112 @@
             <li>
                 <span>{{ 'module.menutree.onu.command.title' | translate }}</span>
             </li>
-            <li>
-                <span>{{title}}</span>
-            </li>
         </ul>
     </div>
     <div class="row">
         <div class="box col-md-12">
             <div class="box-inner">
                 <div class="box-header well" data-original-title="">
-                    <h2>{{title}}</h2>
+                    <h2>字典管理</h2>
                 </div>
                 <div class="box-content">
-                    <command-result data-ng-init="getCommandResult()"></command-result>
+                    <table class="table table-bordered">
+                        <caption>
+                            <form class="form-inline" role="form" ng-submit="mySubmit(dict)">
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">名称</label>
+                                    <input type="text" ng-model="dict.key" class="form-control" id="name" placeholder="请输入名称">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">词性</label>
+                                    <input type="text" ng-model="dict.label" class="form-control" id="name" placeholder="请输入词性">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">词频</label>
+                                    <input type="text" ng-model="dict.frequency" class="form-control" id="name" placeholder="请输入词频">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="dict.enable" type="checkbox">开启使用
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-default">添加</button>
+                            </form>
+                        </caption>
+                        <thead>
+                        <tr>
+                            <th ng-hide="true">ID</th>
+                            <th>词</th>
+                            <th>词性</th>
+                            <th>词频</th>
+                            <th>开启</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="dictItem in dicts">
+                            <td ng-hide="true">{{dictItem.id}}</td>
+                            <td>{{dictItem.word}}</td>
+                            <td>{{dictItem.label}}</td>
+                            <td>{{dictItem.frequency}}</td>
+                            <td><input type="checkbox" ng-checked="dictItem.isopen"></td>
+                            <td><button class="btn btn-danger" ng-click="deleteDict(dictItem.id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box-inner">
+                <div class="box-header well" data-original-title="">
+                    <h2>字典管理</h2>
+                </div>
+                <div class="box-content">
+                    <table class="table table-bordered">
+                        <caption>
+                            <form class="form-inline" role="form" ng-submit="mySubmit(dict)">
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">名称</label>
+                                    <input type="text" ng-model="dict.key" class="form-control" id="name" placeholder="请输入名称">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">词性</label>
+                                    <input type="text" ng-model="dict.label" class="form-control" id="name" placeholder="请输入词性">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="name">词频</label>
+                                    <input type="text" ng-model="dict.frequency" class="form-control" id="name" placeholder="请输入词频">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input ng-model="dict.enable" type="checkbox">开启使用
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-default">添加</button>
+                            </form>
+                        </caption>
+                        <thead>
+                        <tr>
+                            <th ng-hide="true">ID</th>
+                            <th>词</th>
+                            <th>词性</th>
+                            <th>词频</th>
+                            <th>开启</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="dictItem in dicts">
+                            <td ng-hide="true">{{dictItem.id}}</td>
+                            <td>{{dictItem.word}}</td>
+                            <td>{{dictItem.label}}</td>
+                            <td>{{dictItem.frequency}}</td>
+                            <td><input type="checkbox" ng-checked="dictItem.isopen"></td>
+                            <td><button class="btn btn-danger" ng-click="deleteDict(dictItem.id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

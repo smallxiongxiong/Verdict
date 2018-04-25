@@ -9,6 +9,21 @@
         $scope.logout = function(){
             LogoutService.logout();
         };
+        $scope.go1 = function(){
+            $state.go('home.ontInfo');
+        };
+        $scope.go2 = function(){
+            $state.go('home.imageInfo');
+        };
+        $scope.go3 = function(){
+            $state.go('home.offline');
+        };
+        $scope.go4 = function(){
+            $state.go('home.online');
+        };
+        $scope.go5 = function(){
+            $state.go('home.customCommand');
+        };
     }
 
     /* @ngInject */

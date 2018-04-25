@@ -22,24 +22,19 @@
         });
     }
 
-    function FactoryRecoveryCtrl($scope,$translate, ManagementResource, storageService, LogoutService) {
+    function FactoryRecoveryCtrl($scope,$translate, ManagementResource, storageService,blockUI) {
+        var partBlock = blockUI.instances.get('partBlock');
         var factoryRecovery = this;
-
-        $scope.executeCommand = function() {
+        $scope.CRFsentence="";
+        $scope.CRFresult="";
+        $scope.executeCommand = function(CRFsentence) {
             //var deferred = $q.defer();
-            ManagementResource.query({
-                ip: storageService.getIP(),
-                item: 'reset'
+            partBlock.start();
+            ManagementResource.crf({
+                sentence: CRFsentence,
             }, function(data) {
-                var executeCommandResult = data.Status;
-
-                if(executeCommandResult=="success"){
-                	$scope.executeCommandResult=$translate.instant('module.msg.success');
-                }else{
-                	$scope.executeCommandResult=$translate.instant('module.msg.fail');
-                }
-                //deferred.resolve();
-                LogoutService.logout();
+                $scope.CRFresult=data;
+                partBlock.stop();
             });
             //return deferred.promise;
         };
@@ -47,7 +42,7 @@
 
     angular.module('module.system.recovery', [])
         .config(['$stateProvider',routeConfig])
-        .controller('FactoryRecoveryCtrl', ['$scope','$translate','ManagementResource','storageService','LogoutService',FactoryRecoveryCtrl]);
+        .controller('FactoryRecoveryCtrl', ['$scope','$translate','ManagementResource','storageService','blockUI',FactoryRecoveryCtrl]);
 
 
 })();

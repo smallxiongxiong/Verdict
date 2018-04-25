@@ -22,7 +22,7 @@
       $scope.telUserName = storageService.getUserNameFromLocalStorage();
       $scope.telPassword = storageService.getPasswordFromLocalStorage();
       $scope.signIn = function (userName,userPwd) {
-          $state.go('home');
+          $state.go('home.imageInfo');
           // UserResource.login({
           //     userName:userName,
           //     userPwd:userPwd

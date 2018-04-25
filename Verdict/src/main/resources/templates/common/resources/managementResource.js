@@ -4,12 +4,12 @@
 
     var ManagementResource = function($resource) {
 
-        var resource = $resource('http://:ip:8043/onu/management/:item', {
-            ip: '@ip',
-            item: '@item'
+        var resource = $resource('/segment/crf/', {
+            sentence: '@sentence'
         }, {
-            query: {
-                isArray: false
+            crf: {
+                method : 'post',
+                isArray: true
             }
         });
         return resource;

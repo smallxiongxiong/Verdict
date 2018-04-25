@@ -16,7 +16,7 @@
                     "lightPower": "ONU 光功率",
                     "interface": "网络接口",
                     "RIInfo": "RI 信息",
-                    "imageInfo": "Image 信息",
+                    "imageInfo": "文书检索",
                     "timeZone": "时间与时区",
                     "version": "版本信息",
                     "process": "进程信息"
@@ -25,13 +25,13 @@
                     "title": "模型训练"
                 },
                 "system": {
-                    "title": "分词功能",
+                    "title": "知识库",
                     "recovery": "中文分词",
-                    "upload": "关键字提取",
-                    "upgrade": "文本推荐",
-                    "reboot": "句法分析",
-                    "debug": "word2vec",
-                    "operator":"文本分类"
+                    "upload": "信息抽取规则",
+                    "upgrade": "情形归纳",
+                    "reboot": "法条分析",
+                    "debug": "关联规则",
+                    "operator":"关联规则"
                 }
             }
         },
@@ -182,7 +182,7 @@
 			"save":"保存",
 			"clear":"清除",
             "image": {
-                "title": "Image信息"
+                "title": "文书检索"
             },
             "interface": {
                 "title": "网络接口"

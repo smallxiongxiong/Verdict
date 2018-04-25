@@ -15,6 +15,10 @@
         label: $filter('translate')('module.menutree.onu.info.title'),
         state: 'home.ontInfo'
       },
+        {
+            label: $filter('translate')('module.menutree.onu.command.imageInfo'),
+            state: 'home.imageInfo'
+        },
       {
         label: $filter('translate')('module.menutree.onu.diagnose.offline'),
         state: 'home.offline'
@@ -24,11 +28,12 @@
         state: 'home.online'
       },
       {
-        label: $filter('translate')('module.menutree.onu.command.title')
+        label: $filter('translate')('module.menutree.onu.command.title'),
+          state: 'home.customCommand'
       },
       {
         label: $filter('translate')('module.menutree.onu.batchCommand.title'),
-        state: 'home.batch'
+         state: 'home.batch'
       },
       {
         label: $filter('translate')('module.menutree.onu.system.title'),
@@ -39,19 +44,19 @@
           },
           {
             label: $filter('translate')('module.menutree.onu.system.upload'),
-            state: 'home.upload'
+            //state: 'home.upload'
           },
           {
             label: $filter('translate')('module.menutree.onu.system.operator'),
-            state: 'home.operator'
+            //state: 'home.operator'
           },
           {
             label: $filter('translate')('module.menutree.onu.system.upgrade'),
-            state: 'home.upgrade'
+            //state: 'home.upgrade'
           },
           {
             label: $filter('translate')('module.menutree.onu.system.reboot'),
-            state: 'home.reboot'
+            //state: 'home.reboot'
           }
         ]
       }

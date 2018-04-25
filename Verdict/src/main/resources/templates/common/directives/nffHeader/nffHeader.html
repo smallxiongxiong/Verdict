@@ -1,12 +1,12 @@
 <div class="navbar navbar-default" role="navigation">
 
     <div class="navbar-inner">
-        <button type="button" class="navbar-toggle pull-left animated flip">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+        <!--<button type="button" class="navbar-toggle pull-left animated flip" data-toggle="collapse" data-target="#example-navbar-collapse">-->
+            <!--<span class="sr-only">Toggle navigation</span>-->
+            <!--<span class="icon-bar"></span>-->
+            <!--<span class="icon-bar"></span>-->
+            <!--<span class="icon-bar"></span>-->
+        <!--</button>-->
         <a class="navbar-brand" href="#"> <img alt="Logo" src="assets/images/favicon.ico" class="hidden-xs"/>
             <span>VERDICT</span></a>
 
@@ -25,19 +25,20 @@
         <!-- user dropdown ends -->
 
         <!-- theme selector starts-->
-        <!--div class="btn-group pull-right theme-container animated tada">
+        <div id="title_xs_show" class="visible-xs hidden-sm hidden-md hidden-xs btn-group pull-right theme-container animated tada">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <i class="glyphicon glyphicon-tint"></i><span
-                    class="hidden-sm hidden-xs">{{ 'module.header.skin' | translate }}</span>
+                <i class="glyphicon glyphicon-tint"></i>
+                <!--<span class="hidden-sm hidden-xs">{{ 'module.header.skin' | translate }}</span>-->
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" id="themes">
-                <li><a data-value="classic" href="#"><i class="whitespace"></i> Classic</a></li>
-                <li><a data-value="cerulean" href="#"><i class="whitespace"></i> Cerulean</a></li>
-                <li><a data-value="spacelab" href="#"><i class="whitespace"></i> Spacelab</a></li>
-                <li><a data-value="united" href="#"><i class="whitespace"></i> United</a></li>
+                <li><a  ng-click="go1()"><i class="whitespace"></i> 统计数据</a></li>
+                <li><a  ng-click="go2()"><i class="whitespace"></i> 文书检索</a></li>
+                <li><a  ng-click="go3()"><i class="whitespace"></i> 判决文书</a></li>
+                <li><a  ng-click="go4()"><i class="whitespace"></i> 文书分词</a></li>
+                <li><a  ng-click="go5()"><i class="whitespace"></i> 自定义词典</a></li>
             </ul>
-        </div-->
+        </div>
         <!-- theme selector ends -->
 
         <ul class="collapse navbar-collapse nav navbar-nav top-menu nff-header-title">

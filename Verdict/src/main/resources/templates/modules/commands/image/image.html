@@ -1,1 +1,110 @@
-<command-page title="module.commands.image.title" command="image"></command-page>
+<div ng-cloak>
+    <ul class="breadcrumb">
+        <li>
+            <span>文书检索</span>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="box col-md-12">
+        <div class="box-inner">
+            <div class="box-header well" data-original-title="">
+                <h2>过滤条件：</h2>
+            </div>
+            <div class="box-content">
+                <div class="btn-group" ng-repeat="guiItem in guiArr">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown">
+                        {{guiItem.name}}<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-click="showFlag(guiItem.name+itemName)" ng-repeat=" itemName in guiItem.item"><a >{{itemName}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box-content">
+                <form role="form">
+                    <div class="form-group has-success has-feedback">
+                        <label class="control-label sr-only" for="inputGroupSuccess4">Input group with success</label>
+                        <div class="input-group">
+                            <span ng-click="queryByConditions()" class="btn input-group-addon">搜索</span>
+                            <input ng-model="inputCondition" type="text" class="form-control" id="inputGroupSuccess4" aria-describedby="inputGroupSuccess4Status">
+                        </div>
+                        <!--<span class="glyphicon glyphicon-ok form-control-feedback"></span>-->
+                        <span id="inputGroupSuccess4Status" class="sr-only">(success)</span>
+                    </div>
+                </form>
+                <div class="checkbox">
+                    <label>
+                        <input ng-model="contextCondition" type="checkbox" ng-checked="true"> 标题
+                    </label>
+                    <label>
+                        <input ng-model="titleCondition" type="checkbox"> 被告
+                    </label>
+                    <label>
+                        <input ng-model="causeCondition" type="checkbox"> 案由
+                    </label>
+                    <label>
+                        <input ng-model="keyCondition" type="checkbox"> 关键字
+                    </label>
+                </div>
+            </div>
+            <div class="box-content">
+                检索条件：
+                <span ng-repeat="guiItem in guiArr">
+                    <span ng-if="check[guiItem.name+itemName]" ng-repeat="itemName in guiItem.item" class="label label-info " style="margin: 0 3px;">
+                        {{guiItem.name}}：{{itemName}}<span ng-click="hideFlag(guiItem.name+itemName)" class="glyphicon glyphicon-remove" style="color: #f34444d4;margin-left: 2px;"></span>
+                    </span>
+                </span>
+            </div>
+            <div class="box-content">
+
+                    <div class="panel panel-default" ng-repeat="source in dataResult.hits.hits">
+                        <div class="panel-body">
+                            <h3>{{source._source.caseName}}</h3>
+                            <p>
+                                {{source._source.caseNum}} {{source._source.caseNum}} {{source._source.court}}
+                            </p>
+                            <table class="table table-bordered">
+                               <tr>
+                                   <td style="width: 15%">相关度</td>
+                                   <td>{{source._score}}</td>
+                               </tr>
+                                <tr>
+                                    <td>文书类型</td>
+                                    <td>{{source._source.caseType}}</td>
+                                </tr>
+                                <tr>
+                                    <td>相关文书</td>
+                                    <td>{{source._source.relatedCaseNum}}</td>
+                                </tr>
+                            </table>
+                            <p>
+                                <span>【事实】</span>
+                                {{source._source.facts}}
+                            </p>
+                            <p>
+                                <span>【理由】</span>
+                                {{source._source.cause}}
+                            </p>
+                            <p>
+                                <span>【法律依据】</span>
+
+                            </p>
+                            <p>
+                                <span>【判决结果】</span>
+                                {{source._source.judgeResult}}
+                            </p>
+                            <p>
+                                <span>【审判人员】</span>
+                                {{source._source.tailContent}}
+                            </p>
+                        </div>
+
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,22 +7,16 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
+
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="bower_components/split-pane/split-pane.css" />
   <link rel="stylesheet" href="bower_components/angular-bootstrap-nav-tree/dist/abn_tree.css" />
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
   <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
 
-  <!--link id="bs-css" href="assets/template/css/bootstrap-cerulean.min.css" rel="stylesheet"-->
+  <link rel="stylesheet" href="styles/main.css">
+
   <link href="assets/template/css/charisma-app.css" rel="stylesheet">
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -48,16 +42,12 @@
   <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
   <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
   <script src="bower_components/ngstorage/ngStorage.js"></script>
-  <!-- endbower -->
 
-
-  <!-- modules script -->
   <script src="modules/app.js"></script>
 
   <script src="modules/connector/connector.js"></script>
   <script src="modules/home/home.js"></script>
 
-  <!--script src="modules/layout/menutree/menutree.js"></script-->
   <script src="modules/info/ontInfo.js"></script>
 
   <script src="modules/diagnosis/offline/offline.js"></script>
@@ -80,9 +70,6 @@
   <script src="modules/system/upload/upload.js"></script>
   <script src="modules/system/operator/operator.js"></script>
 
-
-
-  <!-- services -->
   <script src="common/services/storageService.js"></script>
   <script src="common/services/messageService.js"></script>
   <script src="common/services/logoutService.js"></script>
@@ -114,16 +101,11 @@
   <script src="common/filters/convertToDate.js"></script>
   <script src="common/filters/nffUpgtadeFilter.js"></script>
 
-  <!--script src="modules/connector/httpInterceptor.js"></script-->
-  <!-- endbuild -->
 
 </head>
 
 <body ng-app="nff">
-<!--[if lte IE 8] >
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-  your browser</a> to improve your experience.</p>
-<! [endif]-->
+
 
 <div ui-view class="home-frame">
 

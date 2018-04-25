@@ -22,16 +22,31 @@
         });
     }
 
-    function DiagnoseOnlineCtrl($scope, OnlineGuiResource) {
-        OnlineGuiResource.query({}, function(data) {
-            $scope.diagnosisItemsData = data;
-            $scope.showColumnLabel = true;
-        });
+    function DiagnoseOnlineCtrl($scope, JudgementResource,JudgementResource1,JudgementResource2,blockUI) {
+        var partBlock = blockUI.instances.get('partBlock');
+
+        $scope.findByID = function () {
+            $scope.idType;
+            partBlock.start();
+            JudgementResource1.getMixResults({
+                    idType:$scope.idType,
+                    idValue : $scope.idValue
+                },
+                function (data) {
+                    $scope.judgement = data[0];
+                    $scope.splitRes = data[1];
+                    partBlock.stop();
+                },function (err) {
+                    console.log(err);
+                    partBlock.stop();
+                }
+            );
+        }
     }
 
     angular.module('module.diagnosis.online', [])
         .config(['$stateProvider',routeConfig])
-        .controller('DiagnoseOnlineCtrl', ['$scope','OnlineGuiResource',DiagnoseOnlineCtrl]);
+        .controller('DiagnoseOnlineCtrl', ['$scope','JudgementResource','JudgementResource1','JudgementResource2','blockUI',DiagnoseOnlineCtrl]);
 
 
 })();

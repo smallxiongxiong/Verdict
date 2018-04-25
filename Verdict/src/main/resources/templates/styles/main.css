@@ -1,5 +1,5 @@
 /**
- * nff-client - v - 2018-04-15
+ * nff-client - v - 2018-04-21
  * 
  *
  * Copyright (c) 2018 
@@ -393,4 +393,9 @@ header {
 .home-frame {
   background-color: #fff;
   padding-bottom: 30px;
+}
+@media (max-width: 768px) {
+  #title_xs_show{
+    display: block!important;
+  }
 }

@@ -127,9 +127,37 @@
         return resource;
     };
 
+    var JudgementResource1 = function ($resource) {
+
+        var resource =  $resource('/query/:idType/:idValue',
+            {
+                idType:'@idType',
+                idValue : '@idValue'
+            },
+            {
+                getMixResults: {isArray: true}
+            }
+        );
+        return resource;
+    };
+    var JudgementResource2 = function ($resource) {
+
+        var resource =  $resource('/article/:docId',
+            {
+                pageNum : '@docId'
+            },
+            {
+                getArticle: {isArray: false}
+            }
+        );
+        return resource;
+    };
+
   var diagnosisResource = angular.module('resources.diagnosisResource', []);
   diagnosisResource
       .factory('JudgementResource', ['$resource','$rootScope',JudgementResource])
+      .factory('JudgementResource1', ['$resource','$rootScope',JudgementResource1])
+      .factory('JudgementResource2', ['$resource','$rootScope',JudgementResource2])
       .factory('LineResource', ['$resource','$rootScope',LineResource])
       .factory('AuthenticationLOIDResource', ['$resource',AuthenticationLOIDResource])
       .factory('AuthenticationOPERATORIDResource', ['$resource',AuthenticationOPERATORIDResource])

@@ -1,0 +1,144 @@
+.nff-green{
+  background: green;
+  color white
+}
+
+.nff-red{
+  background: red;
+  color white
+}
+
+td{
+  word-break: break-all; word-wrap:break-word;
+}
+#table a{
+  text-decoration none;
+  color #807c7c
+}
+ #table{
+   text-align center
+ }
+
+#table th{
+  text-align center
+}
+
+@media (max-width: 991px){
+  #table .diagnosis-result a{
+    display none
+  }
+  #table .diagnosis-result button{
+    min-height 20px;
+    width 26px;
+    height 20px;
+    border-radius 40px;
+    margin 2px;
+  }
+  #table .suggestion a{
+    display none
+  }
+  #table .suggestion button{
+    min-height 20px;
+    width 26px;
+    height 20px;
+    border-radius 40px;
+    margin 2px;
+  }
+  #table .suggestion button span{
+    top -7px;
+  }
+  #table .diagnosis-result button span{
+    top -7px;
+  }
+}
+@media (min-width: 992px){
+  //#table .suggestion span{
+   // display none
+  //}
+  #table .diagnosis-result span{
+    display none
+  }
+  #table .diagnosis-result button{
+  margin 3px;
+  }
+  #table .suggestion button{
+    width: 36px;
+    height :36px;
+    border-radius: 40px;
+    margin-left -15px;
+  }
+
+}
+@media (max-width: 767px) {
+
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .category{
+    width: 9%;
+  }
+  .port{
+    width: 10%;
+  }
+  .checkAll{
+    width: 7%;
+  }
+  .items{
+    width: 7%;
+  }
+  .diagnosis-progress{
+    width: 8%;
+  }
+  .confirm{
+    width: 9%;
+  }
+  .comment{
+    min-width: 100px
+  }
+  .suggestion{
+    width:10%;
+  }
+  .diagnosis-result{
+    width:112px;
+  }
+
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .comment{
+    min-width: 150px
+  }
+  .suggestion{
+    width:210px;
+  }
+  .diagnosis-result{
+    width:170px;
+  }
+}
+@media (min-width: 1200px) {
+  .category{
+    width: 10%;
+  }
+  .port{
+    width: 10%;
+  }
+  .checkAll{
+    width: 6%;
+  }
+  .items{
+    width: 6%;
+  }
+  .diagnosis-progress{
+    width: 7%;
+  }
+  .confirm{
+     width: 8%;
+  }
+  .comment{
+    min-width: 150px
+  }
+  .suggestion{
+    width:210px;
+  }
+  .diagnosis-result{
+    width:170px;
+  }
+}

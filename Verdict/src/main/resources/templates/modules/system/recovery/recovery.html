@@ -12,7 +12,7 @@
     <div class="box col-md-12">
         <div class="box-inner">
             <div class="box-header well" data-original-title="">
-                <h2>{{'module.reboot.head-title' | translate }}</h2>
+                <h2>CRF分词</h2>
 
                 <!--div class="box-icon">
                     <a href="#" class="btn btn-setting btn-round btn-default"><i
@@ -25,14 +25,14 @@
             </div>
             <div class="box-content">
                 <div style="border: 1px solid  #dbdbdb;padding: 10px;">
-                    <div class="alert" style="background-color: #F3565D;border-color: #f13e64;color: white;">
-                        <span class="glyphicon glyphicon-warning-sign" style="font-size: 14px;color: white"></span> {{'module.recovery.head-title' | translate }}
+                    <div>
+                        <textarea ng-model="CRFsentence" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div style="margin: 20px 0px;text-align:center">
+                        <button class="btn btn-default" ng-click="executeCommand(CRFsentence)">{{'module.recovery.execute' | translate }}</button>
                     </div>
                     <div>
-                        <span ng-model="executeCommandResult" ng-bind-html="executeCommandResult"></span>
-                    </div>
-                    <div style="margin-top: 20px;text-align:center">
-                        <button class="btn btn-default" ng-click="executeCommand()">{{'module.recovery.execute' | translate }}</button>
+                        <textarea class="form-control" ng-model="CRFresult" rows="3"></textarea>
                     </div>
                 </div>
 

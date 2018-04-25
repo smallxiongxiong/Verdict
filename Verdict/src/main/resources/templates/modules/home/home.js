@@ -40,9 +40,7 @@
   }
 
 
-  angular.module('modules.home',[
-    'modules.ontInfo'
-  ])
+  angular.module('modules.home',['modules.ontInfo'])
     .config(['$stateProvider',routeConfig])
     .controller('HomeCtrl', ['ontResource',HomeCtrl]);
 

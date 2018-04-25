@@ -23,19 +23,42 @@
     });
   }
 
-  function BatchCommand($scope,BatchGuiResource,$stateParams) {
-    console.log("$stateParams: " + $stateParams.value);
-    $scope.queryBtnDisabled = false;
-    $scope.commandsArr = $stateParams.value;
-    /*BatchGuiResource.query({},function(data){
-      $scope.commandsArr = data;
-    });*/
+  function BatchCommand($scope,BatchGuiResource,CmdMenusResource,blockUI) {
+      var partBlock = blockUI.instances.get('partBlock');
+      $scope.testFC = function () {
+          partBlock.start();
+          BatchGuiResource.get(
+              {
+                  source:$scope.source
+              },
+              function (data) {
+                  $scope.result = data;
+                  partBlock.stop();
+              },function (err) {
+                  partBlock.stop();
+              }
+          );
+      }
+      $scope.trainFC = function () {
+          partBlock.start();
+          CmdMenusResource.train(
+              {
+                  words:$scope.words
+              },
+              function (data) {
+                  $scope.words='';
+                  partBlock.stop();
+              },function (err) {
+                  partBlock.stop();
+              }
+          );
+      }
 
   }
 
   angular.module('module.commands.batch',[])
     .config(['$stateProvider',routeConfig])
-    .controller('BatchCommand', ['$scope','BatchGuiResource','$stateParams',BatchCommand]);
+    .controller('BatchCommand', ['$scope','BatchGuiResource','CmdMenusResource','blockUI',BatchCommand]);
 
 
 })();

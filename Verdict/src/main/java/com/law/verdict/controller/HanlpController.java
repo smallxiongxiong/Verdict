@@ -31,4 +31,19 @@ public class HanlpController {
     	}
     	return res;
     }
+    
+    @RequestMapping(value = "/test", produces = {"application/json;charset=UTF-8"})
+    public List<String> test(String source){
+    	if(source==null)return null;
+    	return hanlpService.testFC(source);
+    }
+    
+    @RequestMapping(value = "/train", produces = {"application/x-www-form-urlencoded;charset=UTF-8"})
+    public String train(String words){
+    	if(words==null)return null;
+    	if(hanlpService.trainFC(words)){
+    		return "ok";
+    	}
+    	return "fail";
+    }
 }
