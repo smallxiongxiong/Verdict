@@ -82,7 +82,7 @@ public class CrawlerServices {
 			pool.execute(tmp);
 		}
 	}
-	
+
 	/**
 	 * 获取cookie信息
 	 * 
@@ -129,7 +129,7 @@ public class CrawlerServices {
 		@Override
 		public void run() {
 			logger.info("begin run Crawler, caseType:{}", caseType);
-			
+
 			Map<String, String> params = new HashMap<String, String>();
 			List<String> causeOfActionKey = FileTools
 					.readTolines(new File(String.format(PATH_FORMATE, CrawlerConstant.PATH_CASE_DICT, keyFile)));
@@ -164,7 +164,7 @@ public class CrawlerServices {
 					params.put("Param", "案件类型:" + caseType + ",案由:" + cause + ",裁判日期:" + data1 + " TO " + data2);//// 关键词:继承,案由:遗嘱继承纠纷,裁判日期:2018-04-02
 					String filePath = String.format("%s/%s/%s/", CrawlerConstant.PATH_PRE_FILE, caseType, cause);
 					String fileName = data1.replaceAll("-", "") + "TO" + data2.replaceAll("-", "") + "_" + Index;
-
+					
 					File listFileName = new File(filePath + fileName);
 					if (listFileName.exists()) {
 						logger.info("fileName {} has exist!!", listFileName);
@@ -221,8 +221,6 @@ public class CrawlerServices {
 			}
 			logger.info("caseType {} crawler end", this.caseType);
 		}
-
-	
 
 		/**
 		 * 指定时间内抓取列表页，超过三次后，如果还没有抓取到正文内容，则记录到文本中。
@@ -402,7 +400,7 @@ public class CrawlerServices {
 		@Override
 		public Map<String, String> done() {
 			Map<String, String> result = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
-			return result;				
+			return result;
 		}
 
 	}

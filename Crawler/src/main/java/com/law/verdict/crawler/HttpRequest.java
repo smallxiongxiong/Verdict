@@ -67,7 +67,7 @@ public class HttpRequest {
 			int code = conn.getResponseCode();
 			logger.info("query success, code: {}, waiting for get Data", code);
 			if (code != 200) {
-				logger.warn("response code: {}, param: {}", code, param.toString());
+				logger.error("response code: {}, url:{}, param: {}", code, url, param.toString());
 				return String.valueOf("RF" + conn.getResponseCode() + System.currentTimeMillis());
 			}
 			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));

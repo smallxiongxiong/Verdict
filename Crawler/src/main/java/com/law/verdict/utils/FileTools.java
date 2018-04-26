@@ -1028,7 +1028,7 @@ public class FileTools {
 			fileWriter = new FileWriter(file.getPath(), isAppend);
 			fileWriter.write(content);
 		} catch (Exception ex) {
-			log.error("write file has Error, " + ex.getMessage(), ex);
+			log.error("write file has Error, " + file.getAbsolutePath(), ex);
 		} finally {
 			if (null != fileWriter) {
 				try {
