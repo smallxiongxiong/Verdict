@@ -1,6 +1,6 @@
 PATH_PRE=`pwd`
 PAHT_DATA=$(dirname "$PWD")
-if [ $@ -lt 1 ] ; then
+if [ $# -lt 1 ] ; then
 	echo "缺少必要的启动参数"
 	echo "*********启动参数设置*********"
 	echo "penal 刑事案件"
