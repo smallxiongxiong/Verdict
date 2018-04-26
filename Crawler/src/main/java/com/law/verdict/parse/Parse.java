@@ -54,6 +54,10 @@ public class Parse {
 				JsonElement e = it.next();
 				JsonObject obj = e.getAsJsonObject();
 				if (obj.has("Count")) {
+					int count = obj.get("Count").getAsInt();
+					if (count <= 0) {
+						break;
+					}
 					continue;
 				}
 				e = replaceKey(e, JudgementSimple.KEY_MAP);
@@ -61,11 +65,12 @@ public class Parse {
 				Gson gson = new Gson();
 				JudgementSimple simple = gson.fromJson(obj.toString(), JudgementSimple.class);
 				simple.setTimestamp(0);
-
 				result.add(simple);
 			}
 		} catch (Exception e) {
+			result = null;
 			throw new RuntimeException(e);
+
 		}
 		return result;
 	}

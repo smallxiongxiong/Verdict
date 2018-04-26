@@ -129,7 +129,6 @@ public class CrawlerServices {
 		@Override
 		public void run() {
 			logger.info("begin run Crawler, caseType:{}", caseType);
-
 			
 			Map<String, String> params = new HashMap<String, String>();
 			List<String> causeOfActionKey = FileTools
@@ -178,7 +177,6 @@ public class CrawlerServices {
 						e.printStackTrace();
 					}
 					logger.info("contentList query param: {}", params.toString());
-
 					listContent = this.getListContent(params, vjkl5);
 
 					logger.info("contentList return size： {}", listContent.length());
@@ -187,10 +185,10 @@ public class CrawlerServices {
 						try {
 							Thread.sleep(1000 * 120);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						specialParams = getCookies();
+						vjkl5 = specialParams.get(CrawlerConstant.KEY_VJKL5);
 						params.put(CrawlerConstant.KEY_VL5X, specialParams.get(CrawlerConstant.KEY_VL5X));
 						FileTools.writeAndChangeRow(FILE_UN_SEARCH, params.toString(), true);
 						continue;
@@ -404,7 +402,7 @@ public class CrawlerServices {
 		@Override
 		public Map<String, String> done() {
 			Map<String, String> result = JavaScriptTools.getCookiesByJsFile(CrawlerConstant.PATH_JS_COOKIE);
-			return result;
+			return result;				
 		}
 
 	}

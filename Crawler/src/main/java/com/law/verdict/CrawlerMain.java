@@ -24,6 +24,14 @@ public class CrawlerMain implements CommandLineRunner {
 	private static Logger log = LoggerFactory.getLogger(CrawlerMain.class);
 	@Autowired
 	CrawlerServices crawlerServices;
+	private static Map<String, String> caseMap = new HashMap<>();
+	static {
+		caseMap.put("penal", "刑事案件");
+		caseMap.put("civil", "民事案件");
+		caseMap.put("admin", "行政案件");
+		caseMap.put("compensation", "赔偿案件");
+		caseMap.put("executive", "执行案件");
+	}
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(CrawlerMain.class, args);
@@ -31,6 +39,10 @@ public class CrawlerMain implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println(args.length);
+		for(String value: args) {
+			System.out.println(value);
+		}
 		
 		if (null == crawlerServices) {
 			System.out.println("CrawlerServices crawlerServices is null");
@@ -39,12 +51,13 @@ public class CrawlerMain implements CommandLineRunner {
 			Map<String, String> params = new HashMap<>();
 			//params.put("penal", "刑事案件");
 			//params.put("civil", "民事案件");
-			params.put("admin", "行政案件");
+			params.put("admin", "行政案 件");
 			//params.put("compensation", "赔偿案件");
 			//params.put("executive", "执行案件");
 			//crawlerServices.beginCrawler("刑事案件");
 			crawlerServices.beginCrawler(params);
 		}
+		
 		System.out.println("=========== START SERVCIES SUCCESS ===========");
 		log.info("START SERVCIES");
 	}
