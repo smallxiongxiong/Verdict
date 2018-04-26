@@ -37,6 +37,13 @@ public class HanlpService {
 		return BasicTokenizer.segment(sourceStr);
 	}
 	
+	public List<Term> split(String sourceStr) {
+		Segment seg = HanLP.newSegment().enableAllNamedEntityRecognize(true).enableCustomDictionary(true)
+				.enableCustomDictionaryForcing(true).enableNameRecognize(true).enableNumberQuantifierRecognize(true)
+				.enableOrganizationRecognize(true).enablePlaceRecognize(true).enableTranslatedNameRecognize(true);
+		return seg.seg(sourceStr);
+	}
+	
 	public Sentence cRFLexicalAnalyzer(String sourceStr) {
 		logger.info("CRF词法分析器");
 		CRFLexicalAnalyzer analyzer;

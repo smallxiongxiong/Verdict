@@ -2,6 +2,7 @@ package com.law.verdict.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,5 +56,23 @@ public class HanlpController {
     		return "ok";
     	}
     	return "fail";
+    }
+    
+    @RequestMapping(value = "/split/words", produces = {"application/json;charset=UTF-8"})
+    public List<String> splitWords(String source,int type){
+    	if(source==null)return null;
+    	if(type==0) {
+    		return hanlpService.testFC(source);
+    	}else if(type == 1){
+    		List<Term> list = hanlpService.split(source);
+    		List<String> res = new ArrayList<String>();
+        	for(int i=0;i<list.size();i++){
+        		Term term = list.get(i);
+        		res.add(term.word+" ");
+        	}
+        	return res;
+    	}else {
+    		return null;
+    	}
     }
 }
