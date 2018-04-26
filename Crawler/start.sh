@@ -1,4 +1,5 @@
-PATH_PRE=$(dirname "$PWD")
+PATH_PRE=`pwd`
+PAHT_DATA=$(dirname "$PWD")
 if [ $@ -lt 1 ] ; then
 	echo "缺少必要的启动参数"
 	echo "*********启动参数设置*********"
@@ -12,5 +13,5 @@ if [ $@ -lt 1 ] ; then
 	exit
 fi
 echo "本次抓取案件：",$@
-nohup java -jar -DpathPre=$PATH_PRE/config -DpathData=$PATH_PRE/datas  Crawler-0.0.1-SNAPSHOT.jar $@ >/dev/null 2>&1 &
+nohup java -jar -DpathPre=$PATH_PRE/config -DpathData=$PATH_DATA/datas  Crawler-0.0.1-SNAPSHOT.jar $@ >/dev/null 2>&1 &
 sleep 3s
