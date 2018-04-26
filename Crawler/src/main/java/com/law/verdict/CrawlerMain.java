@@ -49,9 +49,12 @@ public class CrawlerMain implements CommandLineRunner {
 			System.exit(0);
 		} else {
 			Map<String, String> params = new HashMap<>();
+			for(String value: args) {
+				params.put(value, caseMap.get(value));
+			}
 			//params.put("penal", "刑事案件");
 			//params.put("civil", "民事案件");
-			params.put("admin", "行政案 件");
+			
 			//params.put("compensation", "赔偿案件");
 			//params.put("executive", "执行案件");
 			//crawlerServices.beginCrawler("刑事案件");
