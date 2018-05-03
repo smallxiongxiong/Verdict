@@ -1,0 +1,70 @@
+<div class="container-fluid space">
+    <div class="row">
+        <div class="col-xs-18 col-md-12"> <br></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-18 col-md-12"> <br></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-18 col-md-12"><br> </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 col-md-4"></div>
+        <div class="col-xs-6 col-md-4">
+            <div class="navbar-form">
+                <div class="form-group">
+                    <select class="form-control" ng-model="st">
+                        <option ng-selected="true" value="1">商标名</option>
+                        <option value="3">申请人</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input id="searchLen" type="text" class="form-control" placeholder="Search" ng-model="searchKey">
+                </div>
+                <input type="hidden" ng-model="pageNo" value="1"/>
+                <button class="btn btn-default" ng-click="search(searchKey,st,pageNo)">查询</button>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4"></div>
+    </div>
+</div>
+<div class="container-fluid space">
+    <div class="row">
+        <div class="col-xs-18 col-md-12"> <br></div>
+    </div>
+</div>
+<div class="context-span">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="panel-title">查询结果</span>
+            <span style="float:right">
+                <label ng-model="pageNo">1</label>
+                <a>>></a>
+            </span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td class="active">商标名称</td>
+                    <td class="success">注册号</td>
+                    <td class="warning">申请人</td>
+                    <td class="danger">申请日期</td>
+                    <td class="info">商标状态</td>
+                    <td class="info">类别</td>
+                </tr>
+                </thead>
+                <tr ng-repeat='brand in brands'>
+                    <td >{{brand.tmname}}</td>
+                    <td >{{brand.regno}}</td>
+                    <td >{{brand.appname}}</td>
+                    <td >{{brand.csrq}}</td>
+                    <td >{{brand.newprocess}}</td>
+                    <td >{{brand.intcls}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
