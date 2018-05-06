@@ -1,0 +1,9 @@
+mvn dependency:sources 下载依赖包的源代码
+搜索条件：caseName、head、head2、facts、cause、judgeResult、tailContent、abstractText、caseType、
+verdictTime、verdictProcess、caseNum、court、executiveScope、executiveType、appellor
+
+curl -XGET http://47.106.110.50:12000/legal/verdict/_search -d '{ "query": { "bool": { "should": [ { "match": { "caseName": "玻璃" }}, { "match": { "head": "广东省" }} ] } } }'
+
+http://47.106.110.50:12000/legal/verdict/_search?q=caseName:*
+
+http://47.96.17.143:8082 
