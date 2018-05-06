@@ -15,10 +15,10 @@
         label: $filter('translate')('module.menutree.onu.info.title'),
         state: 'home.ontInfo'
       },
-        {
+       /* {
             label: $filter('translate')('module.menutree.onu.command.imageInfo'),
             state: 'home.imageInfo'
-        },
+        },*/
       {
         label: $filter('translate')('module.menutree.onu.diagnose.offline'),
         state: 'home.offline'
