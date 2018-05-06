@@ -20,8 +20,17 @@
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="lib/angular.min.js"></script>
-    <script src="lib/angular-ui-router.min.js"></script>
+    <script src="templates/lib/angular.min.js"></script>
+    <script src="templates/lib/angular-ui-router.min.js"></script>
+    <script src="templates/lib/angular-resource.min.js"></script>
+    <script src="templates/lib/angular-sanitize.min.js"></script>
+    <script src="templates/model/resources/esResource.js"></script>
+    <style type="text/css">
+    	em {
+    		color : red;
+    		font-style: normal;
+    	}
+    </style>
 </head>
 <body >
     <div ng-app="myApp" ng-controller="myCtrl">
@@ -48,20 +57,133 @@
                 </div>
             </div>
         </nav>
+        <div style="height: 50px;"></div>
+        <div class="container-fluid">
+	        <div class="row">
+	        	<div class="col-sm-2" >
+	    		</div>
+		    	<div class="col-xs-12 col-sm-8" >
+		    		<div class="box col-md-12">
+				        <div class="box-inner">
+				            <div class="box-content">
+				            	<ul class="nav nav-pills">
+								  <li role="presentation" class="active"><a href="#">案例</a></li>
+								  <li role="presentation"><a href="#">法院分析</a></li>
+								  <li role="presentation"><a href="#">其他</a></li>
+								</ul>
+				            </div>
+				         </div>
+				    </div>        
+		    		
+		        </div>
+		        <div class="col-sm-2" >
+	    		</div>
+	    	</div>
+	    </div>
+	    <div style="height: 5px"></div>
         <div ui-view></div>
     </div>
 </body>
 
 <script type="text/javascript">
-    var app = angular.module('myApp', ['ui.router']);
+    var app = angular.module('myApp', ['ui.router','ngResource','ngSanitize','resources.esResource']);
     app.config(["$stateProvider",  function ($stateProvider) {
         $stateProvider
             .state("home", {
                 url: '/',
-                templateUrl:"model/home.html"
+                templateUrl:"templates/model/home.html",
+                controller:function($stateParams,$state,$scope,esResource,guiResource){
+                	var queryObj = {};
+                	queryObj.query = {};
+                	queryObj.query.bool = {};
+                	queryObj.query.bool.must = [];
+                	
+                	var highlight = {};
+                	highlight.fields = {};
+                	
+                	$scope.check = new Array();
+                	guiResource.query({},function(data){
+                      $scope.guiArr = data;
+                        angular.forEach($scope.guiArr, function(guiItem){
+                            angular.forEach(guiItem.item, function(itemName){
+                                $scope.check[guiItem.name.key+'_'+itemName.key] = false;
+                            });
+                        });
+                    });
 
+                    $scope.hideFlag = function (flag) {
+                        $scope.check[flag] = false;
+                        $scope.queryByConditions();
+                    }
+                    $scope.showFlag = function (flag) {
+                        $scope.check[flag] = true;
+                        $scope.queryByConditions();
+                    }
+                    if(!$scope.condition)$scope.condition=1;
+                    
+                    $scope.queryByConditions = function () {
+                    	queryObj.query.bool.must = [];
+                    	highlight.fields = {};
+                    	var matchObj = {};
+                    	matchObj.match = {};
+                    	if($scope.condition==1){
+                    		if($scope.inputCondition){
+                    			matchObj.match.caseName = $scope.inputCondition;
+                    			queryObj.query.bool.must.push(matchObj);
+                    			highlight.fields.caseName = {};
+                    		}
+                    	}
+                    	if($scope.condition==2){
+                    		if($scope.inputCondition){
+                    			matchObj.match.appellor = $scope.inputCondition;
+                    			queryObj.query.bool.must.push(matchObj);
+                    			highlight.fields.appellor = {};
+                    		}
+                    	}
+                    	if($scope.condition==3){
+                    		if($scope.inputCondition){
+                    			matchObj.match.court = $scope.inputCondition;
+                    			queryObj.query.bool.must.push(matchObj);
+                    			highlight.fields.court = {};
+                    		}
+                    	}
+                    	if($scope.condition==4){
+                    		if($scope.inputCondition){
+                    			matchObj.match.abstractText = $scope.inputCondition;
+                    			queryObj.query.bool.must.push(matchObj);
+                    			highlight.fields.abstractText = {};
+                    		}
+                    	}
+                        for(var k in $scope.check){
+                        	if($scope.check[k]){
+                        		var key = k.split('_')[0];
+                        		var value = k.split('_')[1];
+                        		var obj = {};
+                        		obj.match = {};
+                        		obj.match[key] = value;
+                        		queryObj.query.bool.must.push(obj); 
+                        	}
+                        }
+                    	
+                        var conditionsObj = {};
+                        conditionsObj.query = queryObj.query;
+                        conditionsObj.highlight = highlight;
+                    	esResource.post(
+                                {
+                                	conditions:JSON.stringify(conditionsObj)
+                                },
+                                function (data) {
+                                	$scope.dataResult = data;
+                                  
+                                },function (err) {
+                                    
+                                }
+                            );
+                    }
+                	
+                }
             })
-            .state("index", {
+            /* .state("index", {
                 url: '/index/:id',
                 template:"<div>indexcontent</div>",
                 controller:function($stateParams,$state){
@@ -75,7 +197,7 @@
                 controller:function($stateParams){
                     alert($stateParams.username)
                 }
-            })
+            }) */
     }]);
     app.controller('myCtrl', function($scope,$state) {
         $state.go('home');
