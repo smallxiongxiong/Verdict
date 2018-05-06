@@ -3,6 +3,9 @@
   "item" : [{"key":"*","value":"全部"},{"key":"1","value":"刑事案件"},{"key":"2","value":"民事案件"},{"key":"3","value":"行政案件"},{"key":"4","value":"赔偿案件"},{"key":"5","value":"执行案件"}]
 },{
   "name" : {"key":"verdictProcess","value":"审判程序"},
-  "item" : [{"key":"*","value":"全部"},{"key":"一审","value":"一审"},{"key":"二审","value":"二审"},{"key":"再审","value":"再审"},{"key":"刑罚变更","value":"刑罚变更"},{"key":"再审审查与审判监督","value":"再审审查与审判监督"},{"key":"其他","value":"其他"}]
+  "item" : [{"key":"*","value":"全部"},{"key":"一","value":"一审"},{"key":"二","value":"二审"},{"key":"再","value":"再审"},{"key":"刑罚变更","value":"刑罚变更"},{"key":"再审审查与审判监督","value":"再审审查与审判监督"},{"key":"其他","value":"其他"}]
+},{
+  "name" : {"key":"judgeResult","value":"判决结果"},
+  "item" : [{"key":"*","value":"全部"},{"key":"无期","value":"无期"},{"key":"死刑","value":"死刑"},{"key":"驳回","value":"驳回申请"},{"key":"撤回起诉","value":"撤回起诉"}]
 }
 ]

@@ -51,8 +51,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-
+                        <li><a href="#">登录</a></li>
+						<li><a href="#">注册</a></li>
                     </ul>
                 </div>
             </div>
@@ -68,7 +68,7 @@
 				            <div class="box-content">
 				            	<ul class="nav nav-pills">
 								  <li role="presentation" class="active"><a href="#">案例</a></li>
-								  <li role="presentation"><a href="#">法院分析</a></li>
+								  <!-- <li role="presentation"><a href="#">法院分析</a></li> -->
 								  <li role="presentation"><a href="#">其他</a></li>
 								</ul>
 				            </div>
@@ -149,11 +149,18 @@
                     	}
                     	if($scope.condition==4){
                     		if($scope.inputCondition){
+                    			matchObj.match.cause = $scope.inputCondition;
+                    			queryObj.query.bool.must.push(matchObj);
+                    			highlight.fields.cause = {};
+                    		}
+                    	}
+                    	/* if($scope.condition==5){
+                    		if($scope.inputCondition){
                     			matchObj.match.abstractText = $scope.inputCondition;
                     			queryObj.query.bool.must.push(matchObj);
                     			highlight.fields.abstractText = {};
                     		}
-                    	}
+                    	} */
                         for(var k in $scope.check){
                         	if($scope.check[k]){
                         		var key = k.split('_')[0];
@@ -161,6 +168,7 @@
                         		var obj = {};
                         		obj.match = {};
                         		obj.match[key] = value;
+                        		highlight.fields[key] = {};
                         		queryObj.query.bool.must.push(obj); 
                         	}
                         }

@@ -33,8 +33,11 @@
 			                        <input type="radio" ng-value="3" ng-model="condition"> 法院名称
 			                    </label>
 			                    <label>
-			                        <input type="radio" ng-value="4" ng-model="condition"> 法院观点
+			                        <input type="radio" ng-value="4" ng-model="condition"> 判决理由
 			                    </label>
+			                    <!-- <label>
+			                        <input type="radio" ng-value="5" ng-model="condition"> 法院观点
+			                    </label> -->
 			                </div>
 			            </div>
 			            <br>
@@ -66,16 +69,27 @@
 			                            <h3 ng-if="source.highlight.caseName" ng-bind-html="source.highlight.caseName"></h3>
 			                            <h3 ng-if="!source.highlight.caseName">{{source._source.caseName}}</h3>
 			                            <p>
-			                                {{source._source.caseNum}} {{source._source.caseNum}} {{source._source.court}}
+			                                {{source._source.caseNum}} 
+			                                
+			                                <span ng-if="source.highlight.court" ng-bind-html="source.highlight.court"></span>
+				                            <span ng-if="!source.highlight.court">{{source._source.court}}</span>
 			                            </p>
 			                            <table class="table table-bordered">
 			                               <tr>
-			                                   <td style="width: 15%">相关度</td>
-			                                   <td>{{source._score}}</td>
+			                                   <td style="width: 15%">判决时间</td>
+			                                   <td>{{source._source.verdictTime}}</td>
 			                               </tr>
 			                                <tr>
-			                                    <td>文书类型</td>
-			                                    <td>{{source._source.caseType}}</td>
+			                                    <td>案件类型</td>
+			                                    <td ng-if="source._source.caseType==1">刑事案件</td>
+			                                    <td ng-if="source._source.caseType==2">民事案件</td>
+			                                    <td ng-if="source._source.caseType==3">行政案件</td>
+			                                    <td ng-if="source._source.caseType==4">赔偿案件</td>
+			                                    <td ng-if="source._source.caseType==5">执行案件</td>
+			                                </tr>
+			                                <tr>
+			                                    <td>审判程序</td>
+			                                    <td>{{source._source.verdictProcess}}</td>
 			                                </tr>
 			                                <tr>
 			                                    <td>相关文书</td>
@@ -83,12 +97,14 @@
 			                                </tr>
 			                            </table>
 			                            <p>
-			                                <span>【事实】</span>
-			                                {{source._source.facts}}
+				                            <span>【事实】</span>
+				                            <span ng-if="source.highlight.facts" ng-bind-html="source.highlight.facts"></span>
+				                            <span ng-if="!source.highlight.facts">{{source._source.facts}}</span>
 			                            </p>
 			                            <p>
 			                                <span>【理由】</span>
-			                                {{source._source.cause}}
+			                                <span ng-if="source.highlight.cause" ng-bind-html="source.highlight.cause"></span>
+				                            <span ng-if="!source.highlight.cause">{{source._source.cause}}</span>
 			                            </p>
 			                            <p>
 			                                <span>【法律依据】</span>
@@ -96,7 +112,13 @@
 			                            </p>
 			                            <p>
 			                                <span>【判决结果】</span>
-			                                {{source._source.judgeResult}}
+			                                <span ng-if="source.highlight.judgeResult" ng-bind-html="source.highlight.judgeResult"></span>
+				                            <span ng-if="!source.highlight.judgeResult">{{source._source.judgeResult}}</span>
+			                            </p>
+			                            <p>
+			                                <span>【当事人】</span>
+			                                <span ng-if="source.highlight.appellor" ng-bind-html="source.highlight.appellor"></span>
+				                            <span ng-if="!source.highlight.appellor">{{source._source.appellor}}</span>
 			                            </p>
 			                            <p>
 			                                <span>【审判人员】</span>
