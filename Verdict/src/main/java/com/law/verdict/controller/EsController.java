@@ -19,9 +19,7 @@ public class EsController {
 	@RequestMapping(value = "/query", produces = {"application/x-www-form-urlencoded;charset=utf-8"},method=RequestMethod.POST)
 	public String findJudgement(String conditions){
 		System.out.println(conditions);
-		//String content1 = "{  \"query\": {\"match\": {\"appellor\": \"耐克国际有限公司\"} }}";
-		String content = "{  \"query\": {\"match\": "+ conditions +"}}";
-	    return indexSearchService.queryIndex(content);
+	    return indexSearchService.queryIndex(conditions);
 	}
 	
 }

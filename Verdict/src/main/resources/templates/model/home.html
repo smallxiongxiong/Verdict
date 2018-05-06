@@ -1,0 +1,119 @@
+<style type="text/css">
+    	em {
+    		color : red;
+    	}
+</style>
+<div class="container-fluid">
+    <div class="row">
+    	<div class="col-sm-2" >
+    	</div>
+    	<div class="col-xs-12 col-sm-8" >
+    		    <div class="box col-md-12">
+			        <div class="box-inner">
+			            <div class="box-content">
+			                <form role="form">
+			                    <div class="form-group has-primary has-feedback">
+			                        <label class="control-label sr-only" for="inputGroupSuccess4">Input group with success</label>
+			                        <div class="input-group" style="width: 70%">
+			                            <input ng-model="inputCondition" type="text" class="form-control">
+			                        	<span ng-click="queryByConditions()" class="btn input-group-addon">开始检索</span>
+			                        </div>
+			                        <!--<span class="glyphicon glyphicon-ok form-control-feedback"></span>-->
+			                        <span id="inputGroupSuccess4Status" class="sr-only">(success)</span>
+			                    </div>
+			                </form>
+			                <div class="checkbox">
+			                    <label>
+			                        <input type="radio" ng-value="1" ng-model="condition" ng-checked="true"> 标题
+			                    </label>
+			                    <label>
+			                        <input type="radio" ng-value="2" ng-model="condition"> 当事人
+			                    </label>
+			                    <label>
+			                        <input type="radio" ng-value="3" ng-model="condition"> 法院名称
+			                    </label>
+			                    <label>
+			                        <input type="radio" ng-value="4" ng-model="condition"> 法院观点
+			                    </label>
+			                </div>
+			            </div>
+			            <br>
+			            <div class="box-content">
+			                <div class="btn-group" ng-repeat="guiItem in guiArr">
+			                    <button type="button" class="btn btn-default dropdown-toggle"
+			                            data-toggle="dropdown">
+			                        {{guiItem.name.value}}<span class="caret"></span>
+			                    </button>
+			                    <ul class="dropdown-menu" role="menu">
+			                        <li ng-click="showFlag(guiItem.name.key+'_'+itemName.key)" ng-repeat=" itemName in guiItem.item"><a >{{itemName.value}}</a></li>
+			                    </ul>
+			                </div>
+			            </div>
+			            <br>
+			            <div class="box-content">
+			                过滤条件：
+			                <span ng-repeat="guiItem in guiArr">
+			                    <span ng-if="check[guiItem.name.key+'_'+itemName.key]" ng-repeat="itemName in guiItem.item" class="label label-info " style="margin: 0 3px;">
+			                        {{guiItem.name.value}}：{{itemName.value}}<span ng-click="hideFlag(guiItem.name.key+'_'+itemName.key)" class="glyphicon glyphicon-remove" style="color: #f34444d4;margin-left: 2px;"></span>
+			                    </span>
+			                </span>
+			            </div>
+			            <br>
+			            <div class="box-content">
+							<div ng-if="dataResult.hits.total||dataResult.hits.total==0">一共查询到<span style="color: red">{{dataResult.hits.total}}</span>条结果</div>
+			                    <div class="panel panel-default" ng-repeat="source in dataResult.hits.hits">
+			                        <div class="panel-body">
+			                            <h3 ng-if="source.highlight.caseName" ng-bind-html="source.highlight.caseName"></h3>
+			                            <h3 ng-if="!source.highlight.caseName">{{source._source.caseName}}</h3>
+			                            <p>
+			                                {{source._source.caseNum}} {{source._source.caseNum}} {{source._source.court}}
+			                            </p>
+			                            <table class="table table-bordered">
+			                               <tr>
+			                                   <td style="width: 15%">相关度</td>
+			                                   <td>{{source._score}}</td>
+			                               </tr>
+			                                <tr>
+			                                    <td>文书类型</td>
+			                                    <td>{{source._source.caseType}}</td>
+			                                </tr>
+			                                <tr>
+			                                    <td>相关文书</td>
+			                                    <td>{{source._source.relatedCaseNum}}</td>
+			                                </tr>
+			                            </table>
+			                            <p>
+			                                <span>【事实】</span>
+			                                {{source._source.facts}}
+			                            </p>
+			                            <p>
+			                                <span>【理由】</span>
+			                                {{source._source.cause}}
+			                            </p>
+			                            <p>
+			                                <span>【法律依据】</span>
+			
+			                            </p>
+			                            <p>
+			                                <span>【判决结果】</span>
+			                                {{source._source.judgeResult}}
+			                            </p>
+			                            <p>
+			                                <span>【审判人员】</span>
+			                                {{source._source.tailContent}}
+			                            </p>
+			                        </div>
+			
+			                    </div>
+			
+			
+			            </div>
+			        </div>
+			    </div>
+    	</div>
+    	<div class="col-sm-2" >
+    	</div>
+    
+
+</div>
+</div>
