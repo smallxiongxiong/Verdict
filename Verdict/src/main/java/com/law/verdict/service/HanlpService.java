@@ -17,7 +17,14 @@ import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.CRF.CRFSegment;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.BasicTokenizer;
-
+/**
+ * 
+ * @ClassName: HanlpService 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 4:16:46 PM 
+ *
+ */
 @Service
 public class HanlpService {
 	private static Logger logger = LoggerFactory.getLogger(HanlpService.class);
@@ -58,7 +65,8 @@ public class HanlpService {
 	}
 	public List<Term> crfSegment(String sourceStr,boolean showNature,boolean customDict) {
 		logger.info("CRF分词");
-		HanLP.Config.ShowTermNature = showNature;    // 关闭词性显示
+		// 关闭词性显示
+		HanLP.Config.ShowTermNature = showNature;
         final Segment segment = new CRFSegment().enableCustomDictionary(customDict);
         return segment.seg(sourceStr);
 	}

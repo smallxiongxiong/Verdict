@@ -14,6 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.law.verdict.model.Dict;
 import com.law.verdict.service.DictService;
 
+/**
+ * 
+ * @ClassName: DictController 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 3:53:20 PM 
+ *
+ */
+
 @RestController
 @RequestMapping("/")
 public class DictController {

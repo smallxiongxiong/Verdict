@@ -9,11 +9,19 @@ import com.law.verdict.dao.DictMapper;
 import com.law.verdict.model.Dict;
 import com.law.verdict.model.JudgementWithBLOBs;
 import com.law.verdict.vo.Article;
+/**
+ * 
+ * @ClassName: DictService 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 4:16:36 PM 
+ *
+ */
 @Service
 public class DictService {
 
 	@Autowired
-	private DictMapper dictMapper;//这里会报错，但是并不会影响
+	private DictMapper dictMapper;
 	
 	public List<Dict> findAll(int pageNum,int pageSize){
 		//PageHelper.startPage(1, 10);

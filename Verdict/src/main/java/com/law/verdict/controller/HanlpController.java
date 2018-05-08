@@ -15,6 +15,14 @@ import com.law.verdict.model.Dict;
 import com.law.verdict.service.DictService;
 import com.law.verdict.service.HanlpService;
 
+/**
+ * 
+ * @ClassName: HanlpController 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 3:54:16 PM 
+ *
+ */
 @RestController
 @RequestMapping("/segment")
 public class HanlpController {
@@ -27,7 +35,9 @@ public class HanlpController {
     @RequestMapping(value = "/crf", produces = {"application/json;charset=UTF-8"})
     public List<String> crfSegment(String sentence){
     	//sentence ="我爱吃苹果，苹果好吃";
-    	if(sentence==null)return null;
+    	if (sentence==null) {
+    		return null;
+    	}
     	List<Term> list = hanlpService.crfSegment(sentence,true,false);
     	List<String> res = new ArrayList<String>();
     	for(int i=0;i<list.size();i++){
@@ -39,13 +49,17 @@ public class HanlpController {
     
     @RequestMapping(value = "/test", produces = {"application/json;charset=UTF-8"})
     public List<String> test(String source){
-    	if(source==null)return null;
+    	if (source==null) {
+    		return null;
+    	}
     	return hanlpService.testFC(source);
     }
     
     @RequestMapping(value = "/train", produces = {"application/x-www-form-urlencoded;charset=UTF-8"})
     public String train(String words){
-    	if(words==null)return null;
+    	if (words==null) {
+    		return null;
+    	}
     	if(hanlpService.trainFC(words)){
     		Dict d = new Dict();
         	d.setWord(words);
@@ -60,8 +74,10 @@ public class HanlpController {
     
     @RequestMapping(value = "/split/words", produces = {"application/json;charset=UTF-8"})
     public List<String> splitWords(String source,int type){
-    	if(source==null)return null;
-    	if(type==0) {
+    	if (source==null) {
+    		return null;
+    	}
+    	if (type==0) {
     		return hanlpService.testFC(source);
     	}else if(type == 1){
     		List<Term> list = hanlpService.split(source);

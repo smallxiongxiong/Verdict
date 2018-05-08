@@ -13,9 +13,23 @@ import com.law.verdict.model.JudgementWithBLOBs;
 import com.law.verdict.service.JudgementService;
 import com.law.verdict.vo.Article;
 
+/**
+ * 
+ * @ClassName: JudgementController 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 3:57:35 PM 
+ *
+ */
 @RestController
 @RequestMapping("/")
 public class JudgementController {
+	
+	private static final String TYPE_ONE = "1";
+	private static final String TYPE_TWO = "2";
+	private static final String TYPE_THIRD = "3";
+	private static final String TYPE_FOUR = "4";
+	
 	@Autowired
     private JudgementService judgementService;
 
@@ -48,13 +62,13 @@ public class JudgementController {
     @RequestMapping(value = "/query/{idType}/{idValue}", produces = {"application/json;charset=UTF-8"})
     public List<JudgementWithBLOBs> findJudgement(@PathVariable("idType") String idType,@PathVariable("idValue") String idValue){
         String type = "";
-    	if("1".equals(idType)){
+    	if (TYPE_ONE.equals(idType)) {
     		return judgementService.findJudgementById(idValue);
-        }else if("2".equals(idType)){
+        } else if (TYPE_TWO.equals(idType)) {
         	return judgementService.findJudgementByDocId(idValue);
-        }else if("3".equals(idType)){
+        } else if (TYPE_THIRD.equals(idType)) {
         	type = "case_num";
-        }else{
+        } else {
         	
         }
     	return null;

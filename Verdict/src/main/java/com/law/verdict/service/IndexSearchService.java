@@ -14,14 +14,20 @@ import org.elasticsearch.client.Response;
 import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * 
+ * @ClassName: IndexSearchService 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 4:16:54 PM 
+ *
+ */
 @Service
 public class IndexSearchService {
 	@Autowired
 	private RestClient restClient;
 	
 	private static final String QUERY_METHOD="POST";
-	//private static final String END_POINT = "/law/verdict/_search";
 	private static final String END_POINT = "/legal/verdict/_search";
 
 	public String queryIndex(String content)  {

@@ -12,11 +12,19 @@ import com.law.verdict.dao.JudgementMapper;
 import com.law.verdict.model.JudgementWithBLOBs;
 import com.law.verdict.tools.StringTool;
 import com.law.verdict.vo.Article;
+/**
+ * 
+ * @ClassName: JudgementService 
+ * @Description: TODO() 
+ * @author xiongbz
+ * @date May 8, 2018 4:17:03 PM 
+ *
+ */
 @Service
 public class JudgementService {
 
 	@Autowired
-	private JudgementMapper judgementMapper;//这里会报错，但是并不会影响
+	private JudgementMapper judgementMapper;
 	
 	public List<JudgementWithBLOBs> findAll(int pageNum,int pageSize){
 		//PageHelper.startPage(1, 10);
