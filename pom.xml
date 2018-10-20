@@ -17,6 +17,7 @@
 	<modules>
 		<module>Crawler</module>
 		<!--module>Utils</module -->
+		<module>RNN</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

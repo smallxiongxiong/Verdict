@@ -12,6 +12,13 @@ if [ $# -lt 1 ] ; then
 	echo "******************************"
 	exit
 fi
-echo "本次抓取案件：",$@
+echo "本次抓取案件：" $@
+echo "执行命令：java -jar -DpathPre=$PATH_PRE/config -DpathData=$PATH_DATA/datas  Crawler-0.0.1-SNAPSHOT.jar $@ >/dev/null 2>&1 &"
 nohup java -jar -DpathPre=$PATH_PRE/config -DpathData=$PATH_DATA/datas  Crawler-0.0.1-SNAPSHOT.jar $@ >/dev/null 2>&1 &
 sleep 3s
+result=`ps -ef |grep Crawler-0.0.1-SNAPSHOT.jar |grep -v grep|awk '{print $2}'`
+if [ -n $result ] ; then
+	echo "启动成功"
+else
+    echo "启动失败"
+fi

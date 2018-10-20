@@ -54,11 +54,7 @@ public class IndexTest {
 			Parse.parseSummary(item, js);
 			System.out.println(js.toString());
 		}
-		
-		
 	}
-
-	
 	
 	@Test
 	public void testSave() {

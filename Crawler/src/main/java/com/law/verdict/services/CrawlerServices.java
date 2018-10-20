@@ -164,7 +164,7 @@ public class CrawlerServices {
 					params.put("Param", "案件类型:" + caseType + ",案由:" + cause + ",裁判日期:" + data1 + " TO " + data2);//// 关键词:继承,案由:遗嘱继承纠纷,裁判日期:2018-04-02
 					String filePath = String.format("%s/%s/%s/", CrawlerConstant.PATH_PRE_FILE, caseType, cause);
 					String fileName = data1.replaceAll("-", "") + "TO" + data2.replaceAll("-", "") + "_" + Index;
-					
+
 					File listFileName = new File(filePath + fileName);
 					if (listFileName.exists()) {
 						logger.info("fileName {} has exist!!", listFileName);
@@ -179,7 +179,8 @@ public class CrawlerServices {
 					logger.info("contentList query param: {}", params.toString());
 					listContent = this.getListContent(params, vjkl5);
 
-					logger.info("contentList return size： {}", listContent.length());
+					logger.info("contentList return value:{}",
+							(listContent.length() <= 23 ? listContent : listContent.substring(0, 23)));
 					if (null == listContent || listContent.startsWith("RF") || listContent.contains("remind key")) {
 						logger.info(" DownLoadList return value： {}", listContent);
 						try {
@@ -241,6 +242,7 @@ public class CrawlerServices {
 					logger.error("get List Content timeOut, param: " + params.toString(), e);
 				}
 			} while (listContent == null && ++index < 3);
+			listContent = null == listContent ? "" : listContent;
 			return listContent;
 		}
 
@@ -289,7 +291,8 @@ public class CrawlerServices {
 					JudgementWithBLOBs judgementContent = Parse.parseContent(detail);
 
 					IndexDocument doc = new IndexDocument(js, judgementContent);
-					indexOperation.addIndexDocument(doc);
+					boolean result = indexOperation.addIndexDocument(doc);
+					logger.info("docId: {} add to Index result: {}", doc.getCaseID(), result);
 					if (null == detail || null == summary || relatedFile == null) {
 						logger.error("some of verdict is empty, docID: {}, detail: {}, summary: {}, realtedFile:{}",
 								js.getCaseID(), null == detail, null == summary, null == relatedFile);

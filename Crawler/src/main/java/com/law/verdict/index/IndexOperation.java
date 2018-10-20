@@ -16,10 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.law.verdict.constant.CrawlerConstant;
 
 @Service
 public class IndexOperation<T> {
 	private static Logger log = LoggerFactory.getLogger(IndexOperation.class);
+	private static String index_name = System.getProperty(CrawlerConstant.KEY_INDEX_NAME);
+	private static String index = "/" + index_name + "/verdict/";
+	static {
+		index_name = index_name == null ? "law" : index_name;
+		index = "/" + index_name + "/verdict/";
+		log.info("index logpath: {}", index);
+	}
 
 	@Autowired
 	RestClient restClient;
@@ -29,10 +37,10 @@ public class IndexOperation<T> {
 		try {
 			Map<String, String> params = Collections.emptyMap();
 			HttpEntity entity = new NStringEntity(value, ContentType.APPLICATION_JSON);
-			Response response = restClient.performRequest("PUT", "/law/verdict/" + id, params, entity);
+			Response response = restClient.performRequest("PUT",  index + id, params, entity);
 			StatusLine statusLine = response.getStatusLine();
 			int code = statusLine.getStatusCode();
-			if (200 <= code && code < 300 ) {
+			if (200 <= code && code < 300) {
 				result = true;
 			} else {
 				log.error("code:{}, reason:{}", statusLine.getStatusCode(), statusLine.getReasonPhrase());

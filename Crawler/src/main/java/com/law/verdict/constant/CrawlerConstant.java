@@ -22,5 +22,6 @@ public final class CrawlerConstant {
 	public static final String KEY_VL5X = "vl5x";
 	public static final String KEY_MAP_DATA = "data";
 	public static final String KEY_MAP_RESULT = "result";
+	public static final String KEY_INDEX_NAME="index";
 
 }
